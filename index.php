@@ -17,7 +17,7 @@
   <title>Bienvenidos al <br>Proyecto Final de Lab 4</title>
 </head>
 <body>
-  <h1>Bienvenido <?php echo $email; ?>!</h1>
+  <h1>Bienvenido  <?php echo $email; ?>!</h1>
   <a href="logout.php">Logout</a>
 </body>
 </html>
