@@ -27,8 +27,9 @@
     <input type="email" name="email" placeholder="Email" required autocomplete="off">
     <br>
     <input type="password" name="password" placeholder="Password" required autocomplete="off">
-    <br>
+    <br><br>
     <button type="submit">Iniciar sesión</button>
+    <button><a href="signup.php">Crear Usuario</a></button>
   </form>
 </body>
 </html>
