@@ -1,0 +1,25 @@
+
+[
+    {
+        "cuil": "30-23565-2",
+        "name": "Aegis",
+        "category":"Programacion",
+        "state":"true",
+        "description": "Empresa dedicada a la consultoria"
+    },
+    {
+        "cuil": "30-223115-2",
+        "name": "IDDQD",
+        "category":"Naval",
+        "state":"true",
+        "description": "Empresa dedicada a la supervision de barcos"
+    },
+    {
+        "cuil": "30-412441-2",
+        "name": "GreenPunch",
+        "category":"Interiorismo",
+        "state":"false",
+        "description": ""
+
+    }
+]
