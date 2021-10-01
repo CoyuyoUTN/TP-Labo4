@@ -1,48 +1,23 @@
 <?php
+ 
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+	
+	require "Config/Autoload.php";
+	require "Config/Config.php";
 
-function getStudientDatabase(){
-    $opts = array('http' => 
-        array(
-            'method'=>'GET',
-            'header'=>'x-api-key: 4f3bceed-50ba-4461-a910-518598664c08'
-        )
-    );
+	use Config\Autoload as Autoload;
+	use Config\Router 	as Router;
+	use Config\Request 	as Request;
+		
+	Autoload::start();
 
-    $context = stream_context_create($opts);
+	session_start();
 
-    $result = file_get_contents('https://utn-students-api.herokuapp.com/api/Student',false,$context);
+	require_once(VIEWS_PATH."header.php");
 
-    return $result;
-}
+	Router::Route(new Request());
 
-function getCareerDatabase(){
-    $opts = array('http' => 
-        array(
-            'method'=>'GET',
-            'header'=>'x-api-key: 4f3bceed-50ba-4461-a910-518598664c08'
-        )
-    );
-
-    $context = stream_context_create($opts);
-
-    $result = file_get_contents('https://utn-students-api.herokuapp.com/api/Career',false,$context);
-
-    return $result;
-}
-
-function getJobsDatabase(){
-    $opts = array('http' => 
-        array(
-            'method'=>'GET',
-            'header'=>'x-api-key: 4f3bceed-50ba-4461-a910-518598664c08'
-        )
-    );
-
-    $context = stream_context_create($opts);
-
-    $result = file_get_contents('https://utn-students-api.herokuapp.com/api/JobPosition',false,$context);
-
-    return $result;
-}
-
+	require_once(VIEWS_PATH."footer.php");
 ?>

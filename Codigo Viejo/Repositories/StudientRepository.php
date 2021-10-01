@@ -9,10 +9,10 @@ use Models\Student as Student;
 
 class StudientRepository implements IRepository
 {
-    private $fileName;
-
     function GetAll()
     {
+        $result = array();
+
         $opts = array(
             'http' =>
             array(
@@ -43,6 +43,6 @@ class StudientRepository implements IRepository
             }
         }
 
-        return $element;
+        return $ret;
     }
 }
