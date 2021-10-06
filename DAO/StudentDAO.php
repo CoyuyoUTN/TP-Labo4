@@ -46,22 +46,36 @@
         {
             $this->studentList = array();
 
-            if(file_exists('Data/students.json'))
-            {
-                $jsonContent = file_get_contents('Data/students.json');
+            $opt = array(
+                "http" => array(
+                  "method" => "GET",
+                  "header" => "x-api-key: 4f3bceed-50ba-4461-a910-518598664c08\r\n"
+                )
+              );
+              
+              $ctx = stream_context_create($opt);
+              
+              $aux=file_get_contents("https://utn-students-api.herokuapp.com/api/Student", false, $ctx);
+              $array=json_decode($aux);
 
-                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-                foreach($arrayToDecode as $valuesArray)
+                foreach($array as $valuesArray)
                 {
                     $student = new Student();
-                    $student->setRecordId($valuesArray["recordId"]);
+                    $student->setStudentId($valuesArray["studentId"]);
                     $student->setFirstName($valuesArray["firstName"]);
                     $student->setLastName($valuesArray["lastName"]);
+                    $student->setCareerId($valuesArray["careerId"]);
+                    $student->setCareerId ($valuesArray["dni"]);
+                    $student->setFileNumber ($valuesArray["fileNumber"]);
+                    $student->setGender ($valuesArray["gender"]);
+                    $student->setBirthDate ($valuesArray["birthDate"]);
+                    $student->setEmail ($valuesArray["email"]);
+                    $student->setPhoneNumber ($valuesArray["phoneNumber"]);
+                    $student->setActive ($valuesArray["active"]);
 
                     array_push($this->studentList, $student);
                 }
-            }
+        
         }
     }
 ?>
