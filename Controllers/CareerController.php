@@ -25,9 +25,9 @@
             require_once(VIEWS_PATH."careerList.php");
         }
 
-        public function Add($recordId, $firstName, $lastName)
+        public function Add($careerId, $description, $active)
         {
-            $career = new Career();
+            $career = new Career($careerId, $description, $active);
             $career->setCareerId($careerId);
             $career->setDescription($description);
             $career->setActive($active);
