@@ -1,26 +1,7 @@
 <?php
-   /* require_once('nav.php');*/
-   
-    use DAO\CareerDao as CareerDao;
-
-
+    require_once('nav.php');
 ?>
 
-<?php 
-
-
-                    $career= new CareerDao();
-                    $career->Add($career);
-                    echo "".count($career);
-                  
-                    $career->GetAll();
-
-
-
-                    ?>
-
-
-<?php /*
 <main class="py-5">
      <section id="listado" class="mb-5">
           <div class="container">
@@ -54,4 +35,4 @@
 </form>
 </div>
 </section>
-</main> */?>
+</main> 
