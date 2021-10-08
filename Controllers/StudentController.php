@@ -42,11 +42,6 @@
             $student->setPhoneNumber ($phoneNumber);
             $student->setActive ($active);
 
-
-
-
-
-
             $this->studentDAO->Add($student);
 
             $this->ShowAddView();
