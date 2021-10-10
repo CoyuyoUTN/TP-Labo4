@@ -10,11 +10,11 @@
 
         public function Add(Student $student)
         {
-            $this->RetrieveData();
+            $this->RetrieveData();                              // de momento no es necesaria porque se baja todo de la api
             
             array_push($this->studentList, $student);
 
-            $this->SaveData();
+           
         }
 
         public function GetAll()
@@ -24,23 +24,29 @@
             return $this->studentList;
         }
 
-        private function SaveData()
-        {
-            $arrayToEncode = array();
+   
+        public function getStudentData($email){
 
-            foreach($this->studentList as $student)
-            {
-                $valuesArray["recordId"] = $student->getRecordId();
-                $valuesArray["firstName"] = $student->getFirstName();
-                $valuesArray["lastName"] = $student->getLastName();
-
-                array_push($arrayToEncode, $valuesArray);
-            }
-
-            $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-            
-            file_put_contents('Data/students.json', $jsonContent);
+            $this->RetrieveData2($email);
+            return $this->studentList;
         }
+
+        public function GetByStudentMail($mail)
+        {
+            $student = null;
+
+            $this->RetrieveData();
+
+            $students = array_filter($this->studentList, function($student) use($mail){
+                return $student->getEmail() == $mail;
+            });
+
+            $students = array_values($students); //Reordering array indexes
+
+            return (count($students) > 0) ? $students[0] : null;
+        }
+
+
 
         private function RetrieveData()
         {
@@ -56,8 +62,9 @@
               $ctx = stream_context_create($opt);
               
               $aux=file_get_contents("https://utn-students-api.herokuapp.com/api/Student", false, $ctx);
-              $array=json_decode($aux);
+              $array=($aux) ? json_decode($aux, true) : array();
 
+             
                 foreach($array as $valuesArray)
                 {
                     $student = new Student();
@@ -72,10 +79,57 @@
                     $student->setEmail ($valuesArray["email"]);
                     $student->setPhoneNumber ($valuesArray["phoneNumber"]);
                     $student->setActive ($valuesArray["active"]);
+                    
 
                     array_push($this->studentList, $student);
                 }
+            
         
         }
+
+        private function RetrieveData2($email)
+        {
+            $this->studentList = array();
+
+            $opt = array(
+                "http" => array(
+                  "method" => "GET",
+                  "header" => "x-api-key: 4f3bceed-50ba-4461-a910-518598664c08\r\n"
+                )
+              );
+              
+              $ctx = stream_context_create($opt);
+              
+              $aux=file_get_contents("https://utn-students-api.herokuapp.com/api/Student", false, $ctx);
+              $array=($aux) ? json_decode($aux, true) : array();
+
+             
+                foreach($array as $valuesArray)
+                    {
+                        if($email==$valuesArray["email"]){
+                    $student = new Student();
+
+                        
+                    $student->setStudentId($valuesArray["studentId"]);
+                    $student->setFirstName($valuesArray["firstName"]);
+                    $student->setLastName($valuesArray["lastName"]);
+                    $student->setCareerId($valuesArray["careerId"]);
+                    $student->setCareerId ($valuesArray["dni"]);
+                    $student->setFileNumber ($valuesArray["fileNumber"]);
+                    $student->setGender ($valuesArray["gender"]);
+                    $student->setBirthDate ($valuesArray["birthDate"]);
+                    $student->setEmail ($valuesArray["email"]);
+                    $student->setPhoneNumber ($valuesArray["phoneNumber"]);
+                    $student->setActive ($valuesArray["active"]);
+                    
+
+                    array_push($this->studentList, $student);
+                }
+            }
+            
+        
+        }
+
+
     }
 ?>

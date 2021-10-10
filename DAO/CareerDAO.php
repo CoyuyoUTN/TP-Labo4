@@ -59,10 +59,11 @@
               
               $ctx = stream_context_create($opt);
               
-              echo file_get_contents("https://utn-students-api.herokuapp.com/api/Career", false, $ctx);
+              $auxJson= file_get_contents("https://utn-students-api.herokuapp.com/api/Career", false, $ctx);
                
+              $arrayAux=json_decode($auxJson);
 
-                foreach($ctx as $valuesArray)
+                foreach($arrayAux as $valuesArray)
                 {
                     $career = new Career();
                     $career->setCareerId($valuesArray["careerId"]);

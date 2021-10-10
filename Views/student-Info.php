@@ -1,7 +1,8 @@
 <?php
 
      include('nav.php');
-
+     require_once("validate-session.php");
+    var_dump($studentList);
 ?>
 
 <main class="py-5">
@@ -27,6 +28,7 @@
                          <?php
                               foreach($studentList as $student)
                               {
+                                  
                                    ?>
                                         <tr>
                                              <td><?php echo $student->getStudentId() ?></td>
@@ -45,6 +47,7 @@
                                         </tr>
                                    <?php
                               }
+                            
                          ?>
                          </tr>
                     </tbody>
