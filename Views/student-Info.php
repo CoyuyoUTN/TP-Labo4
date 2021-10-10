@@ -2,14 +2,14 @@
 
      include('nav.php');
      require_once("validate-session.php");
-    var_dump($studentList);
+    var_dump($student);
 ?>
 
 <main class="py-5">
      <section id="listado" class="mb-5">
           <div class="container">
                <h2 class="mb-4">Listado de estudiantes</h2>
-               <form action="<?php echo FRONT_ROOT."Home/ShowListView" ?>"  method="">
+               <form action="<?php echo FRONT_ROOT."Home/ShowListView" ?>"  method="get">
                <table class="table bg-light-alpha" border="3">
                     <thead>
                          <th>Legajo</th>
@@ -25,11 +25,7 @@
                          <th>Activo</th>
                     </thead>
                     <tbody>
-                         <?php
-                              foreach($studentList as $student)
-                              {
-                                  
-                                   ?>
+                     
                                         <tr>
                                              <td><?php echo $student->getStudentId() ?></td>
                                              <td><?php echo $student->getCareerId() ?></td>
@@ -45,10 +41,7 @@
                                              
                                              
                                         </tr>
-                                   <?php
-                              }
-                            
-                         ?>
+                     
                          </tr>
                     </tbody>
                </table></form>

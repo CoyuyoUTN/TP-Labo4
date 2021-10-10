@@ -22,12 +22,13 @@
 
         public function Login($email)
         {
+            
             $student = $this->studentDAO->GetByStudentMail($email);
 
             if($student != null)
             {
                 $_SESSION["loggedUser"] = $student;
-                $this->ShowStudentView($student);
+                $this->ShowStudentView($email);
             }
             else{
                 $this->Index("Usuario y/o Contraseña incorrectos");
