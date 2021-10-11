@@ -1,6 +1,6 @@
 <?php
 
-     include('navADMIN.php');
+     include("navADMIN.php");
      require_once("validate-session.php");
 
 ?>
@@ -9,7 +9,7 @@
     <section id="listado" class="mb-5">
         <div class="container">
             <h2 class="mb-4">Listado de empresas</h2>
-            <form action="<?php echo FRONT_ROOT."Remove" ?>" method="post">
+            <form action="<?php echo FRONT_ROOT."Home/Remove" ?>" method="get">
                 <table class="table bg-light-alpha" border="3">
                     <thead>
                         <th>Name</th>
