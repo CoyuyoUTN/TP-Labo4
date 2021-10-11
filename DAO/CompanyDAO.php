@@ -12,10 +12,9 @@ class CompanyDAO implements ICompanyDAO{
 
     function Add(Company $company){
 
+        
         $this->RetrieveData();
-
         array_push($this->companyList, $company);
-
         $this->SaveData();
 
 
@@ -54,6 +53,23 @@ class CompanyDAO implements ICompanyDAO{
 
 
 
+
+    public function searchName($name)
+    {            
+        $this->RetrieveData();
+        
+        $companySearch = array_filter($this->companyList, function($company) use($name){                
+            return $company->getName() == $name;
+        });
+        
+        return $companySearch;
+    }
+
+
+
+
+
+
     function GetAll(){
 
         $this->RetrieveData();
@@ -86,6 +102,11 @@ class CompanyDAO implements ICompanyDAO{
                  }
              }
         }
+
+
+
+
+
 
 
 

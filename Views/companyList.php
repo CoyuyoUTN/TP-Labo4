@@ -9,7 +9,7 @@
     <section id="listado" class="mb-5">
         <div class="container">
             <h2 class="mb-4">Listado de empresas</h2>
-            <form action="<?php echo FRONT_ROOT."Home/Remove" ?>" method="get">
+            <form action="<?php echo FRONT_ROOT."Company/Remove" ?>" method="post">
                 <table class="table bg-light-alpha" border="3">
                     <thead>
                         <th>Name</th>
@@ -25,7 +25,7 @@
                             <td><?php echo $company->getName() ?></td>
                             <td><?php echo $company->getCuil() ?></td>
                             <td>
-                                <button type="submit" name="name" class="btn" value="<?php echo $company->getName() ?>"> Remove </button>
+                                <button type="submit" class="btn" name="name" value="<?php echo $company->getName() ?>"> Remove </button>
                             </td>
 
                         </tr>
