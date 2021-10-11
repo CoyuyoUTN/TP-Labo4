@@ -33,5 +33,24 @@
 
             $this->ShowAddView();
         }
+
+
+
+        public function Remove($name)
+        {
+            require_once(VIEWS_PATH."validate-session.php");
+            
+            $this->companyDAO->Remove($name);
+
+            $this->ShowAdminView();
+        }
+
+        public function ShowAdminView() 
+        {
+            $companyList=$this->companyDAO->GetAll();
+            require_once(VIEWS_PATH."validate-session.php");
+            require_once(VIEWS_PATH."companyList.php");
+        }
+
     }
 ?>

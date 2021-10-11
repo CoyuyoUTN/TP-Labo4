@@ -41,6 +41,16 @@ class CompanyDAO implements ICompanyDAO{
     }
 
 
+    public function Remove($name)
+    {            
+        $this->RetrieveData();
+        
+        $this->companyList = array_filter($this->companyList, function($company) use($name){                
+            return $company->getName() != $name;
+        });
+        
+        $this->SaveData();
+    }
 
 
 
