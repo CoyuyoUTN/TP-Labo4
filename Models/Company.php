@@ -6,6 +6,7 @@ class Company{
 
 private $name;
 private $cuil;
+private $id;
 
 
 /**
@@ -44,6 +45,26 @@ return $this->cuil;
 public function setCuil($cuil)
 {
 $this->cuil = $cuil;
+
+return $this;
+}
+
+/**
+ * Get the value of id
+ */ 
+public function getId()
+{
+return $this->id;
+}
+
+/**
+ * Set the value of id
+ *
+ * @return  self
+ */ 
+public function setId($id)
+{
+$this->id = $id;
 
 return $this;
 }

@@ -14,6 +14,7 @@ class CompanyDAO implements ICompanyDAO{
 
         
         $this->RetrieveData();
+        $company->setId($this->GetNextId());
         array_push($this->companyList, $company);
         $this->SaveData();
 
@@ -30,6 +31,7 @@ class CompanyDAO implements ICompanyDAO{
             $valuesArray = array();
             $valuesArray["Name"] = $company->getName();
             $valuesArray["CUIL"] = $company->getCuil();
+            $valuesArray["id"] = $company->getId();
             
             array_push($arrayToEncode, $valuesArray);
         }
@@ -40,12 +42,12 @@ class CompanyDAO implements ICompanyDAO{
     }
 
 
-    public function Remove($name)
+    public function Remove($id)
     {            
         $this->RetrieveData();
         
-        $this->companyList = array_filter($this->companyList, function($company) use($name){                
-            return $company->getName() != $name;
+        $this->companyList = array_filter($this->companyList, function($company) use($id){                
+            return $company->getId() != $id;
         });
         
         $this->SaveData();
@@ -54,12 +56,12 @@ class CompanyDAO implements ICompanyDAO{
 
 
 
-    public function searchName($name)
+    public function searchId($id)
     {            
         $this->RetrieveData();
         
-        $companySearch = array_filter($this->companyList, function($company) use($name){                
-            return $company->getName() == $name;
+        $companySearch = array_filter($this->companyList, function($company) use($id){                
+            return $company->getId() == $id;
         });
         
         return $companySearch;
@@ -96,6 +98,7 @@ class CompanyDAO implements ICompanyDAO{
                      $company = new Company();
                      $company->setName($content["Name"]);
                      $company->setCuil($content["CUIL"]);
+                     $company->setId($content["id"]);
                      
 
                      array_push($this->companyList, $company);
@@ -106,7 +109,17 @@ class CompanyDAO implements ICompanyDAO{
 
 
 
+        private function GetNextId()
+        {
+            $id = 0;
 
+            foreach($this->companyList as $company)
+            {
+                $id = ($company->getId() > $id) ? $company->getId() : $id;
+            }
+
+            return $id + 1;
+        }
 
 
 

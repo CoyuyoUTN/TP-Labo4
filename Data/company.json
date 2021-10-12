@@ -1,30 +1,27 @@
 [
     {
         "Name": "Napal",
-        "CUIL": "22-ab11535616"
+        "CUIL": "22-ab11535616",
+        "id": "1"
     },
     {
         "Name": "Infosis",
-        "CUIL": "22-ab11535616"
+        "CUIL": "22-ab11535616",
+        "id": "2"
     },
     {
         "Name": "Accenture",
-        "CUIL": "22-ab11535616"
+        "CUIL": "22-ab11535616",
+        "id": "3"
     },
     {
         "Name": "Logitec",
-        "CUIL": "22-ab11535616"
+        "CUIL": "22-ab11535616",
+        "id": "4"
     },
     {
         "Name": "linkedin",
-        "CUIL": "adfwbk23452"
-    },
-    {
-        "Name": "Quilmes",
-        "CUIL": "adfwbk23452"
-    },
-    {
-        "Name": "Rexona",
-        "CUIL": "gsgvws161sef"
+        "CUIL": "gsedgrn3453",
+        "id": 5
     }
 ]

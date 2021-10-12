@@ -7,7 +7,7 @@
     <section id="listado" class="mb-5">
         <div class="container">
             <h2 class="mb-4">Modificar Empresa</h2>
-            <form action="<?php  echo FRONT_ROOT?>Company/showModifyView" method="post" class="bg-light-alpha p-5">
+            <form action="<?php  echo FRONT_ROOT?>Company/Modify" method="post" class="bg-light-alpha p-5">
 
 
 
@@ -15,12 +15,12 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="name">Nombre</label>
-                            <input type="text" name="name" id="name" class="form-control" required>
+                            <label for="id">Id empresa</label>
+                            <input type="number" name="id" id="id" min="1" max="9999" class="form-control" required>
                         </div>
                         
                     </div>
-                    <input type="submit" class="btn" name="name" value="Modificar" style="background-color:#DC8E47;color:white;"/>
+                    <input type="submit" class="btn" value="Edit" style="background-color:#DC8E47;color:white;"/>
                 </div>
                
                

@@ -36,13 +36,31 @@
             $this->ShowAdminView();
         }
 
+        public function Modify($id){
+
+            require_once(VIEWS_PATH."validate-session.php");
+            
+           $valor= $this->companyDAO->searchId($id);
+
+           if($valor==NULL){
+            $this->ShowAdminView();
+
+            echo "<center><H3> 'Id no existe' </center></H3>";
+           }
+           else{
+               $this->showModifyView();
+            }
+
+        }
 
 
-        public function Remove($name)
+
+
+        public function Remove($id)
         {
             require_once(VIEWS_PATH."validate-session.php");
             
-            $this->companyDAO->Remove($name);
+            $this->companyDAO->Remove($id);
 
             $this->ShowAdminView();
         }
@@ -56,21 +74,14 @@
         }
 
 
-        public function showModifyView($name){
+        public function showModifyView(){
             
-           $bool=$this->companyDAO->searchName($name);
-            if($bool==NULL){
+         
                 require_once(VIEWS_PATH."validate-session.php");
-                require_once(VIEWS_PATH."CompanyModificar.php");
-            }
-            else{
-                require_once(VIEWS_PATH."validate-session.php");
-                require_once(VIEWS_PATH."companyADD.php");
-            }
-
-
-
+                require_once(VIEWS_PATH."companyModify.php");
+            
         }
+
 
     }
 ?>

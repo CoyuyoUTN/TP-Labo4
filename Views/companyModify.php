@@ -6,8 +6,8 @@
 <main class="py-5">
     <section id="listado" class="mb-5">
         <div class="container">
-            <h2 class="mb-4">Agregar empresa</h2>
-            <form action="<?php  echo FRONT_ROOT?>Company/Add" method="post" class="bg-light-alpha p-5">
+            <h2 class="mb-4">Modificar empresa</h2>
+            <form action="<?php  echo FRONT_ROOT?>Company/Modify" method="post" class="bg-light-alpha p-5">
 
 
 
@@ -26,7 +26,7 @@
                             <input type="text" name="cuil" id="cuil" class="form-control" required>
                         </div>
                     </div>
-                    <input type="submit" class="btn" value="Agregar" style="background-color:#DC8E47;color:white;"/>
+                    <input type="submit" class="btn" value="Modificar" style="background-color:#DC8E47;color:white;"/>
                 </div>
                
                

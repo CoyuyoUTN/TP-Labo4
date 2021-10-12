@@ -12,6 +12,7 @@
             <form action="<?php echo FRONT_ROOT."Company/Remove" ?>" method="post">
                 <table class="table bg-light-alpha" border="3">
                     <thead>
+                        <th>Id</th>
                         <th>Name</th>
                         <th>CUIL</th>
 
@@ -22,10 +23,15 @@
                               {
                                    ?>
                         <tr>
+                            <td><?php echo $company->getId() ?></td>
                             <td><?php echo $company->getName() ?></td>
                             <td><?php echo $company->getCuil() ?></td>
+
                             <td>
-                                <button type="submit" class="btn" name="name" value="<?php echo $company->getName() ?>"> Remove </button>
+                                <button type="submit" class="btn" name="id" value="<?php echo $company->getId() ?>">
+                                    Remove </button>
+
+
                             </td>
 
                         </tr>
