@@ -22,6 +22,16 @@ class CompanyDAO implements ICompanyDAO{
     }
 
 
+    public function Edit(Company $company){
+
+        
+        $this->RetrieveData();
+        
+        array_push($this->companyList, $company);
+        $this->SaveData();
+
+
+    }
     private function SaveData()
     {
         $arrayToEncode = array();
@@ -52,25 +62,24 @@ class CompanyDAO implements ICompanyDAO{
         $this->SaveData();
     }
 
-
-
-
     public function searchId($id)
     {            
         $this->RetrieveData();
+
+        $return = array();
+
+        for ($i=0; $i < count($this->companyList); $i++) { 
+            if($this->companyList[$i]->getId() == $id){
+               
+                $return = $this->companyList[$i];
+                
+            }
+        }
        
-        $this->companyList = array_filter($this->companyList, function($company) use($id){                
-            
-            return $company->getId() == $id;
-            var_dump($company);
-            
-        });
-        echo "///////////////////////";
-       
-        echo "///////////////////////";
-        
+        return $return;
     }
 
+   
 
 
 

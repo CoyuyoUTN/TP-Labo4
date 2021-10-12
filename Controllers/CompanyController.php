@@ -37,11 +37,11 @@
         }
 
         public function Modify($id, $name, $cuil){
-            var_dump($name);
+            
             require_once(VIEWS_PATH."validate-session.php");
             $company = new Company();
            $company= $this->companyDAO->searchId($id);
-            var_dump($company);
+            
            if($company==NULL){
             $this->ShowAdminView();
 
@@ -52,7 +52,10 @@
           
             $company->setName($name); 
             $company->setCuil($cuil); 
-             $this->companyDAO->Add($company);
+         
+             $this->companyDAO->Edit($company);
+             $this->ShowAdminView();
+             
             }
 
         }
