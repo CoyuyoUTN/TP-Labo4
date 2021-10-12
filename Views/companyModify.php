@@ -16,6 +16,13 @@
                     
                     <div class="col-lg-4">
                         <div class="form-group">
+                            <label for="id">Id empresa</label>
+                            <input type="number" name="id" id="id" min="1" max="9999" class="form-control" required>
+                        </div>
+                        
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
                             <label for="name">Nombre</label>
                             <input type="text" name="name" id="name" class="form-control" required>
                         </div>

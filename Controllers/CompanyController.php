@@ -36,19 +36,23 @@
             $this->ShowAdminView();
         }
 
-        public function Modify($id){
-
+        public function Modify($id, $name, $cuil){
+            var_dump($name);
             require_once(VIEWS_PATH."validate-session.php");
-            
-           $valor= $this->companyDAO->searchId($id);
-
-           if($valor==NULL){
+            $company = new Company();
+           $company= $this->companyDAO->searchId($id);
+            var_dump($company);
+           if($company==NULL){
             $this->ShowAdminView();
 
             echo "<center><H3> 'Id no existe' </center></H3>";
            }
            else{
-               $this->showModifyView();
+            $this->companyDAO->Remove($id);
+          
+            $company->setName($name); 
+            $company->setCuil($cuil); 
+             $this->companyDAO->Add($company);
             }
 
         }

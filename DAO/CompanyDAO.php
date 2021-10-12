@@ -41,7 +41,6 @@ class CompanyDAO implements ICompanyDAO{
         file_put_contents($this->fileName, $fileContent);
     }
 
-
     public function Remove($id)
     {            
         $this->RetrieveData();
@@ -59,12 +58,17 @@ class CompanyDAO implements ICompanyDAO{
     public function searchId($id)
     {            
         $this->RetrieveData();
-        
-        $companySearch = array_filter($this->companyList, function($company) use($id){                
+       
+        $this->companyList = array_filter($this->companyList, function($company) use($id){                
+            
             return $company->getId() == $id;
+            var_dump($company);
+            
         });
+        echo "///////////////////////";
+       
+        echo "///////////////////////";
         
-        return $companySearch;
     }
 
 

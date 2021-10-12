@@ -11,7 +11,7 @@
                <a class="nav-link" href="<?php echo  FRONT_ROOT."Company/ShowAddView "?>">Añadir empresa</a>
           </li>     
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo  FRONT_ROOT."Company/CompanyModificar "?>">Modificar empresa</a>
+               <a class="nav-link" href="<?php echo  FRONT_ROOT."Company/ShowModifyView "?>">Modificar empresa</a>
           </li>      
      </ul>
 </nav>
