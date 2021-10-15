@@ -13,5 +13,8 @@
           <li class="nav-item">
                <a class="nav-link" href="<?php echo  FRONT_ROOT."Company/ShowModifyView "?>">Modificar empresa</a>
           </li>      
+          <li class="nav-item">
+               <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/ShowListView "?>">Listar Alumnos</a>
+          </li>   
      </ul>
 </nav>

@@ -26,9 +26,18 @@ use Models\Company as Company;
 
    
 
-        public function Login($email)
+        public function Login($email=NULL)
         {
-            
+            if($email==NULL){
+                if( $_SESSION["loggedUser"]){
+                    $email= $_SESSION["loggedUser"]->getEmail();
+                    
+                }
+                else{
+                    this->Index("Logueate");
+                }
+            }
+          
             if($email=="admin@gmail.com"){
                 $_SESSION["loggedUser"] = $email;
                 $this->ShowAdminView();
@@ -70,7 +79,13 @@ use Models\Company as Company;
             require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."student-list.php");
         }
-
+    
+        
+        public function ShowCompanyListStudent(){
+            $companyList = $this->companyDAO->GetAll();
+            require_once(VIEWS_PATH."validate-session.php");
+            require_once(VIEWS_PATH."studentCompanyList.php");
+        }
 
         public function ShowStudentView($email)
         {
