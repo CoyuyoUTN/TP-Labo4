@@ -85,11 +85,20 @@ class CompanyDAO implements ICompanyDAO{
 
 
 
-    function GetAll(){
+    function GetAll($filter=NULL){
 
         $this->RetrieveData();
 
-        return $this->companyList;
+        if($filter != NULL){
+            $ret = array_filter($this->companyList, function($company) use($filter){
+                return str_contains($company->getName(),$filter);
+            });
+        }
+        else{
+            $ret = $this->companyList;
+        }
+
+        return $ret;
     }
 
 

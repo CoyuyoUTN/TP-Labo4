@@ -34,7 +34,7 @@ use Models\Company as Company;
                     
                 }
                 else{
-                    this->Index("Logueate");
+                    $this->Index("Logueate");
                 }
             }
           
@@ -82,7 +82,13 @@ use Models\Company as Company;
     
         
         public function ShowCompanyListStudent(){
-            $companyList = $this->companyDAO->GetAll();
+            if(isset($_GET['search'])){
+                $companyList = $this->companyDAO->GetAll($_GET['search']);
+            }
+            else{
+                $companyList = $this->companyDAO->GetAll();
+            }
+            
             require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."studentCompanyList.php");
         }

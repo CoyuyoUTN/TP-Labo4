@@ -2,6 +2,12 @@
 
      include("nav.php");
      require_once("validate-session.php");
+     if(isset($_SERVER["HTTP_REFERER"])){
+        $back = $_SERVER["HTTP_REFERER"];
+     }
+     else{
+        $back = NULL;
+     }
 
 ?>
 
@@ -36,9 +42,13 @@
                         </tr>
                         
                     </tbody>
-                    <a href="<?=$_SERVER["HTTP_REFERER"]?>">Atras</a>
-                    <input type="search" id="search" name="search">
-                    <a href="<?=  echo FRONT_ROOT."Home/ShowCompanyListStudent"?>">BUSCAR</a>
+                    <a href="<?=$back?>">Atras</a>
+                    <br/>
+
+                    <form action="<?php echo FRONT_ROOT."Home/ShowCompanyListStudent" ?>" method="get">
+                        <input type="search" id="search" name="search">
+                        <button type="submit">Buscar</button>
+                    </form>
 
                 </table>
               
