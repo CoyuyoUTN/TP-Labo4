@@ -37,6 +37,9 @@
                         
                     </tbody>
                     <a href="<?=$_SERVER["HTTP_REFERER"]?>">Atras</a>
+                    <input type="search" id="search" name="search">
+                    <a href="<?=  echo FRONT_ROOT."Home/ShowCompanyListStudent"?>">BUSCAR</a>
+
                 </table>
               
            
