@@ -1,6 +1,4 @@
-<?php
- include('nav.php');
-?>
+
 <center>
     <form action="<?php echo FRONT_ROOT."Home/Login" ?>" method="post">
         <div>
