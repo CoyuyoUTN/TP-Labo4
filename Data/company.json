@@ -1,27 +1,22 @@
 [
     {
-        "Name": "Github",
-        "CUIL": "111111111111111111",
+        "Name": "Linkedin",
+        "CUIL": "30-16165151AB",
+        "id": 1
+    },
+    {
+        "Name": "UTN",
+        "CUIL": "30-16162311CB",
         "id": 2
     },
     {
-        "Name": "Linkedin",
-        "CUIL": "55555555555555555",
+        "Name": "TECNO USK",
+        "CUIL": "30-AALVRKNEL64",
         "id": 3
     },
     {
-        "Name": "Modificado",
-        "CUIL": "2222222222222",
+        "Name": "Accenture",
+        "CUIL": "30-AALVRLLLL64",
         "id": 4
-    },
-    {
-        "Name": "Linkedin",
-        "CUIL": "4444444444444",
-        "id": 5
-    },
-    {
-        "Name": "Holaa",
-        "CUIL": "22222",
-        "id": 1
     }
 ]
