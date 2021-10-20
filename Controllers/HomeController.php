@@ -93,6 +93,13 @@ use Models\Company as Company;
             require_once(VIEWS_PATH."studentCompanyList.php");
         }
 
+
+        public function ShowFullData($companyID)
+        {
+            $company = $this->companyDAO->searchId($companyID);
+            require_once(VIEWS_PATH."companyFullData.php");
+        }
+
         public function ShowStudentView($email)
         {
             $studentList = $this->studentDAO->getStudentData($email);

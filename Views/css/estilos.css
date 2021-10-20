@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600');
-
 html, body {
      height: 100%;
 }
+
 body {
      font-family: 'Montserrat', sans-serif;
      background: url(../img/bg.png) no-repeat center center fixed;
      -webkit-background-size: cover;
-        -moz-background-size: cover;
-          -o-background-size: cover;
-             background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+     background-size: cover;
 }
 
 .height-100 {
@@ -17,10 +17,11 @@ body {
 }
 
 .bg-dark-alpha {
-     background-color: rgba(0,0,0,0.2);
+     background-color: rgba(0, 0, 0, 0.2);
 }
+
 .bg-light-alpha {
-     background-color: rgba(255,255,255,0.2);
+     background-color: rgba(255, 255, 255, 0.2);
 }
 
 .login-form {
@@ -32,38 +33,46 @@ body {
      height: 20px !important;
      margin-left: 10px !important;
      width: 20px !important;
-   }
+}
 
-   form {
+form {
      max-width: 800px;
-    background-color: rgb(141, 192, 236);
-   border: 2px solid rgba(58, 2, 2, 0.2);
-   }
-   
-   
-   textarea{
-       min-height: 50px;
-       max-height: 200px;
-       margin-bottom: 5px; 
-   }
-     
-   button {
+     background-color: rgb(141, 192, 236);
+     border: 2px solid rgba(58, 2, 2, 0.2);
+}
+
+textarea {
+     min-height: 50px;
+     max-height: 200px;
+     margin-bottom: 5px;
+}
+
+button {
      padding: 19px 39px 18px 39px;
      font-size: 18px;
      font-style: normal;
      border-radius: 5px;
      border: 1px solid #011d01;
      border-width: 1px 1px 3px;
-     box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
-   }
-   
-   button:hover{
-       background-color: #17c907;
-   }
-   
-   label {
+     box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+button:hover {
+     background-color: #17c907;
+}
+
+label {
      display: contents;
      margin-bottom: 8px;
-     
-   }
-   
+}
+
+/* CSS personalizado */
+
+.header{
+     padding-bottom: 2rem;
+}
+
+.business-data{
+     background-color: rgba(255, 255, 255, 0.4);
+     padding: 1rem;
+}
