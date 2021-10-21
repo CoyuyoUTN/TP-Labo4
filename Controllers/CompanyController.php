@@ -29,9 +29,7 @@
         public function Add($name, $cuil)
         {
             require_once(VIEWS_PATH."validate-session.php");
-            $company = new Company();
-            $company->setName($name);
-            $company->setCuil($cuil);
+            $company = new Company($name,$cuil);
             $this->companyDAO->Add($company);
             $this->ShowAdminView();
         }
@@ -39,7 +37,6 @@
         public function Modify($id, $name, $cuil){
             
             require_once(VIEWS_PATH."validate-session.php");
-            $company = new Company();
            $company= $this->companyDAO->searchId($id);
             
            if($company==NULL){

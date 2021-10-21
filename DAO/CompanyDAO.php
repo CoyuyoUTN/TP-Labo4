@@ -117,11 +117,7 @@ class CompanyDAO implements ICompanyDAO{
                  
                  foreach($contentArray as $content)
                  {
-                     $company = new Company();
-                     $company->setName($content["Name"]);
-                     $company->setCuil($content["CUIL"]);
-                     $company->setId($content["id"]);
-                     
+                    $company = Company::fromJson($content);
 
                      array_push($this->companyList, $company);
                  }
