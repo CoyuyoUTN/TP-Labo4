@@ -148,8 +148,8 @@
                  $Password = $_GET["lastName"];
      
                  $insertStatement->bindParam(":studentId", $studentId);
-                 $insertStatement->bindParam(":firstName", $CareerId);
-                 $insertStatement->bindParam(":lastName", $Password);
+                 $insertStatement->bindParam(":CareerId", $CareerId);
+                 $insertStatement->bindParam(":Password", $Password);
          
                  $insertStatement->execute();
              }
