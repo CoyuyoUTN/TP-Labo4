@@ -1,4 +1,9 @@
+<?php
 
+     include("navADMIN.php");
+     require_once("validate-session.php");
+
+?>
 <main class="py-5">
      <section id="listado" class="mb-5">
           <div class="container">
