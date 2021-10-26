@@ -129,7 +129,34 @@
             
         
         }
-
+                
+        function toDataBase (){
+                        
+                
+            try
+         {
+             $pdo = new PDO("mysql:host=".DB_HOST."; dbname=".DB_NAME, DB_USER, DB_PASS);
+             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+             
+             if ($_GET && isset($_GET['studentId'])) {
+                 //Execute INSERT statement
+                 $insertStatement = $pdo->prepare("INSERT INTO Students (studentId, careerId, password )
+                                             VALUES (:studentId, :CareerId, :Password)");
+     
+                 $studentId = $_GET["studenId"];
+                 $CareerId = $_GET["CareerId"];
+                 $Password = $_GET["lastName"];
+     
+                 $insertStatement->bindParam(":studentId", $studentId);
+                 $insertStatement->bindParam(":firstName", $CareerId);
+                 $insertStatement->bindParam(":lastName", $Password);
+         
+                 $insertStatement->execute();
+             }
+             catch(PDOException $ex)
+             {
+                 echo $ex->getMessage();
+             }
 
     }
 ?>
