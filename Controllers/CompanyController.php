@@ -29,9 +29,16 @@
         public function Add($name, $cuil)
         {
             require_once(VIEWS_PATH."validate-session.php");
+            if($this->companyDAO->ifExistsData($name,$cuil)){
+                $var="Empresa ya existente";
+                echo "<script> alert('".$var."'); </script>";
+                $this->ShowAddView();
+            }
+            else{
             $company = new Company($name,$cuil);
             $this->companyDAO->Add($company);
             $this->ShowAdminView();
+            }
         }
 
         public function Modify($id, $name, $cuil){

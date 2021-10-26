@@ -80,7 +80,26 @@ class CompanyDAO implements ICompanyDAO{
     }
 
    
+    public function ifExistsData($name,$cuil){
 
+        $this->RetrieveData();
+        $answer=false;
+    
+        for ($i=0; $i < count($this->companyList); $i++) { 
+            if($this->companyList[$i]->getName() == $name  ){
+               
+                $answer=true;
+                
+            }
+            if($this->companyList[$i]->getCuil() == $cuil ){
+               
+                $answer=true;
+                
+            }
+        
+        }
+        return $answer;
+    }
 
 
 
