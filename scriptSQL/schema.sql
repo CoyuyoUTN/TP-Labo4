@@ -14,4 +14,26 @@ CREATE TABLE company (
   linked varchar(20) DEFAULT NULL,
   webpage varchar(30) NOT NULL,
   facebook varchar(30) NOT NULL
+),
+
+CREATE TABLE proyecto4.Admin (
+	Id INT auto_increment NOT NULL,
+	Email varchar(50) NOT NULL,
+	Password varchar(15) NOT NULL,
+	Name varchar(30) NOT NULL,
+	CONSTRAINT Id_PK PRIMARY KEY (Id),
+	CONSTRAINT Email_UN UNIQUE KEY (Email)
 )
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE proyecto4.Career (
+	careerId INT auto_increment NOT NULL,
+	description varchar(100) NOT NULL,
+	active BOOL NOT NULL,
+	CONSTRAINT Career_PK PRIMARY KEY (careerId)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;

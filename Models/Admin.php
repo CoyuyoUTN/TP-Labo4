@@ -5,9 +5,10 @@ namespace Models;
 class Admin{
 
 private $id;
+private $nombre;
 private $email="admin@gmail.com";
 private $password="adminadmin";
-private $careerId;
+
 
 
 
@@ -72,22 +73,24 @@ $this->id = $id;
 return $this;
 }
 
+
+
 /**
- * Get the value of careerId
+ * Get the value of nombre
  */ 
-public function getCareerId()
+public function getNombre()
 {
-return $this->careerId;
+return $this->nombre;
 }
 
 /**
- * Set the value of careerId
+ * Set the value of nombre
  *
  * @return  self
  */ 
-public function setCareerId($careerId)
+public function setNombre($nombre)
 {
-$this->careerId = $careerId;
+$this->nombre = $nombre;
 
 return $this;
 }
