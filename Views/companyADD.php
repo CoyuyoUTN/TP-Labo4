@@ -1,6 +1,7 @@
 <?php
     require_once('navADMIN.php');
     require_once("validate-session.php");
+
 ?>
 
 <main class="py-5">
