@@ -26,7 +26,7 @@ use Models\Company as Company;
 
    
 
-        public function Login($email=NULL)
+        public function Login($email=NULL, $password=NULL)
         {
             if($email==NULL){
                 if( $_SESSION["loggedUser"]){
@@ -146,6 +146,15 @@ use Models\Company as Company;
             $this->companyDAO->Remove($name);
 
             $this->ShowAdminView();
+        }
+
+
+
+        public function AddToDataBase(){
+                require_once (VIEWS_PATH."studentADDtoDB.php");
+
+
+
         }
 
 

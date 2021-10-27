@@ -18,6 +18,11 @@
           </li>   
           <li class="nav-item">
                <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/Logout "?>">Cerrar secion</a>
-          </li>   
+          </li> 
+          <li class="nav-item">
+               <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/AddToDataBase "?>">Agregar usuario</a>
+          </li>
+          
+            
      </ul>
 </nav>
