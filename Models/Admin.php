@@ -7,7 +7,7 @@ class Admin{
 private $id;
 private $nombre;
 private $email="admin@gmail.com";
-private $password="adminadmin";
+private $password="123456";
 
 
 
