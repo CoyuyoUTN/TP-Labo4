@@ -8,7 +8,7 @@
                     <label for="password">Contraseña</label>
                     <input type="password" name="password" id="password" class="form-control form-control-lg" placeholder="Ingresar contraseña">
                </div>
-               <button class="btn btn-dark btn-block btn-lg" type="submit">Iniciar Sesión</button>
+               <button class="btn btn-dark btn-block btn-lg" type="submit">Login</button>
           </form>
 </center>
 
