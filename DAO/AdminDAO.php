@@ -120,7 +120,7 @@ class AdminDAO implements IAdminDAO{
                      $admin = new Admin();
                      $admin->setEmail($content["Email"]);
                      $admin->setPassword($content["Password"]);
-                     $admin->setCareerId($content["id"]);
+                   
                      
 
                      array_push($this->adminList, $admin);

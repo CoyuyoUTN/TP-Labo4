@@ -130,7 +130,8 @@
         
         }
                 
-        function toDataBase (){
+        function toDataBase ()
+        {
                         
                 
             try
@@ -153,10 +154,11 @@
          
                  $insertStatement->execute();
              }
+             }
              catch(PDOException $ex)
              {
                  echo $ex->getMessage();
              }
-
+            }
     }
 ?>

@@ -1,16 +1,14 @@
-
 <center>
-    <form action="<?php echo FRONT_ROOT."Home/Login" ?>" method="post">
-        <div>
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email" placeholder="Ingresar email">
-        </div>
-        <?php	/*	 <div >
-                         <label for="password">Password</label>
-                         <input type="text" name="password" id="password" placeholder="Ingresar constraseña">
-                    </div>*/
-					?>
-        <br>
-        <button type="submit">Iniciar Sesión</button>
-    </form>
+<form action="<?php echo FRONT_ROOT."Home/Login" ?>" method="post" class="login-form bg-dark-alpha p-5 text-white">
+               <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="Ingresar email">
+               </div>
+               <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" name="password" id="password" class="form-control form-control-lg" placeholder="Ingresar contraseña">
+               </div>
+               <button class="btn btn-dark btn-block btn-lg" type="submit">Iniciar Sesión</button>
+          </form>
 </center>
+
