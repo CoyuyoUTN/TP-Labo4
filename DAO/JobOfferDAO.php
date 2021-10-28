@@ -5,6 +5,7 @@ namespace DAO;
 use DAO\Connection as Connection;
 use Models\JobOffer as JobOffer;
 
+
 class JobOfferDAO
 {
     private $db;

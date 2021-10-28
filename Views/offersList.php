@@ -14,8 +14,8 @@
                     <thead>
                         <th>ID</th>
                         <th>Descripcion</th>
-                        <th>CompanyId</th>
-                        <th>JobPositionId</th>
+                        <th>Compañia</th>
+                        <th>Posicion</th>
                     </thead>
                     <tbody>
                          <?php
@@ -26,7 +26,7 @@
                                              <td><?php echo $offer->getId() ?></td>
                                              <td><?php echo $offer->getDescription() ?></td>
                                              <td><?php echo $offer->getCompanyId() ?></td>
-                                             <td><?php echo $offer->getJobPositionId() ?></td>
+                                             <td><?php echo $offer->getJobPosition()->getDescription() ?></td>
                                         </tr>
                                    <?php
                               }

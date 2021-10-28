@@ -7,6 +7,7 @@ use Models\JobPosition as JobPosition;
 class JobPositionDAO
 {
     private $jobPositionList;
+    private static $instance;
 
     function __construct()
     {
@@ -25,8 +26,16 @@ class JobPositionDAO
         $array = ($aux) ? json_decode($aux, true) : array();
 
         foreach ($array as $value) {
-            array_push($this->studentList, new JobPosition($value["jobPositionId"],$value["careerId"],$value["description"]));
+            array_push($this->jobPositionList, new JobPosition($value["jobPositionId"],$value["careerId"],$value["description"]));
         }
+    }
+
+    static function getInstance(){
+        if(self::$instance == null){
+            self::$instance = new self();
+        }
+
+        return self::$instance;
     }
 
     function getAll(){
@@ -34,7 +43,7 @@ class JobPositionDAO
     }
 
     function getById($id){
-        $ret = array();
+        $ret = new JobPosition;
         foreach ($this->jobPositionList as $value) {
             if($value->getJobPositionId() == $id){
                 $ret = $value;

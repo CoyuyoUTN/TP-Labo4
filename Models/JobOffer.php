@@ -2,19 +2,28 @@
 
 namespace Models;
 
+use Models\JobPosition as JobPosition;
+use DAO\JobPositionDAO as JobPositionDAO;
+
 class JobOffer
 {
     private $id;
     private $description;
     private $companyId;
     private $jobPositionId;
+    private $jobPosition;
 
-    public function __construct($id, $description, $companyId, $jobPositionId)
-    {
+    public function __construct($id=NULL, $description=NULL, $companyId=NULL, $jobPositionId=NULL)
+    {   
+        $positionInstance = JobPositionDAO::getInstance();
+
         $this->id = $id;
         $this->description = $description;
         $this->companyId = $companyId;
         $this->jobPositionId = $jobPositionId;
+        if(isset($this->jobPositionId)){
+            $this->jobPosition = $positionInstance->getById($this->jobPositionId);
+        }
     }
 
     public static function fromArray($array)
@@ -44,6 +53,7 @@ class JobOffer
         } else {
             $jobPositionId = null;
         }
+        
 
         return new self($id, $description, $companyId, $jobPositionId);
     }
@@ -124,6 +134,26 @@ class JobOffer
     public function setJobPositionId($jobPositionId)
     {
         $this->jobPositionId = $jobPositionId;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of jobPosition
+     */ 
+    public function getJobPosition()
+    {
+        return $this->jobPosition;
+    }
+
+    /**
+     * Set the value of jobPosition
+     *
+     * @return  self
+     */ 
+    public function setJobPosition($jobPosition)
+    {
+        $this->jobPosition = $jobPosition;
 
         return $this;
     }

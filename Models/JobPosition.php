@@ -18,6 +18,26 @@ class JobPosition
         $this->description=$description;
     }
 
+    static function byArray($value){
+        $jobPositionId=null;
+        $careerId=null;
+        $description=null;
+
+        if(isset($value["jobPositionId"])){
+            $jobPositionId = $value["jobPositionId"];
+        }
+
+        if(isset($value["careerId"])){
+            $careerId = $value["careerId"];
+        }
+
+        if(isset($value["description"])){
+            $description = $value["description"];
+        }
+
+        return new self($jobPositionId,$careerId,$description);
+    }
+
     /**
      * Get the value of description
      */ 
