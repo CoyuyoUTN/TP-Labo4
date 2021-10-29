@@ -4,10 +4,15 @@ namespace DAO;
 
 use DAO\IStudentDAO as IStudentDAO;
 use Models\Student as Student;
+use DAO\Connection as Connection;
 
 class StudentDAO implements IStudentDAO
 {
-    private $studentList = array();
+    private $db;
+
+    public function __construct(){
+        $this->db = Connection::getInstance();
+    }
 
     public function Add(Student $student)
     {
@@ -105,7 +110,6 @@ class StudentDAO implements IStudentDAO
             if ($email == $valuesArray["email"]) {
                 $student = new Student();
 
-
                 $student->setStudentId($valuesArray["studentId"]);
                 $student->setFirstName($valuesArray["firstName"]);
                 $student->setLastName($valuesArray["lastName"]);
@@ -117,7 +121,6 @@ class StudentDAO implements IStudentDAO
                 $student->setEmail($valuesArray["email"]);
                 $student->setPhoneNumber($valuesArray["phoneNumber"]);
                 $student->setActive($valuesArray["active"]);
-
 
                 array_push($this->studentList, $student);
             }
@@ -144,32 +147,9 @@ class StudentDAO implements IStudentDAO
 
         foreach ($array as $valuesArray) {
             if (isset($_GET['studentId']) ==  $valuesArray["stuendtId"]) {
-
-                try {
-                    $pdo = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS);
-                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-
-                    if ($_GET && isset($_GET['studentId'])) {
-                        //Execute INSERT statement
-                        $insertStatement = $pdo->prepare("INSERT INTO Students (studentId, password)
-                                                            VALUES (:studentId, :Password,)");
-
-                        $studentId = $_GET["studenId"];
-                        $Password = $_GET["password"];
-
-
-
-                        $insertStatement->bindParam(":studentId", $studentId);
-                        $insertStatement->bindParam(":Password", $Password);
-
-
-
-
-                        $insertStatement->execute();
-                    }
-                } catch (PDOException $ex) {
-                    echo $ex->getMessage();
+                $verify = $this->db->Execute('SELECT * FROM Studient WHERE apiId='.$valuesArray["stuendtId"]);
+                if(empty($verify)){
+                    //Registrarse
                 }
             }
         }

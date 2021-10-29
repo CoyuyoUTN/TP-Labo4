@@ -2,16 +2,14 @@
     namespace Controllers;
 
     use DAO\StudentDAO as StudentDAO;
-   use Models\Student as Student;
-
-   use DAO\CompanyDAO as CompanyDAO;
-use Models\Company as Company;
+    use Models\Student as Student;
+    use DAO\CompanyDAO as CompanyDAO;
+    use Models\Company as Company;
 
     class HomeController
     {
         private $studentDAO;
         private $companyDAO;
-        
 
         public function __construct()
         {
@@ -24,7 +22,9 @@ use Models\Company as Company;
             require_once(VIEWS_PATH."loguin.php");
         }
 
-   
+        public function PhpInfo(){
+            phpinfo();
+        }
 
         public function Login($email=NULL, $password=NULL)
         {
@@ -118,20 +118,7 @@ use Models\Company as Company;
 
         public function Add($studentId,$firstName,$lastName,$careerId,$dni,$fileNumber,$gender,$birthDate,$email,$phoneNumber,$active)
         {
-            $student = new Student();
-         
-
-            $student->setStudentId($studentId);
-            $student->setFirstName($firstName);
-            $student->setLastName($lastName);
-            $student->setCareerId($careerId);
-            $student->setCareerId ($dni);
-            $student->setFileNumber ($fileNumber);
-            $student->setGender ($gender);
-            $student->setBirthDate ($birthDate);
-            $student->setEmail ($email);
-            $student->setPhoneNumber ($phoneNumber);
-            $student->setActive ($active);
+            $student = new Student($studentId,$firstName,$lastName,$careerId,$dni,$fileNumber,$gender,$birthDate,$email,$phoneNumber,$active);
 
             $this->studentDAO->Add($student);
 
@@ -159,6 +146,3 @@ use Models\Company as Company;
 
 
     }
-
-    
-?>

@@ -19,7 +19,32 @@
         private $password;
 
 
-
+        function __construct(
+                $studentId=NULL,
+                $firstName=NULL,
+                $lastName=NULL,
+                $careerId=NULL,
+                $dni=NULL,
+                $fileNumber=NULL,
+                $gender=NULL,
+                $birthDate=NULL,
+                $email=NULL,
+                $phoneNumber=NULL,
+                $active=NULL
+                )
+        {
+                $this->studentId = $studentId;
+                $this->firstName = $firstName;
+                $this->lastName = $lastName;
+                $this->careerId = $careerId;
+                $this->dni = $dni;
+                $this->fileNumber = $fileNumber;
+                $this->gender = $gender;
+                $this->birthDate = $birthDate;
+                $this->email = $email;
+                $this->phoneNumber = $phoneNumber;
+                $this->active = $active;
+        }
 
 
         /**
@@ -262,15 +287,3 @@
                 return $this;
         }
         }
-
-
-
-
-
-        
-
-
-       
-?>
-
-
