@@ -1,15 +1,172 @@
 <?php
 
 namespace DAO;
+namespace interface;
 
-use DAO\IAdminDAO as IAdminDAO;
+use FFI\Exception as Exception;
 use Models\Admin as Admin;
+use DAO\Connection as Connection;
 
-class AdminDAO implements IAdminDAO{
+class AdminDAO implements Crud{
 
-    private $adminList=array();
-    private $fileName = ROOT."Data/admin.json";
+  
+   
+   
+    private $table="Admin";
+	private $connection;
+	
 
+	private function __construct()
+	{
+		
+	}
+	
+    
+    public function create ($admin)
+	{
+
+        try
+            {
+               
+                $query1 = "INSERT INTO ".$this->table." (Id) VALUES (:Id);";
+                $query2 = "INSERT INTO ".$this->table." (Email) VALUES (:Email);";
+                $query3 = "INSERT INTO ".$this->table." (Password) VALUES (:Password);";
+                $query4 = "INSERT INTO ".$this->table." (Name) VALUES (:Name);";
+             
+                
+               
+               
+               
+                $parameters1["Id"] = $admin->getId();
+                $parameters2["Id"] = $admin->getEmail();
+                $parameters3["Id"] = $admin->getPassword();
+                $parameters4["Id"] = $admin->getNombre();
+              
+
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query1, $parameters1);
+                $this->connection->ExecuteNonQuery($query2, $parameters2);
+                $this->connection->ExecuteNonQuery($query3, $parameters3);
+                $this->connection->ExecuteNonQuery($query4, $parameters4);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+	}
+  
+  
+  
+    public function readAll(){
+        try
+            {
+                $adminList = array();
+
+                $query = "SELECT * FROM ".$this->table;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $admin = new Admin();
+                    $admin->setID($row["Id"]);
+                    $admin->setEmail($row["Email"]);
+                    $admin->setPassword($row["Password"]);
+                    $admin->setNombre($row["Name"]);
+                    
+                    
+
+                    array_push($adminList, $admin);
+                }
+
+                return $adminList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+    }
+
+    public function read($adminId)
+        {
+            try
+            {
+                $category = null;
+
+                $query = "SELECT * FROM ".$this->table." WHERE Id = :Id";
+
+                $parameters["Id"] = $adminId;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query, $parameters);
+                
+                foreach ($resultSet as $row)
+                {
+                    $admin = new Admin();
+                    $admin->setID($row["Id"]);
+                    $admin->setEmail($row["Email"]);
+                    $admin->setPassword($row["Password"]);
+                    $admin->setNombre($row["Name"]);
+                }
+                            
+                return $admin;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+    public function update ($admin){
+
+        try
+            {
+                $query = "UPDATE ".$this->table." SET Name = :Name, Email = :Email, Password = :Password  WHERE Id = :Id";
+                
+                $parameters["Id"] = $admin->getId();
+                $parameters["Name"] = $admin->getNombre();
+                $parameters["Password"] = $admin->getPassword();
+                $parameters["Email"] = $admin->getEmail();
+                
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+
+    }
+    
+    public function delete($adminId)
+        {
+            try
+            {
+                $query = "DELETE FROM ".$this->tableName." WHERE Id = :Id";
+            
+                $parameters["Id"] = $adminId;
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);   
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }            
+        }
+   
+   
+   
+   
+      //// A partir de aca para abajo es con JSON, parte vieja
+   
+   
     function Add(Admin $admin){
 
         
