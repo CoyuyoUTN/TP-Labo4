@@ -8,8 +8,8 @@ define("CSS_PATH", FRONT_ROOT.VIEWS_PATH . "css/");
 define("JS_PATH", FRONT_ROOT.VIEWS_PATH . "js/");
 define("DB_HOST", "152.171.186.212");
 define("DB_NAME", "proyecto4");
-define("DB_USER", "group");
-define("DB_PASS", "samasagon");
+define("DB_USER", "public");
+define("DB_PASS", "public");
 ?>
 
 
