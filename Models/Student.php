@@ -6,6 +6,7 @@
     class Student 
     {
         private $studentId;
+        private $dbId;
         private $careerId;
         private $firstName;
         private $lastName;
@@ -21,6 +22,7 @@
 
         function __construct(
                 $studentId=NULL,
+                $dbId = NULL,
                 $firstName=NULL,
                 $lastName=NULL,
                 $careerId=NULL,
@@ -34,6 +36,7 @@
                 )
         {
                 $this->studentId = $studentId;
+                $this->dbId = $dbId;
                 $this->firstName = $firstName;
                 $this->lastName = $lastName;
                 $this->careerId = $careerId;
@@ -286,4 +289,25 @@
 
                 return $this;
         }
+
+        /**
+         * Get the value of dbId
+         */ 
+        public function getDbId()
+        {
+                return $this->dbId;
+        }
+
+        /**
+         * Set the value of dbId
+         *
+         * @return  self
+         */ 
+        public function setDbId($dbId)
+        {
+                $this->dbId = $dbId;
+
+                return $this;
+        }
+        
         }
