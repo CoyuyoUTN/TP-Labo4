@@ -1,0 +1,32 @@
+<?php
+    namespace Controllers;
+
+    use DAO\AdminDAO as AdminDAO;
+    use Models\Admin as Admin;
+
+    class AdminController
+    {
+        private $adminDAO;
+        public function __construct()
+        {
+            $this->adminDAO = new AdminDAO();
+        }
+
+        public function ShowAll($id=null,$email=null,$password=null, $name=null){
+            $admins = $this->adminDAO->GetAll($id,$email,$password, $name);
+
+            require_once(VIEWS_PATH."adminList.php");
+        }
+
+
+        public function ShowAddView()
+        {
+            require_once(VIEWS_PATH."validate-session.php");
+            require_once(VIEWS_PATH."adminADD.php");
+        }
+
+
+
+
+    }
+?>
