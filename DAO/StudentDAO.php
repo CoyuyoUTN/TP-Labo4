@@ -1,4 +1,5 @@
 <?php
+<<<<<<< Updated upstream
 
 namespace DAO;
 
@@ -27,6 +28,158 @@ class StudentDAO implements IStudentDAO
 
         return $this->studentList;
     }
+=======
+    namespace DAO;
+    namespace interface;
+
+
+    
+    use Models\Student as Student;
+    use interface\Crud as Crud;
+
+    class StudentDAO implements Crud
+    {
+
+
+
+        private $studentList = array();
+        private $table="student";
+	    private $connection;
+
+
+
+
+
+
+
+
+        public function create(Student $student)
+	{
+
+        try
+            {
+                $query = "INSERT INTO ".$this->table." (name) VALUES (:name);";
+                
+                $parameters["name"] = $student->getName();
+                
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+	}
+    
+    
+    
+    
+    public function readAll(){
+        try
+            {
+                $studentList = array();
+
+                $query = "SELECT * FROM ".$this->table;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $student = new User();
+                    $student->setID($row["studentId"]);
+                    $student->setName($row[""]);
+
+                    array_push($studentList, $student);
+                }
+
+                return $studentList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+    }
+
+    public function read($studentId)
+        {
+            try
+            {
+                $artist = null;
+
+                $query = "SELECT * FROM ".$this->table." WHERE studentId = :studentId";
+
+                $parameters["studentId"] = studentCode;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query, $parameters);
+                
+                foreach ($resultSet as $row)
+                {
+                    $student = new Student();
+                    $student->setId($row["studentId"]);
+                    $student->setFirstName($row["firstName"]);
+                    $student->setLastName($row["lastName"]);
+                }
+                            
+                return $student;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+
+        
+    public function update($student){
+
+        try
+            {
+                $query = "UPDATE ".$this->table." SET name = :name WHERE id_artist = :id_artist";
+                
+                $parameters["id_artist"] = $artist->getID();
+                $parameters["name"] = $artist->getName();
+                
+
+                
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+
+    }
+    public function delet($artistCode)
+        {
+            try
+            {
+                $query = "DELETE FROM ".$this->tableName." WHERE id_artist = :id_artist";
+            
+                $parameters["id_artist"] = $artistCode;
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);   
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }            
+        }
+
+
+        public function GetAllfromAPI()
+        {
+            $this->RetrieveData();
+>>>>>>> Stashed changes
 
 
     public function getStudentData($email)
@@ -125,6 +278,7 @@ class StudentDAO implements IStudentDAO
                 array_push($this->studentList, $student);
             }
         }
+<<<<<<< Updated upstream
     }
 
     function toDataBase()
@@ -155,3 +309,8 @@ class StudentDAO implements IStudentDAO
         }
     }
 }
+=======
+                
+        
+?>
+>>>>>>> Stashed changes
