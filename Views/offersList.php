@@ -9,13 +9,31 @@
      <section id="listado" class="mb-5">
           <div class="container">
                <h2 class="mb-4">Listado de Ofertas</h2>
-               <form action="<?php echo FRONT_ROOT."Home/ShowListView" ?>"  method="">
+               <form action="<?php echo FRONT_ROOT."Offers/ShowAll" ?>"  method="">
+
+               <button type=submit >Buscar</button>
+
+               <br />
+               <br />
+               
                <table class="table bg-light-alpha" border="3">
                     <thead>
-                        <th>ID</th>
-                        <th>Descripcion</th>
-                        <th>Compañia</th>
-                        <th>Posicion</th>
+                        <th>
+                              ID
+                              <input class="form-control" type="text" id="id" name="id">
+                         </th>
+                        <th>
+                             Descripcion
+                             <input class="form-control" type="text" id="description" name="description">
+                         </th>
+                        <th>
+                             Compañia
+                             <input class="form-control" type="text" id="company" name="company">
+                         </th>
+                        <th>
+                             Posicion
+                             <input class="form-control" type="text" id="position" name="position">
+                         </th>
                     </thead>
                     <tbody>
                          <?php

@@ -51,4 +51,14 @@ class JobPositionDAO
         }
         return $ret;
     }
+
+    function searchByDescription($description){
+        $ret = array();
+        foreach ($this->jobPositionList as $value) {
+            if(str_contains($value->getDescription(), $description)){
+                array_push($ret,$value);
+            }
+        }
+        return $ret;
+    }
 }

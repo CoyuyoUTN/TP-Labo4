@@ -11,10 +11,11 @@
             $this->jobOffersDao = new JobOfferDAO();
         }
 
-        public function ShowAll(){
-            $offers = $this->jobOffersDao->GetAll();
+        public function ShowAll($id=null,$description=null,$company=null,$position=null){
+            $offers = $this->jobOffersDao->GetAll($id,$description,$company,$position);
 
             require_once(VIEWS_PATH."offersList.php");
         }
+
     }
 ?>
