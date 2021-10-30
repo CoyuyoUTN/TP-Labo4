@@ -12,13 +12,43 @@ private $active;
 
 public function __construct($id=null,$email=null,$password=null, $name=null)
     {   
-        $positionInstance = AdminDAO::getInstance();
-
         $this->id = $id;
         $this->email = $email;
         $this->password = $password;
         $this->name = $name;
         
+    }
+
+    public static function fromArray($array)
+    {
+        $id=null;
+        $email=null;
+        $password=null;
+        $name=null;
+
+        if (isset($array["id"])) {
+            $id = $array["id"];
+        } else {
+            $id = null;
+        }
+        if (isset($array["Email"])) {
+            $email = $array["Email"];
+        } else {
+            $email = null;
+        }
+        if (isset($array["Password"])) {
+            $password = $array["Password"];
+        } else {
+            $password = null;
+        }
+        if (isset($array["Name"])) {
+            $name = $array["Name"];
+        } else {
+            $name = null;
+        }
+        
+
+        return new self($id, $email, $password, $name);
     }
 
 /**

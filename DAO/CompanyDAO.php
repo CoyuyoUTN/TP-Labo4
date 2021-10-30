@@ -98,7 +98,7 @@ class CompanyDAO implements Crud{
   
   
   
-    public function readAll(){
+    public function GetAll(){
         try
             {
                 $companyList = array();
