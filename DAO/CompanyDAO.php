@@ -111,11 +111,19 @@ class CompanyDAO implements Crud{
                 
                 foreach ($resultSet as $row)
                 {                
-                    $admin = new Admin();
-                    $admin->setID($row["Id"]);
-                    $admin->setEmail($row["Email"]);
-                    $admin->setPassword($row["Password"]);
-                    $admin->setNombre($row["Name"]);
+                    $company = new Company();
+                    $company->setId($row["Id"]);
+                    $company->setEmail($row["Email"]);
+                    $company->setPassword($row["Password"]);
+                    $company->setNombre($row["Name"]);
+                   $company->setId($row["Id"]);
+                    $company->setEmail($row["Email"]);
+                    $company->setPassword($row["Password"]);
+                    $company->setNombre($row["Name"]);
+                    $company->setId($row["Id"]);
+                    $company->setEmail($row["Email"]);
+                    $company->setPassword($row["Password"]);
+                    $company->setNombre($row["Name"]);
                     
                     
 
