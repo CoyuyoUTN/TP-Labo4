@@ -45,7 +45,7 @@
                 require_once(VIEWS_PATH."companyModify.php");
             
         }
->>>>>>> main
+
 
 
     }

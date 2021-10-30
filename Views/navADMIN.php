@@ -22,12 +22,9 @@
           <li class="nav-item">
                <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/AddToDataBase "?>">Agregar usuario</a>
           </li>
-<<<<<<< HEAD
           <li class="nav-item">
                <a class="nav-link" href="<?php echo  FRONT_ROOT."Admin/ShowAll "?>">Listar Admins</a>
           </li>   
-=======
->>>>>>> main
           
             
      </ul>
