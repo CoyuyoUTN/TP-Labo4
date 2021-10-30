@@ -24,7 +24,7 @@ class AdminDAO implements Crud{
         {
             $result = array();
 
-        $result = $this->db->ExecuteNonQuery($this->insertBuilder($admin->getEmail(),admin->getPassword(), admin->getName()));
+        $result = $this->db->ExecuteNonQuery($this->insertBuilder($admin->getEmail(),$admin->getPassword(), $admin->getName()));
 
         
         }
