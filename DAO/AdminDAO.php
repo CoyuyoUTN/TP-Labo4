@@ -94,7 +94,7 @@ class AdminDAO implements Crud{
         {
             $admin = null;
 
-            $query = "SELECT * FROM ".$this->table." WHERE Id = :Id";
+            $query = "SELECT * FROM Admin".$this->table." WHERE Id = :Id";
 
             $parameters["Id"] = $adminId;
 
