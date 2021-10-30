@@ -1,41 +1,12 @@
 <?php
-<<<<<<< Updated upstream
 
 namespace DAO;
-
-use DAO\IStudentDAO as IStudentDAO;
-use Models\Student as Student;
-use DAO\Connection as Connection;
-
-class StudentDAO implements IStudentDAO
-{
-    private $db;
-
-    public function __construct(){
-        $this->db = Connection::getInstance();
-    }
-
-    public function Add(Student $student)
-    {
-        $this->RetrieveData();                              // de momento no es necesaria porque se baja todo de la api
-
-        array_push($this->studentList, $student);
-    }
-
-    public function GetAll()
-    {
-        $this->RetrieveData();
-
-        return $this->studentList;
-    }
-=======
-    namespace DAO;
+   
     namespace interface;
-
-
-    
+    use DAO\Connection as Connection;
     use Models\Student as Student;
     use interface\Crud as Crud;
+    use Exception as Exception;
 
     class StudentDAO implements Crud
     {
@@ -43,24 +14,35 @@ class StudentDAO implements IStudentDAO
 
 
         private $studentList = array();
-        private $table="student";
+        private $table="Student";
 	    private $connection;
 
 
+      
+        public function __construct(){
+            $this->connection = Connection::getInstance();
+        }
 
 
 
 
 
 
-        public function create(Student $student)
-	{
+        public function create($student)
+	    {
 
-        try
+          try
             {
-                $query = "INSERT INTO ".$this->table." (name) VALUES (:name);";
+                $query = "INSERT INTO ".$this->table." (Name) VALUES (Name), (Email) VALUES (:Email),(Password) VALUES (:Password),
+                (Active) VALUES (:Active);";//DUDA, el ID es autoincrement
+                                                                            //como le solicito el insert ??
                 
-                $parameters["name"] = $student->getName();
+                
+                $parameters["Name"] = $student->getFirstName();
+                $parameters["Email"] = $student->getEmail();
+                $parameters["Password"] = $student->getPassword();
+                $parameters["Active"] = $student->getActive();
+               
                 
 
                 $this->connection = Connection::GetInstance();
@@ -71,12 +53,12 @@ class StudentDAO implements IStudentDAO
             {
                 throw $ex;
             }
-	}
+	    }
     
     
     
     
-    public function readAll(){
+     public function readAll(){
         try
             {
                 $studentList = array();
@@ -89,9 +71,12 @@ class StudentDAO implements IStudentDAO
                 
                 foreach ($resultSet as $row)
                 {                
-                    $student = new User();
-                    $student->setID($row["studentId"]);
-                    $student->setName($row[""]);
+                    $student = new Student();
+                    $student->setStudentId($row["Id"]);
+                    $student->setFirstName($row["Name"]);
+                    $student->setActive($row["Active"]);
+                    $student->setEmail($row["Email"])   ;
+                    $student->setEmail($row["Password"]);
 
                     array_push($studentList, $student);
                 }
@@ -102,17 +87,17 @@ class StudentDAO implements IStudentDAO
             {
                 throw $ex;
             }
-    }
+        }
 
-    public function read($studentId)
+       public function read($studentId)
         {
             try
             {
                 $artist = null;
 
-                $query = "SELECT * FROM ".$this->table." WHERE studentId = :studentId";
+                $query = "SELECT * FROM ".$this->table." WHERE Id = :Id";
 
-                $parameters["studentId"] = studentCode;
+                $parameters["Id"] = $studentId;
 
                 $this->connection = Connection::GetInstance();
 
@@ -140,10 +125,15 @@ class StudentDAO implements IStudentDAO
 
         try
             {
-                $query = "UPDATE ".$this->table." SET name = :name WHERE id_artist = :id_artist";
+                $query = "UPDATE ".$this->table." SET Name = :Name, Active = :Active, Email  = :Email, Password = :Password  WHERE Id = :Id";
                 
-                $parameters["id_artist"] = $artist->getID();
-                $parameters["name"] = $artist->getName();
+                
+                $parameters["Active" ] = $student->getActive();
+                $parameters["Email" ] = $student->getEmail();
+                $parameters["Password" ] = $student->getPassword();
+                $parameters["Name" ] = $student->getName();
+
+                
                 
 
                 
@@ -156,14 +146,18 @@ class StudentDAO implements IStudentDAO
                 throw $ex;
             }
 
-    }
-    public function delet($artistCode)
+     }
+
+
+  
+  
+      public function delete($StudentId)
         {
             try
             {
-                $query = "DELETE FROM ".$this->tableName." WHERE id_artist = :id_artist";
+                $query = "DELETE FROM ".$this->table." WHERE Id = :Id";
             
-                $parameters["id_artist"] = $artistCode;
+                $parameters["Id"] = $StudentId;
 
                 $this->connection = Connection::GetInstance();
 
@@ -176,10 +170,8 @@ class StudentDAO implements IStudentDAO
         }
 
 
-        public function GetAllfromAPI()
-        {
-            $this->RetrieveData();
->>>>>>> Stashed changes
+     
+
 
 
     public function getStudentData($email)
@@ -189,6 +181,8 @@ class StudentDAO implements IStudentDAO
         return $this->studentList;
     }
 
+   
+   
     public function GetByStudentMail($mail)
     {
         $student = null;
@@ -278,39 +272,23 @@ class StudentDAO implements IStudentDAO
                 array_push($this->studentList, $student);
             }
         }
-<<<<<<< Updated upstream
+
     }
 
-    function toDataBase()
+
+    public function Add(Student $student)
     {
+        $this->RetrieveData();                              // de momento no es necesaria porque se baja todo de la api
 
-        $this->studentList = array();
-
-        $opt = array(
-            "http" => array(
-                "method" => "GET",
-                "header" => "x-api-key: 4f3bceed-50ba-4461-a910-518598664c08\r\n"
-            )
-        );
-
-        $ctx = stream_context_create($opt);
-
-        $aux = file_get_contents("https://utn-students-api.herokuapp.com/api/Student", false, $ctx);
-        $array = ($aux) ? json_decode($aux, true) : array();
-
-
-        foreach ($array as $valuesArray) {
-            if (isset($_GET['studentId']) ==  $valuesArray["stuendtId"]) {
-                $verify = $this->db->Execute('SELECT * FROM Studient WHERE apiId='.$valuesArray["stuendtId"]);
-                if(empty($verify)){
-                    //Registrarse
-                }
-            }
-        }
+        array_push($this->studentList, $student);
     }
+
+    public function GetAll()
+    {
+        $this->RetrieveData();
+
+        return $this->studentList;
+    }
+
+    
 }
-=======
-                
-        
-?>
->>>>>>> Stashed changes

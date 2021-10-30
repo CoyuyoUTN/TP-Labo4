@@ -19,6 +19,8 @@ class Company
     private $linkedin;
     private $webpage;
     private $facebook;
+    private $active;
+
 
     function __construct(
         $name = null,
@@ -435,4 +437,22 @@ class Company
 
         return $this;
     }
+
+
+    public function getActive()
+        {
+                return $this->active;
+        }
+
+        /**
+         * Set the value of active
+         *
+         * @return  self
+         */ 
+        public function setActive($active)
+        {
+                $this->active = $active;
+
+                return $this;
+        }
 }

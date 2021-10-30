@@ -8,6 +8,7 @@ private $id;
 private $nombre;
 private $email="admin@gmail.com";
 private $password="123456";
+private $active;
 
 
 
@@ -94,5 +95,24 @@ $this->nombre = $nombre;
 
 return $this;
 }
+
+public function getActive()
+        {
+                return $this->active;
+        }
+
+        /**
+         * Set the value of active
+         *
+         * @return  self
+         */ 
+        public function setActive($active)
+        {
+                $this->active = $active;
+
+                return $this;
+        }
 }
+
+
 ?>
