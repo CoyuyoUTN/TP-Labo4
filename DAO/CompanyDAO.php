@@ -2,17 +2,6 @@
 
 namespace DAO;
 
-<<<<<<< HEAD
-use DAO\ICompanyDAO as ICompanyDAO;
-use Models\Company as Company;
-
-class CompanyDAO implements ICompanyDAO{
-
-    private $companyList=array();
-    private $fileName = ROOT."Data/company.json";
-
-    function Add(Company $company){
-=======
 
 use Models\Company as Company;
 USE FFI\Exception as Exception;
@@ -284,23 +273,15 @@ class CompanyDAO implements Crud{
 
 
        function Add(Company $company){
->>>>>>> main
 
         
         $this->RetrieveData();
         $company->setId($this->GetNextId());
         array_push($this->companyList, $company);
         $this->SaveData();
-<<<<<<< HEAD
-        this->SaveDataToDB();
-
-
-    }
-=======
 
 
          }
->>>>>>> main
 
 
     public function Edit(Company $company){
@@ -313,12 +294,6 @@ class CompanyDAO implements Crud{
 
 
     }
-<<<<<<< HEAD
-
-  
-
-=======
->>>>>>> main
     private function SaveData()
     {
         $arrayToEncode = array();

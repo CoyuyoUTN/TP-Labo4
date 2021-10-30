@@ -5,7 +5,6 @@ namespace Models;
 class Admin{
 
 private $id;
-<<<<<<< HEAD
 private $email="admin@gmail.com";
 private $password="123456";
 private $name;
@@ -51,15 +50,6 @@ public function __construct($id=null,$email=null,$password=null, $name=null)
 
         return new self($id, $email, $password, $name);
     }
-=======
-private $nombre;
-private $email="admin@gmail.com";
-private $password="123456";
-private $active;
-
-
-
->>>>>>> main
 
 
 /**
@@ -144,7 +134,6 @@ $this->nombre = $nombre;
 return $this;
 }
 
-<<<<<<< HEAD
 /**
  * Get the value of name
  */ 
@@ -165,7 +154,6 @@ $this->name = $name;
 return $this;
 }
 }
-=======
 public function getActive()
         {
                 return $this->active;
@@ -185,5 +173,4 @@ public function getActive()
 }
 
 
->>>>>>> main
 ?>
