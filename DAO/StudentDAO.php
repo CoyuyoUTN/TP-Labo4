@@ -76,7 +76,7 @@ namespace DAO;
                     $student->setFirstName($row["Name"]);
                     $student->setActive($row["Active"]);
                     $student->setEmail($row["Email"])   ;
-                    $student->setEmail($row["Password"]);
+                    $student->setPassword($row["Password"]);
 
                     array_push($studentList, $student);
                 }
@@ -93,7 +93,7 @@ namespace DAO;
         {
             try
             {
-                $artist = null;
+                $student = null;
 
                 $query = "SELECT * FROM ".$this->table." WHERE Id = :Id";
 

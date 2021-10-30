@@ -7,11 +7,11 @@ class Admin{
 private $id;
 private $email="admin@gmail.com";
 private $password="123456";
-private $name;
+private $nombre;
 
 public function __construct($id=null,$email=null,$password=null, $name=null)
     {   
-        $positionInstance = AdminDAO::getInstance();
+       // $positionInstance = AdminDAO::getInstance();
 
         $this->id = $id;
         $this->email = $email;
@@ -153,7 +153,7 @@ $this->name = $name;
 
 return $this;
 }
-}
+
 public function getActive()
         {
                 return $this->active;
