@@ -10,7 +10,8 @@ use Exception as Exception;
 class AdminDAO implements Crud{
 
     private $db;
-
+    private $table='Admin';
+    
     function __construct(){
         $this->db = Connection::getInstance();
     }
@@ -35,7 +36,7 @@ class AdminDAO implements Crud{
     }
     private function selectBuilder($id=null,$email=null,$password=null, $name=null)
     {
-        $query = "SELECT * FROM Admin WHERE active=" . strval(1);
+        $query = "SELECT * FROM  WHERE active=" . strval(1);
 
         if (isset($id) && $id != "") {
             $query = $query . " && id=" . $id;
