@@ -7,11 +7,12 @@ class Admin{
 private $id;
 private $email="admin@gmail.com";
 private $password="123456";
-private $nombre;
+private $name;
+private $active;
 
 public function __construct($id=null,$email=null,$password=null, $name=null)
     {   
-       // $positionInstance = AdminDAO::getInstance();
+        $positionInstance = AdminDAO::getInstance();
 
         $this->id = $id;
         $this->email = $email;
@@ -19,38 +20,6 @@ public function __construct($id=null,$email=null,$password=null, $name=null)
         $this->name = $name;
         
     }
- public static function fromArray($array)
-    {
-        $id=null;
-        $email=null;
-        $password=null;
-        $name=null;
-
-        if (isset($array["id"])) {
-            $id = $array["id"];
-        } else {
-            $id = null;
-        }
-        if (isset($array["Email"])) {
-            $email = $array["Email"];
-        } else {
-            $email = null;
-        }
-        if (isset($array["Password"])) {
-            $password = $array["Password"];
-        } else {
-            $password = null;
-        }
-        if (isset($array["Name"])) {
-            $name = $array["Name"];
-        } else {
-            $name = null;
-        }
-        
-
-        return new self($id, $email, $password, $name);
-    }
-
 
 /**
  * Get the value of password
@@ -154,23 +123,23 @@ $this->name = $name;
 return $this;
 }
 
+/**
+ * Get the value of active
+ */ 
 public function getActive()
-        {
-                return $this->active;
-        }
-
-        /**
-         * Set the value of active
-         *
-         * @return  self
-         */ 
-        public function setActive($active)
-        {
-                $this->active = $active;
-
-                return $this;
-        }
+{
+return $this->active;
 }
 
+/**
+ * Set the value of active
+ *
+ * @return  self
+ */ 
+public function setActive($active)
+{
+$this->active = $active;
 
-?>
+return $this;
+}
+}

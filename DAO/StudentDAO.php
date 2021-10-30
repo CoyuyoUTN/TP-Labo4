@@ -34,8 +34,7 @@ namespace DAO;
           try
             {
                 $query = "INSERT INTO ".$this->table." (Name) VALUES (Name), (Email) VALUES (:Email),(Password) VALUES (:Password),
-                (Active) VALUES (:Active);";//DUDA, el ID es autoincrement
-                                                                            //como le solicito el insert ??
+                (Active) VALUES (:Active);";
                 
                 
                 $parameters["Name"] = $student->getFirstName();
@@ -76,7 +75,7 @@ namespace DAO;
                     $student->setFirstName($row["Name"]);
                     $student->setActive($row["Active"]);
                     $student->setEmail($row["Email"])   ;
-                    $student->setPassword($row["Password"]);
+                    $student->setEmail($row["Password"]);
 
                     array_push($studentList, $student);
                 }
@@ -93,7 +92,7 @@ namespace DAO;
         {
             try
             {
-                $student = null;
+                $artist = null;
 
                 $query = "SELECT * FROM ".$this->table." WHERE Id = :Id";
 
