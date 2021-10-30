@@ -5,7 +5,7 @@ namespace DAO;
 
 use Models\Company as Company;
 USE FFI\Exception as Exception;
-use interface\Crud;
+use DAO\Crud;
 
 class CompanyDAO implements Crud{
 
@@ -16,7 +16,7 @@ class CompanyDAO implements Crud{
 
 
 
-    private function __construct()
+    public function __construct()
 	{
         $this->connection = Connection::getInstance();	
 	}

@@ -2,10 +2,10 @@
 
 namespace DAO;
    
-    namespace interface;
+    
     use DAO\Connection as Connection;
     use Models\Student as Student;
-    use interface\Crud as Crud;
+    use DAO\Crud as Crud;
     use Exception as Exception;
 
     class StudentDAO implements Crud
@@ -106,7 +106,7 @@ namespace DAO;
                 foreach ($resultSet as $row)
                 {
                     $student = new Student();
-                    $student->setId($row["studentId"]);
+                    $student->setStudentId($row["studentId"]);
                     $student->setFirstName($row["firstName"]);
                     $student->setLastName($row["lastName"]);
                 }

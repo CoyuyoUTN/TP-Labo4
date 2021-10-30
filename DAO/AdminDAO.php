@@ -3,7 +3,7 @@
 namespace DAO;
 
 
-use interface\Crud;
+use DAO\Crud as Crud;
 use Models\Admin as Admin;
 USE FFI\Exception as Exception;
 use Models\Student;

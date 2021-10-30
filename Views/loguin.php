@@ -1,5 +1,5 @@
 <center>
-<form action="<?php echo FRONT_ROOT."Home/Login" ?>" method="post" class="login-form bg-dark-alpha p-5 text-white">
+<form action="<?php echo FRONT_ROOT."Home/Login" ?>" method="post" class="login-form bg-dark-alpha p-5 text-white animate__animated animate__fadeInLeft">
                <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="Ingresar email">

@@ -17,7 +17,7 @@
                <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/ShowListView "?>">Listar Alumnos</a>
           </li>   
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/Logout "?>">Cerrar secion</a>
+               <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/Logout "?>">Cerrar sesion</a>
           </li> 
           <li class="nav-item">
                <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/AddToDataBase "?>">Agregar usuario</a>
