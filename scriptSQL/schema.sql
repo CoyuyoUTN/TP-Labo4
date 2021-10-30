@@ -1,3 +1,4 @@
+-- proyecto4.Admin definition
 CREATE TABLE `Admin` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
