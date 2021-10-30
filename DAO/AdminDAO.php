@@ -11,7 +11,7 @@ class AdminDAO implements Crud{
 
     private $db;
     private $table='Admin';
-    
+
     function __construct(){
         $this->db = Connection::getInstance();
     }
@@ -65,7 +65,7 @@ class AdminDAO implements Crud{
     }
 
 
-    function GetAll($id=null,$email=null,$password=null, $name=null){
+    function readAll($id=null,$email=null,$password=null, $name=null){
         $result = array();
         $list=array();
 

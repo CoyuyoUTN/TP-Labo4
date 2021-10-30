@@ -57,7 +57,7 @@ namespace DAO;
     
     
     
-     public function GetAll(){
+     public function readAll(){
         try
             {
                 $studentList = array();

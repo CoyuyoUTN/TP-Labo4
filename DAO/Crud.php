@@ -8,7 +8,7 @@ interface Crud
 {
 	public function create($object);
 	public function read($id);
-	public function GetAll();
+	public function readAll();
 	public function update($object);
 	public function delete($object);
 }
