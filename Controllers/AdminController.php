@@ -13,7 +13,7 @@
         }
 
         public function ShowAll($id=null,$email=null,$password=null, $name=null){
-            $admins = $this->adminDAO->GetAll($id,$email,$password, $name);
+            $admins = $this->adminDAO->readAll($id,$email,$password, $name);
 
             require_once(VIEWS_PATH."adminList.php");
         }
