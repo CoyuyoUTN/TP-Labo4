@@ -2,7 +2,9 @@
 
 namespace Models;
 
-class Admin{
+use Models\IUser as IUser;
+
+class Admin implements IUser{
 
 private $id;
 private $email="admin@gmail.com";
@@ -171,6 +173,4 @@ public function getActive()
                 return $this;
         }
 }
-
-
-?>
+}

@@ -4,7 +4,7 @@
     use DAO\StudentDAO as StudentDAO;
     use Models\Student as Student;
     use DAO\CompanyDAO as CompanyDAO;
-    use Models\Company as Company;
+    use Models\Admin as Admin;
 
     class HomeController
     {

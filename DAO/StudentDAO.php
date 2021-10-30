@@ -146,32 +146,32 @@ namespace DAO;
                 throw $ex;
             }
 
-     }
 
+use DAO\IStudentDAO as IStudentDAO;
+use Models\Student as Student;
+use DAO\Connection as Connection;
 
-  
-  
-      public function delete($StudentId)
-        {
-            try
-            {
-                $query = "DELETE FROM ".$this->table." WHERE Id = :Id";
-            
-                $parameters["Id"] = $StudentId;
+class StudentDAO implements IStudentDAO
+{
+    private $db;
 
-                $this->connection = Connection::GetInstance();
+    public function __construct(){
+        $this->db = Connection::getInstance();
+    }
 
-                $this->connection->ExecuteNonQuery($query, $parameters);   
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }            
-        }
+    public function Add(Student $student)
+    {
+        $this->RetrieveData(); // de momento no es necesaria porque se baja todo de la api
 
+        array_push($this->studentList, $student);
+    }
 
-     
+    public function GetAll()
+    {
+        $this->RetrieveData();
 
+        return $this->studentList;
+    }
 
 
     public function getStudentData($email)
@@ -181,8 +181,6 @@ namespace DAO;
         return $this->studentList;
     }
 
-   
-   
     public function GetByStudentMail($mail)
     {
         $student = null;
@@ -285,10 +283,29 @@ namespace DAO;
 
     public function GetAll()
     {
-        $this->RetrieveData();
 
-        return $this->studentList;
+        $this->studentList = array();
+
+        $opt = array(
+            "http" => array(
+                "method" => "GET",
+                "header" => "x-api-key: 4f3bceed-50ba-4461-a910-518598664c08\r\n"
+            )
+        );
+
+        $ctx = stream_context_create($opt);
+
+        $aux = file_get_contents("https://utn-students-api.herokuapp.com/api/Student", false, $ctx);
+        $array = ($aux) ? json_decode($aux, true) : array();
+
+
+        foreach ($array as $valuesArray) {
+            if (isset($_GET['studentId']) ==  $valuesArray["stuendtId"]) {
+                $verify = $this->db->Execute('SELECT * FROM Studient WHERE apiId='.$valuesArray["stuendtId"]);
+                if(empty($verify)){
+                    //Registrarse
+                }
+            }
+        }
     }
-
-    
 }
