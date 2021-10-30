@@ -3,11 +3,14 @@
           <strong>Framework</strong>
      </span>
      <ul class="navbar-nav ml-auto">
+  
+        
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowAddView">Agregar Alumno</a>
-          </li>
+               <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/ShowCompanyListStudent "?>">Listar Empresas</a>
+          </li>     
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowListView">Listar Alumnos</a>
-          </li>          
+               <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/Logout "?>">Cerrar sesion</a>
+          </li>    
+          
      </ul>
 </nav>
