@@ -23,9 +23,28 @@ class AdminDAO implements Crud{
 
       try
         {
-            $result = array();
+            try
+            {
+                $query0 = "INSERT INTO ".$this->table." ( Email, Password, Name ) VALUES ( :Email, :Password, :Name  ) ";
 
-        $result = $this->db->ExecuteNonQuery($this->insertBuilder($admin->getEmail(),$admin->getPassword(), $admin->getName()));
+                
+                $parameters["Email"] = $admin->getEmail();
+                $parameters["Password"] = $admin->getPassword();
+                $parameters["Name"] = $admin->getName();
+               
+            
+
+                $this->connection = Connection::GetInstance();
+
+
+                $this->connection->ExecuteNonQuery($query0, $parameters);
+   
+           }              
+ 
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
 
         
         }
