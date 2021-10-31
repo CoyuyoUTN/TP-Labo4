@@ -5,8 +5,8 @@ namespace Models;
 class Admin{
 
 private $id;
-private $email="admin@gmail.com";
-private $password="123456";
+private $email;
+private $password;
 private $name;
 private $active;
 
