@@ -25,7 +25,6 @@ class Company
     function __construct(
         $name = null,
         $cuil = null,
-        $id = null,
         $img = null,
         $shortDesc = null,
         $ranking = null,
@@ -42,7 +41,6 @@ class Company
 
         $this->name = $name;
         $this->cuil = $cuil;
-        $this->id = $id;
         $this->img = $img;
         $this->shortDesc = $shortDesc;
         $this->ranking = $ranking;
