@@ -33,14 +33,14 @@ namespace DAO;
 
           try
             {
-                $query = "INSERT INTO ".$this->table." (Name) VALUES (Name), (Email) VALUES (:Email),(Password) VALUES (:Password),
-                (Active) VALUES (:Active);";
+                $query = "INSERT INTO ".$this->table." (apiId) VALUES (:apiId),(Password) VALUES (:Password),
+                (active) VALUES (:active);";
                 
-                
-                $parameters["Name"] = $student->getFirstName();
-                $parameters["Email"] = $student->getEmail();
+               
+               
+                $parameters["apiId"] = $student->getStudentId();
                 $parameters["Password"] = $student->getPassword();
-                $parameters["Active"] = $student->getActive();
+                $parameters["active"] = $student->getActive();
                
                 
 
@@ -290,4 +290,73 @@ namespace DAO;
     }
 
     
+
+
+    public function GetByUserId($apiId)
+    {
+        $student = null;
+
+        $query = "select apiId from Student where $apiId=apiId";
+
+        $parameters["apiId"] = $apiId;
+
+        $this->connection = Connection::GetInstance();
+
+        $results = $this->connection->Execute($query, $parameters, QueryType::StoredProcedure);
+
+        foreach($results as $row)
+        {
+            $student = new Student();
+            $student->setDbId($row["dbId"]);
+            $student->setPassword($row["password"]);
+        }
+
+        return $student;
+    }  
+
+
+    public function existsMailPorId($mail){
+
+        $this->RetrieveData();
+        $return=null;
+        for ($i=0; $i < count($this->studentList); $i++) { 
+            if($this->studentList[$i]->getEmail() == $mail){
+               
+                $return = $this->studentList[$i]->getDbId();
+                
+            }
+        }
+
+        return $return;
+
+
+
+    }
+
+    
+    public function existsMail($mail){
+
+        $this->RetrieveData();
+        var_dump($this->studentList);
+        $return=null;
+        for ($i=0; $i < count($this->studentList); $i++) { 
+            if($this->studentList[$i]->getEmail() == $mail){
+               
+                $return = $this->studentList[$i];
+                
+            }
+        }
+
+        
+        return $return;
+
+
+
+    }
+
+
+
+
+
+
 }

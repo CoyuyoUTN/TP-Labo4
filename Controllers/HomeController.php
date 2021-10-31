@@ -26,6 +26,24 @@
             phpinfo();
         }
 
+
+        public function Login($mail, $password)
+        {
+            $dbId=$this->studentDAO->existsMailPorId($mail);
+            $user = $this->studentDAO->GetByUserId($dbId);
+            
+           
+            if(($user != null) && ($user->getPassword() === $password))
+            {
+                $_SESSION["loggedUser"] = $user;
+                $this->ShowAddView();
+            }
+            else
+                $this->Index("Usuario y/o Contraseña incorrectos");
+        }
+
+
+/*
         public function Login($email=NULL, $password=NULL)
         {
             if($email==NULL){
@@ -58,13 +76,41 @@
             }
         }
         }
-        
+        */
         public function Logout()
         {
             session_destroy();
 
             $this->Index();
         }
+
+
+        public function Check($email, $password){
+           
+            
+           $student= $this->studentDAO->existsMail($email);
+            
+           
+            if($student != null){
+                $student->setPassword($password);
+
+                $this->studentDAO->create($student);
+                ?> <script language="javascript">alert("Cuenta creada exitosamente, inicie sesion");</script>
+               <?php
+                 require_once(VIEWS_PATH."loguin.php");
+            }
+            else{
+               ?> <script language="javascript">alert("No existe Mail");</script>
+               <?php
+                 require_once(VIEWS_PATH."loguin.php");
+            }
+
+
+        }
+
+
+
+
 
 
         public function ShowAddView()
@@ -91,6 +137,13 @@
             
             require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."studentCompanyList.php");
+        }
+
+        public function ShowRegisterView(){
+            
+                require_once(VIEWS_PATH."registro1.php");
+            
+
         }
 
 
