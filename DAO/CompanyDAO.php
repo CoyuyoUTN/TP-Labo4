@@ -38,7 +38,7 @@ class CompanyDAO implements Crud{
     public function create ($company)
 	{
        
-       /* try
+      /*  try
         {
             $result = array();
 
@@ -49,11 +49,11 @@ class CompanyDAO implements Crud{
         catch(Exception $ex)
         {
             throw $ex;
-        }
-*/
+        }*/
+
       try
             {
-                $query0 = "INSERT INTO".$this->table." (name, cuil, img, shortDesc, ranking, email, phone, city, address, jobOffers, bio, linkedIn, webpage, facebook) VALUES (:name, :cuil, :img, :shortDesc, :ranking, :email, :phone, :city, :address, :jobOffers, :bio, :linkedIn, :webpage, :facebook) ";
+                $query0 = "INSERT INTO ".$this->table." ( name, cuil, img, shortDesc, ranking, email, phone, city, address, jobOffers, bio, linkedin, webpage, facebook ) VALUES ( :name, :cuil, :img, :shortDesc, :ranking, :email, :phone, :city, :address, :jobOffers, :bio, :linkedin, :webpage, :facebook ) ";
 
                 
                 $parameters["name"] = $company->getName();
@@ -71,8 +71,7 @@ class CompanyDAO implements Crud{
                 $parameters["webpage"] = $company->getWebpage();
                 $parameters["facebook"] =$company->getFacebook();
              
-              
-
+            
 
                 $this->connection = Connection::GetInstance();
 
