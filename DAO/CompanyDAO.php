@@ -13,6 +13,7 @@ class CompanyDAO implements Crud{
     private $fileName = ROOT."Data/company.json";
     private $table="Company";
 	private $connection;
+    private $db;
 
 
 
@@ -21,27 +22,50 @@ class CompanyDAO implements Crud{
         $this->connection = Connection::getInstance();	
 	}
 	
+
+    private function insertBuilder($company)
+    {
+        $query = "INSERT INTO Company (";
+        $values = ") VALUES (";
+
+
+        $query = $query . "name, cuil, img, shortDesc, ranking, email, phone, city, address, jobOffers, bio, linkedIn, webpage, facebook";
+        $values = $values . '"' .strval($company->getName()) . ','  . strval($company->getCuil()) . ',' . strval($company->getImg()) . ',' . strval($company->getShortDesc()) . ',' . strval($company->getRanking()) . ',' . strval($company->getEmail()) . ',' . strval($company->getPhone()) . ',' . strval($company->getCity()) . ',' . strval($company->getAddress()) . ',' . strval($company->getJobOffers()) . ',' . strval($company->getBio()) . ',' . strval($company->getLinkedIn()) . ',' . strval($company->getWebpage()) . ',' . strval($company->getFacebook()) . ')';
+
+        return $query.$values;
+    }
     
     public function create ($company)
 	{
        
+       /* try
+        {
+            $result = array();
 
-        try
+        $result = $this->db->ExecuteNonQuery($this->insertBuilder($company));
+
+        
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
+*/
+      try
             {
-              
-               $query0 = "INSERT INTO ".$this->table."(name, cuil, img, shortDesc, ranking, email, phone, city, address, jobOffers, bio, linkedIn, webpage, facebook) VALUES ( :name, :cuil, :img, :shortDesc, :ranking, :email, :phone, :city, :address, :jobOffers, :bio, :linkedIn, :webpage, :facebook)";
+                $query0 = "INSERT INTO".$this->table." (name, cuil, img, shortDesc, ranking, email, phone, city, address, jobOffers, bio, linkedIn, webpage, facebook) VALUES (:name, :cuil, :img, :shortDesc, :ranking, :email, :phone, :city, :address, :jobOffers, :bio, :linkedIn, :webpage, :facebook) ";
 
                 
                 $parameters["name"] = $company->getName();
-                $parameters["cuil"] =$company->getCuil();
-                $parameters["img"] =$company->getImg();
+                $parameters["cuil"] = $company->getCuil();
+                $parameters["img"] = $company->getImg();
                 $parameters["shortDesc"] = $company->getShortDesc();
                 $parameters["ranking"] = $company->getRanking();
                 $parameters["email"] = $company->getEmail();
-                $parameters["phone"] =$company->getPhone();
-                $parameters["city"] =$company->getCity();
+                $parameters["phone"] = $company->getPhone();
+                $parameters["city"] = $company->getCity();
                 $parameters["address"] = $company->getAddress();
-                $parameters["jobOffers"] =$company->getJobOffers();
+                $parameters["jobOffers"] = $company->getJobOffers();
                 $parameters["bio"] = $company->getBio();
                 $parameters["linkedin"] = $company->getLinkedin();
                 $parameters["webpage"] = $company->getWebpage();
