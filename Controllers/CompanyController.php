@@ -22,7 +22,7 @@ class CompanyController
 
     public function ShowListView()
     {
-        $companyList = $this->companyDAO->GetAll();
+        $companyList = $this->companyDAO->readAll();
 
         require_once(VIEWS_PATH . "companyList.php");
     }
@@ -109,7 +109,7 @@ class CompanyController
     {
         require_once(VIEWS_PATH . "validate-session.php");
 
-        $this->companyDAO->Remove($id);
+        $this->companyDAO->delete($id);
 
         $this->ShowAdminView();
     }
@@ -117,7 +117,7 @@ class CompanyController
     public function ShowAdminView()
     {
 
-        $companyList = $this->companyDAO->GetAll();
+        $companyList = $this->companyDAO->readAll();
         require_once(VIEWS_PATH . "validate-session.php");
         require_once(VIEWS_PATH . "companyList.php");
     }

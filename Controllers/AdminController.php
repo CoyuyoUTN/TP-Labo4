@@ -7,6 +7,7 @@
     class AdminController
     {
         private $adminDAO;
+        
         public function __construct()
         {
             $this->adminDAO = new AdminDAO();

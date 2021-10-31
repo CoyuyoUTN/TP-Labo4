@@ -103,7 +103,7 @@ class CompanyDAO implements Crud{
             {
                 $companyList = array();
 
-                $query = "SELECT * FROM ".$this->table;
+                $query = "SELECT * FROM ".$this->table. " WHERE active = 1 ";
 
                 $this->connection = Connection::GetInstance();
 
@@ -115,7 +115,7 @@ class CompanyDAO implements Crud{
                     $company->setName($row["name"]);
                     $company->setCuil($row["cuil"]);
                     $company->setId($row["id"]);
-                    $company->setImg($row[" img"]);
+                    $company->setImg($row["img"]);
                     $company->setShortDesc($row["shortDesc"]);
                     $company->setRanking($row["ranking"]);
                     $company->setEmail($row["email"]);
@@ -226,13 +226,13 @@ class CompanyDAO implements Crud{
 
     }
     
-     public function delete($companyId)
+     public function delete($id)
         {
             try
             {
-                $query = "DELETE FROM ".$this->table." WHERE id = :id";
+                $query = "UPDATE ".$this->table." SET active = 0 WHERE id = :id";
             
-                $parameters["id"] = $companyId;
+                $parameters["id"] = $id;
 
                 $this->connection = Connection::GetInstance();
 

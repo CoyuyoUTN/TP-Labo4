@@ -27,20 +27,33 @@
         }
 
 
-        public function Login($mail, $password)
+        public function Login($email, $password)
         {
-            $dbId=$this->studentDAO->existsMailPorId($mail);
-            $user = $this->studentDAO->GetByUserId($dbId);
+
+
             
+            if($email=="admin@gmail.com" && $password== "123456"){
+                $_SESSION["loggedUser"] = $email;
+                $this->ShowAdminView();
+            }
+
+
+            else{
+            $dbId=$this->studentDAO->existsMailPorId($email);
+            $user = $this->studentDAO->GetByUserId($dbId);
+
            
             if(($user != null) && ($user->getPassword() === $password))
             {
                 $_SESSION["loggedUser"] = $user;
-                $this->ShowAddView();
+                $this->ShowStudentView($email);
             }
             else
+            ?> <script language="javascript">alert("Usuario y/o Contraseña incorrectos");</script>
+            <?php
                 $this->Index("Usuario y/o Contraseña incorrectos");
         }
+    }
 
 
 /*
