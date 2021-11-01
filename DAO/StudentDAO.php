@@ -33,17 +33,14 @@ namespace DAO;
 
           try
             {
-                $query = "INSERT INTO ".$this->table." (apiId) VALUES (:apiId),(Password) VALUES (:Password),
-                (active) VALUES (:active);";
                 
+                $query = "INSERT INTO ".$this->table." ( Password, active, apiId) VALUES ( :Password, :active, :apiId ) ";
                
-               
-                $parameters["apiId"] = $student->getStudentId();
                 $parameters["Password"] = $student->getPassword();
                 $parameters["active"] = $student->getActive();
-               
-                
+                $parameters["apiId"] = $student->getStudentId();
 
+          
                 $this->connection = Connection::GetInstance();
 
                 $this->connection->ExecuteNonQuery($query, $parameters);
@@ -337,7 +334,7 @@ namespace DAO;
     public function existsMail($mail){
 
         $this->RetrieveData();
-        var_dump($this->studentList);
+        
         $return=null;
         for ($i=0; $i < count($this->studentList); $i++) { 
             if($this->studentList[$i]->getEmail() == $mail){

@@ -97,6 +97,9 @@
             $this->Index();
         }
 
+        public function BackToLogin(){
+            require_once(VIEWS_PATH."loguin.php");
+        }
 
         public function Check($email, $password){
            
