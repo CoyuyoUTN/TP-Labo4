@@ -28,7 +28,7 @@
 
 
         public function Login($email, $password)
-        {
+    {
 
 
             
@@ -38,58 +38,34 @@
             }
 
 
-            else{
-            $dbId=$this->studentDAO->existsMailPorId($email);
+            else
+        {
+            $dbId=$this->studentDAO->existsMailPorId($email); //valida si exite por api y devuelve studentId, sino null
+            $user=null;
+            
+            if($dbId != null){
             $user = $this->studentDAO->GetByUserId($dbId);
-
+            var_dump($user);
+            } 
            
+        
             if(($user != null) && ($user->getPassword() === $password))
             {
                 $_SESSION["loggedUser"] = $user;
                 $this->ShowStudentView($email);
             }
             else
+            {
             ?> <script language="javascript">alert("Usuario y/o Contraseña incorrectos");</script>
             <?php
                 $this->Index("Usuario y/o Contraseña incorrectos");
+            }
+        
         }
     }
 
 
-/*
-        public function Login($email=NULL, $password=NULL)
-        {
-            if($email==NULL){
-                if( $_SESSION["loggedUser"]){
-                    $email= $_SESSION["loggedUser"]->getEmail();
-                    
-                }
-                else{
-                    $this->Index("Logueate");
-                }
-            }
-          
-            if($email=="admin@gmail.com"){
-                $_SESSION["loggedUser"] = $email;
-                $this->ShowAdminView();
 
-
-            }
-            else{
-
-            $student = $this->studentDAO->GetByStudentMail($email);
-
-            if($student != null)
-            {
-                $_SESSION["loggedUser"] = $student;
-                $this->ShowStudentView($email);
-            }
-            else{
-                $this->Index("Usuario y/o Contraseña incorrectos");
-            }
-        }
-        }
-        */
         public function Logout()
         {
             session_destroy();
@@ -109,7 +85,7 @@
            
             if($student != null){
                 $student->setPassword($password);
-
+                
                 $this->studentDAO->create($student);
                 ?> <script language="javascript">alert("Cuenta creada exitosamente, inicie sesion");</script>
                <?php

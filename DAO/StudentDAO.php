@@ -40,7 +40,7 @@ namespace DAO;
                 $parameters["active"] = $student->getActive();
                 $parameters["apiId"] = $student->getStudentId();
 
-          
+                var_dump($query);
                 $this->connection = Connection::GetInstance();
 
                 $this->connection->ExecuteNonQuery($query, $parameters);
@@ -169,7 +169,10 @@ namespace DAO;
      
 
 
-
+/**
+ * Devuelve un estudiante por mail
+ * param Mail
+ */
     public function getStudentData($email)
     {
 
@@ -293,14 +296,14 @@ namespace DAO;
     {
         $student = null;
 
-        $query = "select apiId from Student where $apiId=apiId";
-
+        $query = "SELECT apiId from ".$this->table. " WHERE (apiId = :apiId)";
+        
         $parameters["apiId"] = $apiId;
 
         $this->connection = Connection::GetInstance();
 
-        $results = $this->connection->Execute($query, $parameters, QueryType::StoredProcedure);
-
+    $results = $this->connection->Execute($query, $parameters, QueryType::StoredProcedure);
+        var_dump($results);
         foreach($results as $row)
         {
             $student = new Student();
@@ -315,19 +318,17 @@ namespace DAO;
     public function existsMailPorId($mail){
 
         $this->RetrieveData();
-        $return=null;
+        $return=null; 
+       
         for ($i=0; $i < count($this->studentList); $i++) { 
             if($this->studentList[$i]->getEmail() == $mail){
                
-                $return = $this->studentList[$i]->getDbId();
+                $return = $this->studentList[$i]->getStudentId();
                 
             }
         }
-
+        
         return $return;
-
-
-
     }
 
     
