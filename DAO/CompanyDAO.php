@@ -23,33 +23,12 @@ class CompanyDAO implements Crud{
 	}
 	
 
-    private function insertBuilder($company)
-    {
-        $query = "INSERT INTO Company (";
-        $values = ") VALUES (";
-
-
-        $query = $query . "name, cuil, img, shortDesc, ranking, email, phone, city, address, jobOffers, bio, linkedIn, webpage, facebook";
-        $values = $values . '"' .strval($company->getName()) . ','  . strval($company->getCuil()) . ',' . strval($company->getImg()) . ',' . strval($company->getShortDesc()) . ',' . strval($company->getRanking()) . ',' . strval($company->getEmail()) . ',' . strval($company->getPhone()) . ',' . strval($company->getCity()) . ',' . strval($company->getAddress()) . ',' . strval($company->getJobOffers()) . ',' . strval($company->getBio()) . ',' . strval($company->getLinkedIn()) . ',' . strval($company->getWebpage()) . ',' . strval($company->getFacebook()) . ')';
-
-        return $query.$values;
-    }
+    
     
     public function create ($company)
 	{
        
-      /*  try
-        {
-            $result = array();
-
-        $result = $this->db->ExecuteNonQuery($this->insertBuilder($company));
-
-        
-        }
-        catch(Exception $ex)
-        {
-            throw $ex;
-        }*/
+ 
 
       try
             {
@@ -58,19 +37,87 @@ class CompanyDAO implements Crud{
                 
                 $parameters["name"] = $company->getName();
                 $parameters["cuil"] = $company->getCuil();
-                $parameters["img"] = $company->getImg();
-                $parameters["shortDesc"] = $company->getShortDesc();
-                $parameters["ranking"] = $company->getRanking();
-                $parameters["email"] = $company->getEmail();
-                $parameters["phone"] = $company->getPhone();
-                $parameters["city"] = $company->getCity();
-                $parameters["address"] = $company->getAddress();
-                $parameters["jobOffers"] = $company->getJobOffers();
-                $parameters["bio"] = $company->getBio();
-                $parameters["linkedin"] = $company->getLinkedin();
-                $parameters["webpage"] = $company->getWebpage();
-                $parameters["facebook"] =$company->getFacebook();
-             
+                if($company->getImg()==null){
+                    $parameters["img"]=null;
+                }
+                else{
+                 $parameters["img"] = $company->getImg();
+                }
+
+                if($company->getShortDesc()==null){
+                 $parameters["shortDesc"] = null;
+                }
+                else{
+                 $parameters["shortDesc"] = $company->getShortDesc();
+                }
+
+                if($company->getRanking()==null){
+                $parameters["ranking"] = null;
+                }
+                else{
+                    $parameters["ranking"] = $company->getRanking();
+                }
+                if($company->getEmail()==null){
+                $parameters["email"] = null;
+                 }
+                else{
+                    $parameters["email"] = $company->getEmail();
+                }
+                if($company->getPhone()==null){
+                $parameters["phone"] = null;
+                }
+                else{
+                    $parameters["phone"] = $company->getPhone();
+                }
+
+                if($company->getCity()==null){
+                $parameters["city"] = null;
+                }
+                else{
+                    $parameters["city"] = $company->getCity();
+                }
+
+                if($company->getAddress()==null){
+                $parameters["address"] = null;
+                }
+                else{
+                    $parameters["address"] = $company->getAddress();
+                }
+
+                if($company->getJobOffers()==null){
+                $parameters["jobOffers"] = null;
+                }
+                else{
+                    $parameters["jobOffers"] = $company->getJobOffers();
+                }
+
+                if($company->getBio()==null){
+                $parameters["bio"] = null;
+                }
+                else{
+                    $parameters["bio"] = $company->getBio();
+                }
+
+                if($company->getLinkedin()==null){
+                $parameters["linkedin"] = null;
+                }
+                else{
+                    $parameters["linkedin"] = $company->getLinkedin();
+                }
+
+                if( $company->getWebpage()==null){
+                $parameters["webpage"] = null;
+                }
+                else{
+                    $parameters["webpage"] = $company->getWebpage();
+                }
+
+                if($company->getFacebook()==null){
+                $parameters["facebook"] =null;
+                }
+                else{
+                    $parameters["facebook"] =$company->getFacebook();
+                }
             
 
                 $this->connection = Connection::GetInstance();
