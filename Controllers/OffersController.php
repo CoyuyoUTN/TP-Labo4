@@ -17,5 +17,8 @@
             require_once(VIEWS_PATH."offersList.php");
         }
 
+        public function AddForm($message=NULL){
+            require_once(VIEWS_PATH."offersNew.php");
+        }
     }
 ?>

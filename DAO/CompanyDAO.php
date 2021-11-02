@@ -418,8 +418,3 @@ class CompanyDAO implements Crud{
 
 
 }
-
-
-
-
-?>

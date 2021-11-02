@@ -9,7 +9,7 @@
      <section id="listado" class="mb-5">
           <div class="container">
                <h2 class="mb-4">Listado de Ofertas</h2>
-               <form action="<?php echo FRONT_ROOT."Offers/ShowAll" ?>"  method="">
+               <form action="<?php echo FRONT_ROOT."Offers/AddOffer" ?>"  method="">
 
                <button type=submit >Buscar</button>
 

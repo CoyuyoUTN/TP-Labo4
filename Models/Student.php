@@ -1,9 +1,9 @@
 <?php
     namespace Models;
 
-    
+    use Models\IUser as IUser;
 
-    class Student 
+    class Student implements IUser
     {
         private $studentId;
         private $dbId;

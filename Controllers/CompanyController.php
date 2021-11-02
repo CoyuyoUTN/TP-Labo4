@@ -20,7 +20,7 @@ class CompanyController
         require_once(VIEWS_PATH . "companyADD.php");
     }
 
-    public function ShowListView()
+    public function ShowListView($onAction = "Company/Remove",$actionName = "Eliminar")
     {
         $companyList = $this->companyDAO->readAll();
 
@@ -118,10 +118,7 @@ class CompanyController
 
     public function ShowAdminView()
     {
-
-        $companyList = $this->companyDAO->readAll();
-        require_once(VIEWS_PATH . "validate-session.php");
-        require_once(VIEWS_PATH . "companyList.php");
+        header("Location: ../Company/ShowListView");
     }
 
 
