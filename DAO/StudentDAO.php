@@ -34,12 +34,10 @@ namespace DAO;
           try
             {
                 
-                $query = "INSERT INTO ".$this->table." ( Password, active, apiId) VALUES ( :Password, :active, :apiId ) ";
+                $query = "INSERT INTO ".$this->table." ( Password, apiId) VALUES ( :Password, :apiId ) ";
                
                 $parameters["Password"] = $student->getPassword();
-                $parameters["active"] = $student->getActive();
                 $parameters["apiId"] = $student->getStudentId();
-
                 
                 $this->connection = Connection::GetInstance();
 
