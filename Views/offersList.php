@@ -1,8 +1,7 @@
 <?php
-
-    include('nav.php');
-    require_once("validate-session.php");
-
+     use DAO\NavDAO as NavDAO;
+     NavDAO::getNav();
+     require_once("validate-session.php");
 ?>
 
 <main class="py-5">

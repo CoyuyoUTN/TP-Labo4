@@ -1,5 +1,6 @@
 <?php
-include("navADMIN.php");
+use DAO\NavDAO as NavDAO;
+NavDAO::getNav();
 require_once("validate-session.php");
 ?>
 
