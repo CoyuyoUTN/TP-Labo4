@@ -5,17 +5,20 @@ namespace Controllers;
 use DAO\StudentDAO as StudentDAO;
 use Models\Student as Student;
 use DAO\CompanyDAO as CompanyDAO;
-use Models\Admin as Admin;
+use DAO\AdminDAO as AdminDAO;
 
 class HomeController
 {
     private $studentDAO;
     private $companyDAO;
+    private $adminDAO;
+
 
     public function __construct()
     {
         $this->studentDAO = new StudentDAO();
         $this->companyDAO = new CompanyDAO();
+        $this->adminDAO = new AdminDAO();
     }
 
     public function Index($message = "")
@@ -32,14 +35,16 @@ class HomeController
     public function Login($email, $password)
     {
 
+        
+        $userAdmin= $this->adminDAO->GetByEmail($email, $password);
+        
+        if ($userAdmin!=null && $userAdmin->getEmail() == $email  && $userAdmin->getPassword() == $password ) {
+            $_SESSION["loggedUser"] = $userAdmin;
+            $this->ShowAdminView();
 
-
-        if ($email == "admin@gmail.com" && $password == "123456") {
-            $_SESSION["loggedUser"] = $email;
-            header("Location: ../Company/ShowListView");
         } else {
             $dbId = $this->studentDAO->existsMailPorId($email); //valida si exite por api y devuelve studentId, sino null
-            $user = null;
+            $user=null;
 
             if ($dbId != null) {
                 $user = $this->studentDAO->GetByUserId($dbId, $password);
@@ -57,6 +62,7 @@ class HomeController
                 $this->Index("Usuario y/o Contraseña incorrectos");
             }
         }
+        
     }
 
 

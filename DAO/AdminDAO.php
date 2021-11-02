@@ -118,17 +118,31 @@ class AdminDAO implements Crud{
             }
     }
 
+    function GetByEmail($email, $password){
+       
+        $admin = null;
 
-    function GetById($id){
-        $result = $this->db->Execute('SELECT * FROM Admin WHERE id='.$id." && active=1");
-        $list=array();
+        $query = "SELECT * FROM ".$this->table. " WHERE Email = :Email && Password = :Password";
+        
+        $parameters["Email"] = $email;
+        $parameters["Password"] = $password;
 
-        foreach ($result as $value) {
-            array_push($list,Admin::fromArray($value));
+        $this->connection = Connection::GetInstance();
+
+    $results = $this->connection->Execute($query, $parameters, QueryType::StoredProcedure);
+      
+        foreach($results as $row)
+        {
+            $admin = new Admin();
+            $admin->setId($row["Id"]);
+            $admin->setPassword($row["Password"]);
+            $admin->setEmail($row["Email"]);
+            $admin->setName($row["Name"]);
         }
 
-        return $list;
+        return $admin;
     }
+
     public function read($adminId)
     {
         try
