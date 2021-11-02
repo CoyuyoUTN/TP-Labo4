@@ -48,6 +48,15 @@
         }
 
 
+        public function addADMIN($email,$password,$name){
+            require_once(VIEWS_PATH."validate-session.php");
+            $admin= new Admin($email,$password,$name);
+            $this->adminDAO->create($admin);
+            require_once(VIEWS_PATH."adminADD.php");
+
+
+            
+        }
 
     }
 ?>

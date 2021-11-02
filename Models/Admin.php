@@ -10,9 +10,9 @@ private $password;
 private $name;
 private $active;
 
-public function __construct($id=null,$email=null,$password=null, $name=null)
+public function __construct($email=null,$password=null, $name=null)
     {   
-        $this->id = $id;
+       
         $this->email = $email;
         $this->password = $password;
         $this->name = $name;
