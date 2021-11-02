@@ -1,184 +1,168 @@
 <?php
 
 namespace DAO;
-   
-    
-    use DAO\Connection as Connection;
-    use Models\Student as Student;
-    use DAO\Crud as Crud;
-    use Exception as Exception;
-
-    class StudentDAO implements Crud
-    {
 
 
-
-        private $studentList = array();
-        private $table="Student";
-	    private $connection;
-
-
-      
-        public function __construct(){
-            $this->connection = Connection::getInstance();
-        }
-
-
-
-
-
-
-        public function create($student)
-	    {
-
-          try
-            {
-                
-                $query = "INSERT INTO ".$this->table." ( Password, active, apiId) VALUES ( :Password, :active, :apiId ) ";
-               
-                $parameters["Password"] = $student->getPassword();
-                $parameters["active"] = $student->getActive();
-                $parameters["apiId"] = $student->getStudentId();
-
-                var_dump($query);
-                $this->connection = Connection::GetInstance();
-
-                $this->connection->ExecuteNonQuery($query, $parameters);
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-	    }
-    
-    
-    
-    
-     public function readAll(){
-        try
-            {
-                $studentList = array();
-
-                $query = "SELECT * FROM ".$this->table;
-
-                $this->connection = Connection::GetInstance();
-
-                $resultSet = $this->connection->Execute($query);
-                
-                foreach ($resultSet as $row)
-                {                
-                    $student = new Student();
-                    $student->setStudentId($row["Id"]);
-                    $student->setFirstName($row["Name"]);
-                    $student->setActive($row["Active"]);
-                    $student->setEmail($row["Email"])   ;
-                    $student->setEmail($row["Password"]);
-
-                    array_push($studentList, $student);
-                }
-
-                return $studentList;
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-        }
-
-       public function read($studentId)
-        {
-            try
-            {
-                $artist = null;
-
-                $query = "SELECT * FROM ".$this->table." WHERE Id = :Id";
-
-                $parameters["Id"] = $studentId;
-
-                $this->connection = Connection::GetInstance();
-
-                $resultSet = $this->connection->Execute($query, $parameters);
-                
-                foreach ($resultSet as $row)
-                {
-                    $student = new Student();
-                    $student->setStudentId($row["studentId"]);
-                    $student->setFirstName($row["firstName"]);
-                    $student->setLastName($row["lastName"]);
-                }
-                            
-                return $student;
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-        }
-
-
-        
-    public function update($student){
-
-        try
-            {
-                $query = "UPDATE ".$this->table." SET Name = :Name, Active = :Active, Email  = :Email, Password = :Password  WHERE Id = :Id";
-                
-                
-                $parameters["Active" ] = $student->getActive();
-                $parameters["Email" ] = $student->getEmail();
-                $parameters["Password" ] = $student->getPassword();
-                $parameters["Name" ] = $student->getName();
-
-                
-                
-
-                
-                $this->connection = Connection::GetInstance();
-
-                $this->connection->ExecuteNonQuery($query, $parameters);
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-
-
-use DAO\IStudentDAO as IStudentDAO;
-use Models\Student as Student;
 use DAO\Connection as Connection;
+use Models\Student as Student;
+use DAO\Crud as Crud;
+use Exception as Exception;
 
-class StudentDAO implements IStudentDAO
+class StudentDAO implements Crud
 {
-    private $db;
 
-    public function __construct(){
-        $this->db = Connection::getInstance();
-    }
 
-    public function Add(Student $student)
+
+    private $studentList = array();
+    private $table = "Student";
+    private $connection;
+
+
+
+    public function __construct()
     {
-        $this->RetrieveData(); // de momento no es necesaria porque se baja todo de la api
-
-        array_push($this->studentList, $student);
+        $this->connection = Connection::getInstance();
     }
 
-    public function GetAll()
+
+
+
+
+
+    public function create($student)
     {
-        $this->RetrieveData();
 
-        return $this->studentList;
+        try {
+
+            $query = "INSERT INTO " . $this->table . " ( Password, active, apiId) VALUES ( :Password, :active, :apiId ) ";
+
+            $parameters["Password"] = $student->getPassword();
+            $parameters["active"] = $student->getActive();
+            $parameters["apiId"] = $student->getStudentId();
+
+            var_dump($query);
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($query, $parameters);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
     }
 
-/**
- * Devuelve un estudiante por mail
- * param Mail
- */
+
+
+
+    public function readAll()
+    {
+        try {
+            $studentList = array();
+
+            $query = "SELECT * FROM " . $this->table;
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+
+            foreach ($resultSet as $row) {
+                $student = new Student();
+                $student->setStudentId($row["Id"]);
+                $student->setFirstName($row["Name"]);
+                $student->setActive($row["Active"]);
+                $student->setEmail($row["Email"]);
+                $student->setEmail($row["Password"]);
+
+                array_push($studentList, $student);
+            }
+
+            return $studentList;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function read($studentId)
+    {
+        try {
+            $artist = null;
+
+            $query = "SELECT * FROM " . $this->table . " WHERE Id = :Id";
+
+            $parameters["Id"] = $studentId;
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query, $parameters);
+
+            foreach ($resultSet as $row) {
+                $student = new Student();
+                $student->setStudentId($row["studentId"]);
+                $student->setFirstName($row["firstName"]);
+                $student->setLastName($row["lastName"]);
+            }
+
+            return $student;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+
+
+    public function update($student)
+    {
+
+        try {
+            $query = "UPDATE " . $this->table . " SET Name = :Name, Active = :Active, Email  = :Email, Password = :Password  WHERE Id = :Id";
+
+
+            $parameters["Active"] = $student->getActive();
+            $parameters["Email"] = $student->getEmail();
+            $parameters["Password"] = $student->getPassword();
+            $parameters["Name"] = $student->getName();
+
+
+
+
+
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($query, $parameters);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function delete($StudentId)
+    {
+        try {
+            $query = "DELETE FROM " . $this->table . " WHERE Id = :Id";
+
+            $parameters["Id"] = $StudentId;
+
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($query, $parameters);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+
+
+
+
+    /**
+     * Devuelve un estudiante por mail
+     * param Mail
+     */
     public function getStudentData($email)
     {
 
         $this->RetrieveData2($email);
         return $this->studentList;
     }
+
+
 
     public function GetByStudentMail($mail)
     {
@@ -269,7 +253,6 @@ class StudentDAO implements IStudentDAO
                 array_push($this->studentList, $student);
             }
         }
-
     }
 
 
@@ -282,81 +265,68 @@ class StudentDAO implements IStudentDAO
 
     public function GetAll()
     {
-
-        $this->studentList = array();
-
         $this->RetrieveData();
 
         return $this->studentList;
     }
 
-    
 
 
-    public function GetByUserId($apiId,$password)
+
+    public function GetByUserId($apiId, $password)
     {
         $student = null;
 
-        $query = "SELECT apiId, Password from ".$this->table. " WHERE apiId = :apiId and Password = :Password ";
-        
+        $query = "SELECT apiId, Password from " . $this->table . " WHERE apiId = :apiId and Password = :Password ";
+
         $parameters["apiId"] = $apiId;
         $parameters["Password"] = $password;
 
         $this->connection = Connection::GetInstance();
 
-    $results = $this->connection->Execute($query, $parameters);
-        
-        foreach($results as $row)
-        {
+        $results = $this->connection->Execute($query, $parameters);
+
+        foreach ($results as $row) {
             $student = new Student();
             $student->setDbId($row["apiId"]);
             $student->setPassword($row["Password"]);
         }
 
         return $student;
-    }  
+    }
 
 
-    public function existsMailPorId($mail){
+    public function existsMailPorId($mail)
+    {
 
         $this->RetrieveData();
-        $return=null; 
-       
-        for ($i=0; $i < count($this->studentList); $i++) { 
-            if($this->studentList[$i]->getEmail() == $mail){
-               
+        $return = null;
+
+        for ($i = 0; $i < count($this->studentList); $i++) {
+            if ($this->studentList[$i]->getEmail() == $mail) {
+
                 $return = $this->studentList[$i]->getStudentId();
-                
             }
         }
-        
+
         return $return;
     }
 
-    
-    public function existsMail($mail){
+
+    public function existsMail($mail)
+    {
 
         $this->RetrieveData();
-        
-        $return=null;
-        for ($i=0; $i < count($this->studentList); $i++) { 
-            if($this->studentList[$i]->getEmail() == $mail){
-               
+
+        $return = null;
+        for ($i = 0; $i < count($this->studentList); $i++) {
+            if ($this->studentList[$i]->getEmail() == $mail) {
+
                 $return = $this->studentList[$i];
-                
             }
         }
 
-        
+
         return $return;
-
-
-
     }
-
-
-
-
-
-
 }

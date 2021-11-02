@@ -27,18 +27,6 @@
             require_once(VIEWS_PATH."adminADD.php");
         }
 
-
-
-       
-        public function ShowAdminView() 
-        {
-           
-            $companyList=$this->companyDAO->GetAll();
-            require_once(VIEWS_PATH."validate-session.php");
-            require_once(VIEWS_PATH."adminadminList.php");
-        }
-
-
         public function showModifyView(){
             
          
