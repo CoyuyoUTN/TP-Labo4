@@ -34,6 +34,10 @@
                             Name
                              <input class="form-control" type="text" id="position" name="position">
                          </th>
+                         <th>
+                            Active
+                             
+                         </th>
                     </thead>
                     <tbody>
                          <?php
@@ -44,7 +48,10 @@
                                              <td><?php echo $admin->getId() ?></td>
                                              <td><?php echo $admin->getEmail() ?></td>
                                              <td><?php echo $admin->getPassword() ?></td>
-                                             <td><?php echo $admin->getName()->getDescription() ?></td>
+                                             <td><?php echo $admin->getName() ?></td>
+                                             <td><?php echo $admin->getActive() ?></td>
+
+                                             
                                         </tr>
                                    <?php
                               }

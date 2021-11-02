@@ -11,6 +11,7 @@ class AdminDAO implements Crud{
 
     private $db;
     private $table='Admin';
+    private $adminList;
 
     function __construct(){
         $this->db = Connection::getInstance();
@@ -84,17 +85,37 @@ class AdminDAO implements Crud{
     }
 
 
-    function readAll($id=null,$email=null,$password=null, $name=null){
-        $result = array();
-        $list=array();
+    function readAll(){
+        try
+            {
+                $adminList = array();
 
-        $result = $this->db->Execute($this->selectBuilder($id,$email,$password,$name));
+                $query = "SELECT * FROM ".$this->table. " WHERE active = 1 ";
 
-        foreach ($result as $value) {
-            array_push($list,Admin::fromArray($value));
-        }
+                $this->connection = Connection::GetInstance();
 
-        return $list;
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $admin = new Admin();
+                    $admin->setName($row["Name"]);
+                    $admin->setId($row["Id"]);
+                    $admin->setEmail($row["Email"]);
+                    $admin->setPassword($row["Password"]);
+                    $admin->setActive($row["Active"]);
+                    
+                    
+
+                    array_push($adminList, $admin);
+                }
+
+                return $adminList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
     }
 
 

@@ -13,8 +13,8 @@
             $this->adminDAO = new AdminDAO();
         }
 
-        public function ShowAll($id=null,$email=null,$password=null, $name=null){
-            $admins = $this->adminDAO->readAll($id,$email,$password, $name);
+        public function ShowAll(){
+            $admins = $this->adminDAO->readAll();
 
             require_once(VIEWS_PATH."adminList.php");
         }
