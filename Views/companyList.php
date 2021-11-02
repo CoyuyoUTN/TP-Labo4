@@ -25,6 +25,9 @@ require_once("validate-session.php");
                                 <td>
                                     <button type="submit" class="btn" name="id" value="<?php echo $company->getId() ?>"><?php echo $actionName ?></button>
                                 </td>
+                                <td>
+                                    <a class="btn btn-default" href="../Home/ShowFullData?data=<?php echo $company->getId() ?>" >Mostrar</a>
+                                </td>
                             </tr>
                         <?php
                         }
@@ -32,9 +35,6 @@ require_once("validate-session.php");
                         </tr>
                     </tbody>
                 </table>
-            </form>
-            <form action="<?php echo FRONT_ROOT . $onAction ?>" method="">
-                <button type="submit" class="btn" name="id" value="<?php echo !$delete ?>" >Delete Mode</button>
             </form>
         </div>
     </section>

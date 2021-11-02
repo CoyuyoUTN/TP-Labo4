@@ -81,3 +81,8 @@ label {
      width: 300px;
      max-height: 300px;
 }
+
+a.btn.btn-default{
+     background-color: #fff;
+     color: black;
+}
