@@ -4,17 +4,18 @@ namespace Models;
 
 use Models\IUser as IUser;
 
-class Admin{
+class Admin
+{
 
-private $id;
-private $email;
-private $password;
-private $name;
-private $active;
+    private $id;
+    private $email;
+    private $password;
+    private $name;
+    private $active;
 
-public function __construct($email=null,$password=null, $name=null)
-    {   
-       
+    public function __construct($email = null, $password = null, $name = null)
+    {
+
         $this->email = $email;
         $this->password = $password;
         $this->name = $name;
@@ -155,43 +156,23 @@ public function __construct($email=null,$password=null, $name=null)
         return $this;
     }
 
-/**
- * Get the value of name
- */ 
-public function getName()
-{
-return $this->name;
-}
+    /**
+     * Get the value of active
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
 
-/**
- * Set the value of name
- *
- * @return  self
- */ 
-public function setName($name)
-{
-$this->name = $name;
+    /**
+     * Set the value of active
+     *
+     * @return  self
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
 
-return $this;
-}
-
-/**
- * Get the value of active
- */ 
-public function getActive()
-{
-return $this->active;
-}
-
-/**
- * Set the value of active
- *
- * @return  self
- */ 
-public function setActive($active)
-{
-$this->active = $active;
-
-return $this;
-}
+        return $this;
+    }
 }
