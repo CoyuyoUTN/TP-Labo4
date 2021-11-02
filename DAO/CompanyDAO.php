@@ -10,7 +10,6 @@ use DAO\Crud;
 class CompanyDAO implements Crud{
 
     private $companyList=array();
-    private $fileName = ROOT."Data/company.json";
     private $table="Company";
 	private $connection;
     private $db;
@@ -199,7 +198,7 @@ class CompanyDAO implements Crud{
                     $company->setName($row["name"]);
                     $company->setCuil($row["cuil"]);
                     $company->setId($row["id"]);
-                    $company->setImg($row[" img"]);
+                    $company->setImg($row["img"]);
                     $company->setShortDesc($row["shortDesc"]);
                     $company->setRanking($row["ranking"]);
                     $company->setEmail($row["email"]);
@@ -229,7 +228,7 @@ class CompanyDAO implements Crud{
             {
                 $query = "UPDATE ".$this->table." SET name = :name, cuil = :cuil, img = :img, shortDesc = :shortDesc,
                           ranking = :ranking, email = email, phone = :phone,  city = :city, address = :address, jobOffers = :jobOffers,
-                          bio = :bio, linkedin = :linkedin, webpage = :webpage, facebook = :facebook, active = :active WHERE Id = :Id";
+                          bio = :bio, linkedin = :linkedin, webpage = :webpage, facebook = :facebook, active = :active WHERE ( id = :id ) ";
 
 
 
@@ -280,8 +279,7 @@ class CompanyDAO implements Crud{
                 throw $ex;
             }            
         }
-   
-   
+        
 
 
 
@@ -338,23 +336,7 @@ class CompanyDAO implements Crud{
         $this->SaveData();
     }
 
-    public function searchId($id)
-    {            
-        $this->RetrieveData();
-
-        $return = array();
-
-        for ($i=0; $i < count($this->companyList); $i++) { 
-            if($this->companyList[$i]->getId() == $id){
-               
-                $return = $this->companyList[$i];
-                
-            }
-        }
-       
-        return $return;
-    }
-
+    
    
     public function ifExistsData($name,$cuil){
 

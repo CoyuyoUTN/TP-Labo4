@@ -44,17 +44,20 @@ class CompanyController
     {
 
         require_once(VIEWS_PATH . "validate-session.php");
-        $company = $this->companyDAO->searchId($id);
-
+        $company = $this->companyDAO->read($id);
+       
         if ($company == NULL) {
             $this->ShowAdminView();
 
             echo "<center><H3> 'Id no existe' </center></H3>";
         } else {
-            $this->companyDAO->Remove($id);
-
+            
+            if($name!=null){
             $company->setName($name);
+            }
+            if($cuil!=null){
             $company->setCuil($cuil);
+            }
             if($shortDesc!=null){
                 $company->setShortDesc($shortDesc);
             }
@@ -94,9 +97,9 @@ class CompanyController
             if($bio!=null){
                 $company->setBio($bio);
             }
+            
 
-
-            $this->companyDAO->Edit($company);
+            $this->companyDAO->update($company);
             $this->ShowAdminView();
         }
     }
