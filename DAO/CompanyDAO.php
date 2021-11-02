@@ -226,9 +226,7 @@ class CompanyDAO implements Crud{
 
         try
             {
-                $query = "UPDATE ".$this->table." SET name = :name, cuil = :cuil, img = :img, shortDesc = :shortDesc,
-                          ranking = :ranking, email = email, phone = :phone,  city = :city, address = :address, jobOffers = :jobOffers,
-                          bio = :bio, linkedin = :linkedin, webpage = :webpage, facebook = :facebook, active = :active WHERE ( id = :id ) ";
+                $query = "UPDATE ".$this->table." SET name = :name, cuil = :cuil, img = :img, shortDesc = :shortDesc, ranking = :ranking, email = :email, phone = :phone, city = :city, address = :address, jobOffers = :jobOffers, bio = :bio, linkedin = :linkedin, webpage = :webpage, facebook = :facebook, active = :active WHERE ( id = :id ) ";
 
 
 
