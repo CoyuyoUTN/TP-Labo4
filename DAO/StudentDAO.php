@@ -296,18 +296,16 @@ namespace DAO;
     {
         $student = null;
 
-        $query = "SELECT apiId from ".$this->table. " WHERE ( apiId = :apiId )";
+        $query = "SELECT * from ".$this->table. " WHERE apiId = ".$apiId;
         
-        $parameters["apiId"] = $apiId;
-
         $this->connection = Connection::GetInstance();
 
-    $results = $this->connection->Execute($query, $parameters, QueryType::StoredProcedure);
+        $results = $this->connection->Execute($query);
        
         foreach($results as $row)
         {
             $student = new Student();
-            $student->setDbId($row["dbId"]);
+            $student->setDbId($row["id"]);
             $student->setPassword($row["Password"]);
         }
 
