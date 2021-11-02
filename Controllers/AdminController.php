@@ -52,6 +52,8 @@
             require_once(VIEWS_PATH."validate-session.php");
             $admin= new Admin($email,$password,$name);
             $this->adminDAO->create($admin);
+            ?> <script language="javascript">alert("Usuario creado con exito");</script>
+            <?php
             require_once(VIEWS_PATH."adminADD.php");
 
 
