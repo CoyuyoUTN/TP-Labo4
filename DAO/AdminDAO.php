@@ -2,26 +2,21 @@
 
 namespace DAO;
 
-
-use DAO\Crud as Crud;
+use DAO\Connection as Connection;
 use Models\Admin as Admin;
-USE FFI\Exception as Exception;
-use Models\Student;
+use DAO\Crud as Crud;
+use Exception as Exception;
 
 class AdminDAO implements Crud{
 
-    private $adminList=array();
-    private $fileName = ROOT."Data/admin.json";
-    private $table="Admin";
-	private $connection;
+    private $db;
+    private $table='Admin';
+    private $adminList;
 
-
-
-    public function __construct(){
-        $this->connection = Connection::getInstance();
+    function __construct(){
+        $this->db = Connection::getInstance();
     }
 
-//************************************************************************************** */
 
 
     public function create($admin)
@@ -29,68 +24,118 @@ class AdminDAO implements Crud{
 
       try
         {
-            $query = "INSERT INTO ".$this->table." (Name) VALUES (Name), (Email) VALUES (:Email),(Password) VALUES (:Password),
-            (Active) VALUES (:Active);";//DUDA, el ID es autoincrement
-                                                                        //como le solicito el insert ??
+            try
+            {
+                $query0 = "INSERT INTO ".$this->table." ( Email, Password, Name ) VALUES ( :Email, :Password, :Name  ) ";
+
+                
+                $parameters["Email"] = $admin->getEmail();
+                $parameters["Password"] = $admin->getPassword();
+                $parameters["Name"] = $admin->getName();
+               
             
-            
-            $parameters["Name"] = $admin->getNombre();
-            $parameters["Email"] = $admin->getEmail();
-            $parameters["Password"] = $admin->getPassword();
-            $parameters["Active"] = $admin->getActive();
-           
-            
 
-            $this->connection = Connection::GetInstance();
-
-            $this->connection->ExecuteNonQuery($query, $parameters);
-        }
-        catch(Exception $ex)
-        {
-            throw $ex;
-        }
-    }
+                $this->connection = Connection::GetInstance();
 
 
-
-
- public function readAll(){
-    try
-        {
-            $adminList = array();
-
-            $query = "SELECT * FROM ".$this->table;
-
-            $this->connection = Connection::GetInstance();
-
-            $resultSet = $this->connection->Execute($query);
-            
-            foreach ($resultSet as $row)
-            {                
-                $admin = new Admin();
-                $admin->setId($row["Id"]);
-                $admin->setNombre($row["Name"]);
-                $admin->setEmail($row["Email"])   ;
-                $admin->setPassword($row["Password"]);
-
-                array_push($adminList, $admin);
+                $this->connection->ExecuteNonQuery($query0, $parameters);
+   
+           }              
+ 
+            catch(Exception $ex)
+            {
+                throw $ex;
             }
 
-            return $adminList;
+        
         }
         catch(Exception $ex)
         {
             throw $ex;
         }
     }
+    private function selectBuilder($id=null,$email=null,$password=null, $name=null)
+    {
+        $query = "SELECT * FROM  WHERE active=" . strval(1);
 
-   public function read($adminId)
+        if (isset($id) && $id != "") {
+            $query = $query . " && id=" . $id;
+        }
+        if (isset($email) && $email != "") {
+            $query = $query . ' && Email="' . $email . '"';
+        }
+        if (isset($password) && $password != "") {
+            $query = $query . " && Password=" . $password;
+        }
+        if (isset($name) && $name != "") {
+            $query = $query . " && Name=" . $name;
+        }
+        return $query;
+    }
+    private function insertBuilder($email,$password,$name)
+    {
+        $query = "INSERT INTO Admin (";
+        $values = ") VALUES (";
+
+
+        $query = $query . "Id, Email, Password, Name";
+        $values = $values . '"' .strval($email) . ','  . strval($password) . ',' . strval($name) . ')';
+
+        return $query.$values;
+    }
+
+
+    function readAll(){
+        try
+            {
+                $adminList = array();
+
+                $query = "SELECT * FROM ".$this->table. " WHERE active = 1 ";
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $admin = new Admin();
+                    $admin->setName($row["Name"]);
+                    $admin->setId($row["Id"]);
+                    $admin->setEmail($row["Email"]);
+                    $admin->setPassword($row["Password"]);
+                    $admin->setActive($row["Active"]);
+                    
+                    
+
+                    array_push($adminList, $admin);
+                }
+
+                return $adminList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+    }
+
+
+    function GetById($id){
+        $result = $this->db->Execute('SELECT * FROM Admin WHERE id='.$id." && active=1");
+        $list=array();
+
+        foreach ($result as $value) {
+            array_push($list,Admin::fromArray($value));
+        }
+
+        return $list;
+    }
+    public function read($adminId)
     {
         try
         {
             $admin = null;
 
-            $query = "SELECT * FROM ".$this->table." WHERE Id = :Id";
+            $query = "SELECT * FROM Admin".$this->table." WHERE Id = :Id";
 
             $parameters["Id"] = $adminId;
 
@@ -167,64 +212,6 @@ public function update($admin){
 
 
 
-//---------------------------------------------------------------------------//
-
-
-
-
-
-
-
-
-
-
-
-    function GetAll($id=null,$email=null,$password=null, $name=null){
-        $result = array();
-        $list=array();
-
-        $result = $this->db->Execute($this->queryBuilder($id,$email,$password,$name));
-
-        foreach ($result as $value) {
-            array_push($list,Admin::fromArray($value));
-        }
-
-        return $list;
-    }
-
-    function queryBuilder($id=null,$email=null,$password=null, $name=null){
-        $query = "SELECT * FROM Admin WHERE active=".strval(1);
-
-        if(isset($id) && $id != ""){
-            $query = $query." && id=".$id;
-        }
-        if(isset($email) && $email != ""){
-            $query = $query.' && Email="'.$email.'"';
-        }
-        if(isset($password) && $password != ""){
-            $query = $query." && Password=".$password;
-        }
-        if(isset($name) && $name != ""){
-            $query = $query." && Name=".$name;
-        }
-    
-
-        return $query;
-    }
-
-    function GetById($id){
-        $result = $this->db->Execute('SELECT * FROM Admin WHERE id='.$id." && active=1");
-        $list=array();
-
-        foreach ($result as $value) {
-            array_push($list,Admin::fromArray($value));
-        }
-
-        return $list;
-    }
-
-
-
 
 
 
@@ -232,8 +219,3 @@ public function update($admin){
 
 
 }
-
-
-
-
-?>

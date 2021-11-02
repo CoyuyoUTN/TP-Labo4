@@ -7,13 +7,14 @@
     class AdminController
     {
         private $adminDAO;
+        
         public function __construct()
         {
             $this->adminDAO = new AdminDAO();
         }
 
-        public function ShowAll($id=null,$email=null,$password=null, $name=null){
-            $admins = $this->adminDAO->GetAll($id,$email,$password, $name);
+        public function ShowAll(){
+            $admins = $this->adminDAO->readAll();
 
             require_once(VIEWS_PATH."adminList.php");
         }
@@ -47,6 +48,17 @@
         }
 
 
+        public function addADMIN($email,$password,$name){
+            require_once(VIEWS_PATH."validate-session.php");
+            $admin= new Admin($email,$password,$name);
+            $this->adminDAO->create($admin);
+            ?> <script language="javascript">alert("Usuario creado con exito");</script>
+            <?php
+            require_once(VIEWS_PATH."adminADD.php");
+
+
+            
+        }
 
     }
 ?>

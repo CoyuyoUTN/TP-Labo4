@@ -6,7 +6,7 @@
  */
 interface Crud
 {
-	public function create($objet);
+	public function create($object);
 	public function read($id);
 	public function readAll();
 	public function update($object);

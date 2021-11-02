@@ -33,18 +33,14 @@ namespace DAO;
 
           try
             {
-                $query = "INSERT INTO ".$this->table." (Name) VALUES (Name), (Email) VALUES (:Email),(Password) VALUES (:Password),
-                (Active) VALUES (:Active);";//DUDA, el ID es autoincrement
-                                                                            //como le solicito el insert ??
                 
-                
-                $parameters["Name"] = $student->getFirstName();
-                $parameters["Email"] = $student->getEmail();
-                $parameters["Password"] = $student->getPassword();
-                $parameters["Active"] = $student->getActive();
+                $query = "INSERT INTO ".$this->table." ( Password, active, apiId) VALUES ( :Password, :active, :apiId ) ";
                
-                
+                $parameters["Password"] = $student->getPassword();
+                $parameters["active"] = $student->getActive();
+                $parameters["apiId"] = $student->getStudentId();
 
+                var_dump($query);
                 $this->connection = Connection::GetInstance();
 
                 $this->connection->ExecuteNonQuery($query, $parameters);
@@ -76,7 +72,7 @@ namespace DAO;
                     $student->setFirstName($row["Name"]);
                     $student->setActive($row["Active"]);
                     $student->setEmail($row["Email"])   ;
-                    $student->setPassword($row["Password"]);
+                    $student->setEmail($row["Password"]);
 
                     array_push($studentList, $student);
                 }
@@ -93,7 +89,7 @@ namespace DAO;
         {
             try
             {
-                $student = null;
+                $artist = null;
 
                 $query = "SELECT * FROM ".$this->table." WHERE Id = :Id";
 
@@ -173,7 +169,10 @@ class StudentDAO implements IStudentDAO
         return $this->studentList;
     }
 
-
+/**
+ * Devuelve un estudiante por mail
+ * param Mail
+ */
     public function getStudentData($email)
     {
 
@@ -286,26 +285,78 @@ class StudentDAO implements IStudentDAO
 
         $this->studentList = array();
 
-        $opt = array(
-            "http" => array(
-                "method" => "GET",
-                "header" => "x-api-key: 4f3bceed-50ba-4461-a910-518598664c08\r\n"
-            )
-        );
+        $this->RetrieveData();
 
-        $ctx = stream_context_create($opt);
+        return $this->studentList;
+    }
 
-        $aux = file_get_contents("https://utn-students-api.herokuapp.com/api/Student", false, $ctx);
-        $array = ($aux) ? json_decode($aux, true) : array();
+    
 
 
-        foreach ($array as $valuesArray) {
-            if (isset($_GET['studentId']) ==  $valuesArray["stuendtId"]) {
-                $verify = $this->db->Execute('SELECT * FROM Studient WHERE apiId='.$valuesArray["stuendtId"]);
-                if(empty($verify)){
-                    //Registrarse
-                }
+    public function GetByUserId($apiId,$password)
+    {
+        $student = null;
+
+        $query = "SELECT apiId, Password from ".$this->table. " WHERE apiId = :apiId and Password = :Password ";
+        
+        $parameters["apiId"] = $apiId;
+        $parameters["Password"] = $password;
+
+        $this->connection = Connection::GetInstance();
+
+    $results = $this->connection->Execute($query, $parameters);
+        
+        foreach($results as $row)
+        {
+            $student = new Student();
+            $student->setDbId($row["apiId"]);
+            $student->setPassword($row["Password"]);
+        }
+
+        return $student;
+    }  
+
+
+    public function existsMailPorId($mail){
+
+        $this->RetrieveData();
+        $return=null; 
+       
+        for ($i=0; $i < count($this->studentList); $i++) { 
+            if($this->studentList[$i]->getEmail() == $mail){
+               
+                $return = $this->studentList[$i]->getStudentId();
+                
             }
         }
+        
+        return $return;
     }
+
+    
+    public function existsMail($mail){
+
+        $this->RetrieveData();
+        
+        $return=null;
+        for ($i=0; $i < count($this->studentList); $i++) { 
+            if($this->studentList[$i]->getEmail() == $mail){
+               
+                $return = $this->studentList[$i];
+                
+            }
+        }
+
+        
+        return $return;
+
+
+
+    }
+
+
+
+
+
+
 }

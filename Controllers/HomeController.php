@@ -26,45 +26,83 @@
             phpinfo();
         }
 
-        public function Login($email=NULL, $password=NULL)
-        {
-            if($email==NULL){
-                if( $_SESSION["loggedUser"]){
-                    $email= $_SESSION["loggedUser"]->getEmail();
-                    
-                }
-                else{
-                    $this->Index("Logueate");
-                }
-            }
-          
-            if($email=="admin@gmail.com"){
+
+        public function Login($email, $password)
+    {
+
+
+            
+            if($email=="admin@gmail.com" && $password== "123456"){
                 $_SESSION["loggedUser"] = $email;
                 $this->ShowAdminView();
-
-
             }
-            else{
 
-            $student = $this->studentDAO->GetByStudentMail($email);
 
-            if($student != null)
+            else
+        {
+            $dbId=$this->studentDAO->existsMailPorId($email); //valida si exite por api y devuelve studentId, sino null
+            $user=null;
+            
+            if($dbId != null){
+            $user = $this->studentDAO->GetByUserId($dbId,$password);
+            
+            } 
+           
+        
+            if(($user != null) && ($user->getPassword() == $password))
             {
-                $_SESSION["loggedUser"] = $student;
+                $_SESSION["loggedUser"] = $user;
                 $this->ShowStudentView($email);
             }
-            else{
+            else
+            {
+            ?> <script language="javascript">alert("Usuario y/o Contraseña incorrectos");</script>
+            <?php
                 $this->Index("Usuario y/o Contraseña incorrectos");
             }
-        }
-        }
         
+        }
+    }
+
+
+
         public function Logout()
         {
             session_destroy();
 
             $this->Index();
         }
+
+        public function BackToLogin(){
+            require_once(VIEWS_PATH."loguin.php");
+        }
+
+        public function Check($email, $password){
+           
+            
+           $student= $this->studentDAO->existsMail($email);
+            
+           
+            if($student != null){
+                $student->setPassword($password);
+                
+                $this->studentDAO->create($student);
+                ?> <script language="javascript">alert("Cuenta creada exitosamente, inicie sesion");</script>
+               <?php
+                 require_once(VIEWS_PATH."loguin.php");
+            }
+            else{
+               ?> <script language="javascript">alert("No existe Mail");</script>
+               <?php
+                 require_once(VIEWS_PATH."loguin.php");
+            }
+
+
+        }
+
+
+
+
 
 
         public function ShowAddView()
@@ -83,20 +121,28 @@
         
         public function ShowCompanyListStudent(){
             if(isset($_GET['search'])){
-                $companyList = $this->companyDAO->GetAll($_GET['search']);
+                $companyList = $this->companyDAO->read($_GET['search']);
             }
             else{
-                $companyList = $this->companyDAO->GetAll();
+                $companyList = $this->companyDAO->readAll();
+               
             }
             
             require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."studentCompanyList.php");
         }
 
+        public function ShowRegisterView(){
+            
+                require_once(VIEWS_PATH."registro1.php");
+            
+
+        }
+
 
         public function ShowFullData($companyID)
         {
-            $company = $this->companyDAO->searchId($companyID);
+            $company = $this->companyDAO->read($companyID);
             require_once(VIEWS_PATH."companyFullData.php");
         }
 
@@ -109,7 +155,7 @@
 
         public function ShowAdminView() 
         {
-            $companyList=$this->companyDAO->GetAll();
+            $companyList=$this->companyDAO->readAll();
             require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."companyList.php");
         }

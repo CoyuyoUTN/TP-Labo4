@@ -25,7 +25,8 @@ if (isset($_SERVER["HTTP_REFERER"])) {
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($companyList as $company) {
+                       
+                        foreach ($companyList as $company) { 
                         ?>
                             <tr>
                                 <td><?php echo $company->getId() ?></td>

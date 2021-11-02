@@ -10,9 +10,9 @@ use DAO\Crud;
 class CompanyDAO implements Crud{
 
     private $companyList=array();
-    private $fileName = ROOT."Data/company.json";
     private $table="Company";
 	private $connection;
+    private $db;
 
 
 
@@ -21,75 +21,111 @@ class CompanyDAO implements Crud{
         $this->connection = Connection::getInstance();	
 	}
 	
+
+    
     
     public function create ($company)
 	{
+       
+ 
 
-        try
+      try
             {
-               
-                $query1 = "INSERT INTO ".$this->table." (name) VALUES (:name);";
-                $query2 = "INSERT INTO ".$this->table." (cuil) VALUES (:cuil);";
-                $query3 = "INSERT INTO ".$this->table." (id) VALUES (:id);";
-                $query4 = "INSERT INTO ".$this->table." (img) VALUES (:img);";
-                $query5 = "INSERT INTO ".$this->table." (shortDesc) VALUES (:shortDesc);";
-                $query6 = "INSERT INTO ".$this->table." (ranking) VALUES (:ranking);";
-                $query7 = "INSERT INTO ".$this->table." (email) VALUES (:email);";
-                $query8 = "INSERT INTO ".$this->table." (phone) VALUES (:phone);";
-                $query9 = "INSERT INTO ".$this->table." (city) VALUES (:city);";
-                $query10 = "INSERT INTO ".$this->table." (address) VALUES (:address);";
-                $query11 = "INSERT INTO ".$this->table." (jobOffers) VALUES (:jobOffers);";
-                $query12 = "INSERT INTO ".$this->table." (bio) VALUES (:bio);";
-                $query13 = "INSERT INTO ".$this->table." (linkedin) VALUES (:linkedin);";
-                $query14 = "INSERT INTO ".$this->table." (webpage) VALUES (:webpage);";  
-                $query15 = "INSERT INTO ".$this->table." (facebook) VALUES (:facebook);";
-                $query16 = "INSERT INTO ".$this->table." (active) VALUES (:active);";
+                $query0 = "INSERT INTO ".$this->table." ( name, cuil, img, shortDesc, ranking, email, phone, city, address, jobOffers, bio, linkedin, webpage, facebook ) VALUES ( :name, :cuil, :img, :shortDesc, :ranking, :email, :phone, :city, :address, :jobOffers, :bio, :linkedin, :webpage, :facebook ) ";
 
+                
+                $parameters["name"] = $company->getName();
+                $parameters["cuil"] = $company->getCuil();
+                if($company->getImg()==null){
+                    $parameters["img"]=null;
+                }
+                else{
+                 $parameters["img"] = $company->getImg();
+                }
 
-                $parameters1["name"] = $company->getName();
-                $parameters2["cuil"] =$company->getCuil();
-                $parameters3["id"] = $company->getId();
-                $parameters4["img"] =$company->getImg();
-                $parameters5["shortDesc"] = $company->getShortDesc();
-                $parameters6["ranking"] = $company->getRanking();
-                $parameters7["email"] = $company->getEmail();
-                $parameters8["phone"] =$company->getPhone();
-                $parameters9["city"] =$company->getCity();
-                $parameters10["address"] = $company->getAddress();
-                $parameters11["jobOffers"] =$company->getJobOffers();
-                $parameters12["bio"] = $company->getBio();
-                $parameters13["linkedin"] = $company->getLinkedin();
-                $parameters14["webpage"] = $company->getWebpage();
-                $parameters15["facebook"] =$company->getFacebook();
-                $parameters16["active"] = $company->getActive();
-              
+                if($company->getShortDesc()==null){
+                 $parameters["shortDesc"] = null;
+                }
+                else{
+                 $parameters["shortDesc"] = $company->getShortDesc();
+                }
 
+                if($company->getRanking()==null){
+                $parameters["ranking"] = null;
+                }
+                else{
+                    $parameters["ranking"] = $company->getRanking();
+                }
+                if($company->getEmail()==null){
+                $parameters["email"] = null;
+                 }
+                else{
+                    $parameters["email"] = $company->getEmail();
+                }
+                if($company->getPhone()==null){
+                $parameters["phone"] = null;
+                }
+                else{
+                    $parameters["phone"] = $company->getPhone();
+                }
+
+                if($company->getCity()==null){
+                $parameters["city"] = null;
+                }
+                else{
+                    $parameters["city"] = $company->getCity();
+                }
+
+                if($company->getAddress()==null){
+                $parameters["address"] = null;
+                }
+                else{
+                    $parameters["address"] = $company->getAddress();
+                }
+
+                if($company->getJobOffers()==null){
+                $parameters["jobOffers"] = null;
+                }
+                else{
+                    $parameters["jobOffers"] = $company->getJobOffers();
+                }
+
+                if($company->getBio()==null){
+                $parameters["bio"] = null;
+                }
+                else{
+                    $parameters["bio"] = $company->getBio();
+                }
+
+                if($company->getLinkedin()==null){
+                $parameters["linkedin"] = null;
+                }
+                else{
+                    $parameters["linkedin"] = $company->getLinkedin();
+                }
+
+                if( $company->getWebpage()==null){
+                $parameters["webpage"] = null;
+                }
+                else{
+                    $parameters["webpage"] = $company->getWebpage();
+                }
+
+                if($company->getFacebook()==null){
+                $parameters["facebook"] =null;
+                }
+                else{
+                    $parameters["facebook"] =$company->getFacebook();
+                }
+            
 
                 $this->connection = Connection::GetInstance();
 
 
-                $this->connection->ExecuteNonQuery($query1, $parameters1);
-                $this->connection->ExecuteNonQuery($query2, $parameters2);
-                $this->connection->ExecuteNonQuery($query3, $parameters3);
-                $this->connection->ExecuteNonQuery($query4, $parameters4);
-                $this->connection->ExecuteNonQuery($query5, $parameters5);
-                $this->connection->ExecuteNonQuery($query6, $parameters6);
-                $this->connection->ExecuteNonQuery($query7, $parameters7);
-                $this->connection->ExecuteNonQuery($query8, $parameters8);
-                $this->connection->ExecuteNonQuery($query9, $parameters9);
-                $this->connection->ExecuteNonQuery($query10, $parameters10);
-                $this->connection->ExecuteNonQuery($query11, $parameters11);
-                $this->connection->ExecuteNonQuery($query12, $parameters12);
-                $this->connection->ExecuteNonQuery($query13, $parameters13);
-                $this->connection->ExecuteNonQuery($query14, $parameters14);
-                $this->connection->ExecuteNonQuery($query15, $parameters15);
-                $this->connection->ExecuteNonQuery($query16, $parameters16);
-            }              
+                $this->connection->ExecuteNonQuery($query0, $parameters);
+   
+           }              
  
-        
-            
-
-            
             catch(Exception $ex)
             {
                 throw $ex;
@@ -103,7 +139,7 @@ class CompanyDAO implements Crud{
             {
                 $companyList = array();
 
-                $query = "SELECT * FROM ".$this->table;
+                $query = "SELECT * FROM ".$this->table. " WHERE active = 1 ";
 
                 $this->connection = Connection::GetInstance();
 
@@ -115,7 +151,7 @@ class CompanyDAO implements Crud{
                     $company->setName($row["name"]);
                     $company->setCuil($row["cuil"]);
                     $company->setId($row["id"]);
-                    $company->setImg($row[" img"]);
+                    $company->setImg($row["img"]);
                     $company->setShortDesc($row["shortDesc"]);
                     $company->setRanking($row["ranking"]);
                     $company->setEmail($row["email"]);
@@ -162,7 +198,7 @@ class CompanyDAO implements Crud{
                     $company->setName($row["name"]);
                     $company->setCuil($row["cuil"]);
                     $company->setId($row["id"]);
-                    $company->setImg($row[" img"]);
+                    $company->setImg($row["img"]);
                     $company->setShortDesc($row["shortDesc"]);
                     $company->setRanking($row["ranking"]);
                     $company->setEmail($row["email"]);
@@ -190,13 +226,9 @@ class CompanyDAO implements Crud{
 
         try
             {
-                $query = "UPDATE ".$this->table." SET name = :name, cuil = :cuil, img = :img, shortDesc = :shortDesc,
-                          ranking = :ranking, email = email, phone = :phone,  city = :city, address = :address, jobOffers = :jobOffers,
-                          bio = :bio, linkedin = :linkedin, webpage = :webpage, facebook = :facebook, active = :active WHERE Id = :Id";
+                $query = "UPDATE ".$this->table." SET name = :name, cuil = :cuil, img = :img, shortDesc = :shortDesc, ranking = :ranking, email = :email, phone = :phone, city = :city, address = :address, jobOffers = :jobOffers, bio = :bio, linkedin = :linkedin, webpage = :webpage, facebook = :facebook, active = :active WHERE ( id = :id ) ";
 
-
-
-                $parameters["id"] = $company->getId(); 
+                 $parameters["id"] = $company->getId(); 
                 $parameters["name"] = $company->getName();
                 $parameters["cuil"] =$company->getCuil();
                 $parameters["img"] =$company->getImg();
@@ -226,13 +258,13 @@ class CompanyDAO implements Crud{
 
     }
     
-     public function delete($companyId)
+     public function delete($id)
         {
             try
             {
-                $query = "DELETE FROM ".$this->table." WHERE id = :id";
+                $query = "UPDATE ".$this->table." SET active = 0 WHERE id = :id";
             
-                $parameters["id"] = $companyId;
+                $parameters["id"] = $id;
 
                 $this->connection = Connection::GetInstance();
 
@@ -243,31 +275,7 @@ class CompanyDAO implements Crud{
                 throw $ex;
             }            
         }
-   
-   
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 
 
 
@@ -324,27 +332,11 @@ class CompanyDAO implements Crud{
         $this->SaveData();
     }
 
-    public function searchId($id)
-    {            
-        $this->RetrieveData();
-
-        $return = array();
-
-        for ($i=0; $i < count($this->companyList); $i++) { 
-            if($this->companyList[$i]->getId() == $id){
-               
-                $return = $this->companyList[$i];
-                
-            }
-        }
-       
-        return $return;
-    }
-
+    
    
     public function ifExistsData($name,$cuil){
 
-        $this->RetrieveData();
+       
         $answer=false;
     
         for ($i=0; $i < count($this->companyList); $i++) { 

@@ -4,23 +4,22 @@ namespace Models;
 
 use Models\IUser as IUser;
 
-class Admin implements IUser
-{
+class Admin{
 
-    private $id;
-    private $email = "admin@gmail.com";
-    private $password = "123456";
-    private $nombre;
+private $id;
+private $email;
+private $password;
+private $name;
+private $active;
 
-    public function __construct($id = null, $email = null, $password = null, $name = null)
-    {
-        // $positionInstance = AdminDAO::getInstance();
-
-        $this->id = $id;
+public function __construct($email=null,$password=null, $name=null)
+    {   
+       
         $this->email = $email;
         $this->password = $password;
         $this->name = $name;
     }
+
     public static function fromArray($array)
     {
         $id = null;
@@ -156,20 +155,43 @@ class Admin implements IUser
         return $this;
     }
 
-    public function getActive()
-    {
-        return $this->active;
-    }
+/**
+ * Get the value of name
+ */ 
+public function getName()
+{
+return $this->name;
+}
 
-    /**
-     * Set the value of active
-     *
-     * @return  self
-     */
-    public function setActive($active)
-    {
-        $this->active = $active;
+/**
+ * Set the value of name
+ *
+ * @return  self
+ */ 
+public function setName($name)
+{
+$this->name = $name;
 
-        return $this;
-    }
+return $this;
+}
+
+/**
+ * Get the value of active
+ */ 
+public function getActive()
+{
+return $this->active;
+}
+
+/**
+ * Set the value of active
+ *
+ * @return  self
+ */ 
+public function setActive($active)
+{
+$this->active = $active;
+
+return $this;
+}
 }

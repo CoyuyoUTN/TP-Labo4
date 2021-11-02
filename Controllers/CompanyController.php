@@ -22,7 +22,7 @@ class CompanyController
 
     public function ShowListView($onAction = "Company/Remove",$actionName = "Eliminar")
     {
-        $companyList = $this->companyDAO->GetAll();
+        $companyList = $this->companyDAO->readAll();
 
         require_once(VIEWS_PATH . "companyList.php");
     }
@@ -30,32 +30,34 @@ class CompanyController
     public function Add($name, $cuil, $shortDesc = null, $ranking = null, $email = null, $phone = null, $city = null, $address = null, $jobOffers = null, $linkedin = null, $webpage = null, $facebook = null, $img = null, $bio = null)
     {
         require_once(VIEWS_PATH . "validate-session.php");
-        if ($this->companyDAO->ifExistsData($name, $cuil)) {
-            $var = "Empresa ya existente";
-            echo "<script> alert('" . $var . "'); </script>";
-            $this->ShowAddView();
-        } else {
+        
+        
             $company = new Company($name, $cuil, $img, $shortDesc, $ranking, $email, $phone, $city, $address, $jobOffers, $bio, $linkedin, $webpage, $facebook);
-            $this->companyDAO->Add($company);
+            
+            $this->companyDAO->create($company);
+
             $this->ShowAdminView();
-        }
+        
     }
 
     public function Modify($id, $name, $cuil, $shortDesc = null, $ranking = null, $email = null, $phone = null, $city = null, $address = null, $jobOffers = null, $linkedin = null, $webpage = null, $facebook = null, $img = null, $bio = null)
     {
 
         require_once(VIEWS_PATH . "validate-session.php");
-        $company = $this->companyDAO->searchId($id);
-
+        $company = $this->companyDAO->read($id);
+       
         if ($company == NULL) {
             $this->ShowAdminView();
 
             echo "<center><H3> 'Id no existe' </center></H3>";
         } else {
-            $this->companyDAO->Remove($id);
-
+            
+            if($name!=null){
             $company->setName($name);
+            }
+            if($cuil!=null){
             $company->setCuil($cuil);
+            }
             if($shortDesc!=null){
                 $company->setShortDesc($shortDesc);
             }
@@ -95,9 +97,9 @@ class CompanyController
             if($bio!=null){
                 $company->setBio($bio);
             }
+            
 
-
-            $this->companyDAO->Edit($company);
+            $this->companyDAO->update($company);
             $this->ShowAdminView();
         }
     }
@@ -109,7 +111,7 @@ class CompanyController
     {
         require_once(VIEWS_PATH . "validate-session.php");
 
-        $this->companyDAO->Remove($id);
+        $this->companyDAO->delete($id);
 
         $this->ShowAdminView();
     }
@@ -117,7 +119,7 @@ class CompanyController
     public function ShowAdminView()
     {
 
-        $companyList = $this->companyDAO->GetAll();
+        $companyList = $this->companyDAO->readAll();
         require_once(VIEWS_PATH . "validate-session.php");
         require_once(VIEWS_PATH . "companyList.php");
     }
