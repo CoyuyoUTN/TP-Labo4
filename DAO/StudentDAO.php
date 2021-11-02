@@ -304,7 +304,7 @@ namespace DAO;
         $this->connection = Connection::GetInstance();
 
     $results = $this->connection->Execute($query, $parameters);
-        var_dump($results);
+        
         foreach($results as $row)
         {
             $student = new Student();
