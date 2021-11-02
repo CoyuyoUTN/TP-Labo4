@@ -40,7 +40,7 @@ namespace DAO;
                 $parameters["active"] = $student->getActive();
                 $parameters["apiId"] = $student->getStudentId();
 
-                var_dump($query);
+                
                 $this->connection = Connection::GetInstance();
 
                 $this->connection->ExecuteNonQuery($query, $parameters);
