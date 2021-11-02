@@ -121,10 +121,11 @@
         
         public function ShowCompanyListStudent(){
             if(isset($_GET['search'])){
-                $companyList = $this->companyDAO->readAll($_GET['search']);
+                $companyList = $this->companyDAO->read($_GET['search']);
             }
             else{
                 $companyList = $this->companyDAO->readAll();
+               
             }
             
             require_once(VIEWS_PATH."validate-session.php");
@@ -141,7 +142,7 @@
 
         public function ShowFullData($companyID)
         {
-            $company = $this->companyDAO->searchId($companyID);
+            $company = $this->companyDAO->read($companyID);
             require_once(VIEWS_PATH."companyFullData.php");
         }
 
