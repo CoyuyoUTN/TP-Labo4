@@ -25,7 +25,9 @@
           <li class="nav-item">
                <a class="nav-link" href="<?php echo  FRONT_ROOT."Admin/ShowAll "?>">Listar Admins</a>
           </li>   
-          
+          <li class="nav-item">
+               <a class="nav-link" href="<?php echo  FRONT_ROOT."Admin/ShowAddView "?>">Agregar Admin</a>
+          </li> 
             
      </ul>
 </nav>
