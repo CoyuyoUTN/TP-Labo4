@@ -292,23 +292,24 @@ namespace DAO;
     
 
 
-    public function GetByUserId($apiId)
+    public function GetByUserId($apiId,$password)
     {
         $student = null;
 
-        $query = "SELECT apiId from ".$this->table. " WHERE (apiId = :apiId)";
+        $query = "SELECT apiId, Password from ".$this->table. " WHERE apiId = :apiId and Password = :Password ";
         
         $parameters["apiId"] = $apiId;
+        $parameters["Password"] = $password;
 
         $this->connection = Connection::GetInstance();
 
-    $results = $this->connection->Execute($query, $parameters, QueryType::StoredProcedure);
+    $results = $this->connection->Execute($query, $parameters);
         var_dump($results);
         foreach($results as $row)
         {
             $student = new Student();
-            $student->setDbId($row["dbId"]);
-            $student->setPassword($row["password"]);
+            $student->setDbId($row["apiId"]);
+            $student->setPassword($row["Password"]);
         }
 
         return $student;

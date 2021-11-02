@@ -44,12 +44,12 @@
             $user=null;
             
             if($dbId != null){
-            $user = $this->studentDAO->GetByUserId($dbId);
-            var_dump($user);
+            $user = $this->studentDAO->GetByUserId($dbId,$password);
+            
             } 
            
         
-            if(($user != null) && ($user->getPassword() === $password))
+            if(($user != null) && ($user->getPassword() == $password))
             {
                 $_SESSION["loggedUser"] = $user;
                 $this->ShowStudentView($email);
