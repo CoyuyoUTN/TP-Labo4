@@ -140,11 +140,11 @@
         }
 
 
-       /* public function ShowFullData($companyID)
+       public function ShowFullData($companyID)
         {
             $company = $this->companyDAO->read($companyID);
             require_once(VIEWS_PATH."companyFullData.php");
-        }*/
+        }
 
         public function ShowStudentView($email)
         {
