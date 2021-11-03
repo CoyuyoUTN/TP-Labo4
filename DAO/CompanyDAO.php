@@ -178,7 +178,39 @@ class CompanyDAO implements Crud{
             }
     }
 
+    public function verificarSiExisteEmpresa($name){
 
+
+        try
+                {
+                    $companyList = array();
+                   
+                    $query = "SELECT name FROM ".$this->table." WHERE name like '".$name."' ";
+    
+                    
+                    
+                    $this->connection = Connection::GetInstance();
+                   
+                    $resultSet = $this->connection->Execute($query);
+                   
+                    foreach ($resultSet as $row)
+                    {
+                        $company = new Company();
+                       
+                        $company->setName($row["name"]);
+                       
+                      
+                        array_push($companyList, $company);
+                    }
+                  
+                    return $companyList;
+                }
+                catch(Exception $ex)
+                {
+                    throw $ex;
+                }
+    
+        }
    
 
     public function buscarNombre($name){

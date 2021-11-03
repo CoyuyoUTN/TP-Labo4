@@ -30,14 +30,26 @@ class CompanyController
     public function Add($name, $cuil, $shortDesc = null, $ranking = null, $email = null, $phone = null, $city = null, $address = null, $jobOffers = null, $linkedin = null, $webpage = null, $facebook = null, $img = null, $bio = null)
     {
         require_once(VIEWS_PATH . "validate-session.php");
-        
+
+            $companyList=$this->companyDAO->verificarSiExisteEmpresa($name);
+            if($companyList==null){
         
             $company = new Company($name, $cuil, $img, $shortDesc, $ranking, $email, $phone, $city, $address, $jobOffers, $bio, $linkedin, $webpage, $facebook);
             
             $this->companyDAO->create($company);
 
             $this->ShowAdminView();
+            }
+            else{
+               
+                ?> <script language="javascript">
+alert("Empresa ya existente");
+</script>
+<?php
         
+        $this->ShowListView();
+               
+            }
     }
 
     public function Modify($id, $name, $cuil, $shortDesc = null, $ranking = null, $email = null, $phone = null, $city = null, $address = null, $jobOffers = null, $linkedin = null, $webpage = null, $facebook = null, $img = null, $bio = null)
