@@ -171,7 +171,39 @@ class AdminDAO implements Crud{
         }
     }
 
+    public function buscarEmail($email){
 
+
+        try
+                {
+                    $adminList = array();
+                   
+                    $query = "SELECT Id, Email, Name FROM ".$this->table." WHERE Email like '".$email."%' ";
+    
+                    
+                    
+                    $this->connection = Connection::GetInstance();
+                   
+                    $resultSet = $this->connection->Execute($query);
+                   
+                    foreach ($resultSet as $row)
+                    {
+                        $admin = new Admin();
+                        $admin->setId($row["Id"]);
+                        $admin->setEmail($row["Email"]);
+                        $admin->setName($row["Name"]);
+                      
+                        array_push($adminList, $admin);
+                    }
+                  
+                    return $adminList;
+                }
+                catch(Exception $ex)
+                {
+                    throw $ex;
+                }
+    
+        }
     
 public function update($admin){
 

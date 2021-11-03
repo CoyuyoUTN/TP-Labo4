@@ -166,7 +166,7 @@ class HomeController
 
     public function ShowAdminView()
     {
-        header("Location: ../Company/ShowListView");
+        header("Location: ../Admin/ShowAll");
     }
 
 
@@ -191,9 +191,4 @@ class HomeController
     }
 
 
-
-    public function AddToDataBase()
-    {
-        require_once(VIEWS_PATH . "studentADDtoDB.php");
-    }
 }
