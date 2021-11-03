@@ -348,6 +348,26 @@ namespace DAO;
 
     }
 
+    public function existsCareerId($careerId){
+
+        $this->RetrieveData();
+        
+        $return=null;
+        for ($i=0; $i < count($this->studentList); $i++) { 
+            if($this->studentList[$i]->getCareerId() == $careerId){
+               
+                $return = $this->studentList[$i];
+                
+            }
+        }
+
+        
+        return $return;
+
+
+
+    }
+
 
 
 

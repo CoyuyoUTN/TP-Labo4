@@ -52,6 +52,33 @@ class JobPositionDAO
         return $ret;
     }
 
+
+    function getByCareerId($studentCareerId){
+      
+        $listByCareer = array();
+
+        foreach ($this->jobPositionList as $value) {
+
+            if($value->getCareerId() == $studentCareerId){
+              
+                $jobPosition = new JobPosition;
+               
+                $jobPosition["jobPositionID"] = $value->getJobPositionId();
+                $jobPosition["careerId"] = $value->getCareerId();
+                $jobPosition["description"] = $value->getJobPositionId();
+
+                  array_push($listByCareer, $jobPosition);
+
+             }
+               
+        }
+
+     return $listByCareer;
+
+    }
+
+
+    
     function searchByDescription($description){
         $ret = array();
         foreach ($this->jobPositionList as $value) {

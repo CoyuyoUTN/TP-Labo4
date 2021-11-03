@@ -6,6 +6,9 @@ use DAO\StudentDAO as StudentDAO;
 use Models\Student as Student;
 use DAO\CompanyDAO as CompanyDAO;
 use DAO\AdminDAO as AdminDAO;
+use DAO\JobOfferDAO;
+use DAO\JobPositionDAO as JobPositionDAO;
+use Models\JobPosition;
 
 class HomeController
 {
@@ -144,6 +147,8 @@ class HomeController
         require_once(VIEWS_PATH . "studentCompanyList.php");
     }
 
+
+   
     public function ShowRegisterView()
     {
 
@@ -155,7 +160,45 @@ class HomeController
     {
         $company = $this->companyDAO->read($companyID);
         require_once(VIEWS_PATH . "companyFullData.php");
+
+
     }
+
+    public function ShowJobPositionList($studentCarrerId)
+    {   
+
+        $jobPositionList = new JobPositionDAO();
+        
+       
+         
+        $jobPositionList= $this->JobPositionDAO->getByCareerId($studentCarrerId);
+        
+       
+
+     
+        
+
+       /* 
+        if ($jobPositionList==null)
+        {
+            ?> <script language="javascript">
+                        alert("Empresa no encontrada");
+                        
+                    </script>
+                <?php
+               
+        }
+        */
+
+       
+        
+        require_once(VIEWS_PATH . "validate-session.php");
+        require_once(VIEWS_PATH . "studentJobPositionList.php");
+    
+    }
+
+ 
+
 
     public function ShowStudentView($email)
     {
