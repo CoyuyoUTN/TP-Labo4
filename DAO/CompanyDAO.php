@@ -178,6 +178,49 @@ class CompanyDAO implements Crud{
             }
     }
 
+
+   
+
+    public function buscarNombre($name){
+
+
+        try
+                {
+                    $companyList = array();
+                   
+                    $query = "SELECT id, name, cuil FROM ".$this->table." WHERE name like '".$name."%' ";
+    
+                    
+                    
+                    $this->connection = Connection::GetInstance();
+                   
+                    $resultSet = $this->connection->Execute($query);
+                   
+                    foreach ($resultSet as $row)
+                    {
+                        $company = new Company();
+                        $company->setId($row["id"]);
+                        $company->setName($row["name"]);
+                        $company->setCuil($row["cuil"]);
+                      
+                        array_push($companyList, $company);
+                    }
+                  
+                    return $companyList;
+                }
+                catch(Exception $ex)
+                {
+                    throw $ex;
+                }
+    
+        }
+
+
+
+
+
+
+
     public function read($companyId)
         {
             try

@@ -125,12 +125,21 @@ class HomeController
 
     public function ShowCompanyListStudent()
     {
+        $companyList=null;
         if (isset($_GET['search'])) {
-            $companyList = $this->companyDAO->read($_GET['search']);
+            $companyList = $this->companyDAO->buscarNombre($_GET['search']);
+           
         } else {
             $companyList = $this->companyDAO->readAll();
         }
-
+        if ($companyList==null){
+            ?> <script language="javascript">
+                        alert("Empresa no encontrada");
+                        
+                    </script>
+                <?php
+               
+        }
         require_once(VIEWS_PATH . "validate-session.php");
         require_once(VIEWS_PATH . "studentCompanyList.php");
     }
