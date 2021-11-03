@@ -14,7 +14,24 @@
         }
 
         public function ShowAll(){
-            $admins = $this->adminDAO->readAll();
+            $adminList=null;
+            if (isset($_GET['search'])) {
+                $adminList = $this->adminDAO->buscarEmail($_GET['search']);
+               
+            } else {
+                $adminList = $this->adminDAO->readAll();
+            }
+            if ($adminList==null){
+                ?> <script language="javascript">
+                            alert("Admin no encontrado");
+                            
+                        </script>
+                    <?php
+                   
+            }
+            require_once(VIEWS_PATH . "validate-session.php");
+            
+            
 
             require_once(VIEWS_PATH."adminList.php");
         }
