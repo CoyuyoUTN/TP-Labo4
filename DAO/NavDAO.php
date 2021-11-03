@@ -9,8 +9,8 @@
                 case 'Models\Admin':
                     $ret = "navADMIN.php";
                     break;
-                
-                case 'Models\Student':
+            
+                case ' Models\Admin':
                     $ret = "nav.php";
                     break;
                 default:
@@ -19,5 +19,28 @@
             }
             require_once(VIEWS_PATH . $ret);
         }
+        static function getTableNav($table){
+            $ret = null;
+         
+                switch ($table) {
+                case 'Company':
+                    $ret = "navCompanyAdmin.php";
+                    break;
+                    
+            }
+            require_once(VIEWS_PATH . $ret);
+        }
+        static function getTableNav1($table1){
+            $ret = null;
+         
+                switch ($table1) {
+                case 'Admin':
+                    $ret = "navAdmins.php";
+                    break;
+                    
+            }
+            require_once(VIEWS_PATH . $ret);
+        }
     }
+    
 ?>

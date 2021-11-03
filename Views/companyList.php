@@ -1,6 +1,7 @@
 <?php
 use DAO\NavDAO as NavDAO;
 NavDAO::getNav();
+NavDAO::getTableNav('Company');
 require_once("validate-session.php");
 ?>
 

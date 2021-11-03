@@ -1,19 +1,24 @@
 <?php
-
-    include('navADMIN.php');
-    require_once("validate-session.php");
-
+use DAO\NavDAO as NavDAO;
+NavDAO::getNav();
+NavDAO::getTableNav1('Admin');
+require_once("validate-session.php");
+if (isset($_SERVER["HTTP_REFERER"])) {
+     $back = $_SERVER["HTTP_REFERER"];
+ } else {
+     $back = NULL;
+ }
 ?>
 
 <main class="py-5">
      <section id="listado" class="mb-5">
           <div class="container">
                <h2 class="mb-4">Listado de Admins</h2>
-               <form action="<?php echo FRONT_ROOT."Admin/ShowAll" ?>"  method="">
-
-               <button type=submit >Buscar</button>
-
-               <br />
+              
+               <form action="<?php echo FRONT_ROOT ."Admin/ShowAll" ?>" method="get">
+                <input type="search" id="search" name="search">
+                <button type="submit">Buscar</button>
+            
                <br />
                
                <table class="table bg-light-alpha" border="3">
@@ -41,7 +46,7 @@
                     </thead>
                     <tbody>
                          <?php
-                              foreach($admins as $admin)
+                              foreach($adminList as $admin)
                               {
                                    ?>
                                         <tr>
@@ -59,6 +64,8 @@
                          </tr>
                     </tbody>
                </table></form>
+               <a href="<?= $back ?>">Atras</a>
+            <br />
           </div>
      </section>
 </main>

@@ -6,6 +6,9 @@ use DAO\StudentDAO as StudentDAO;
 use Models\Student as Student;
 use DAO\CompanyDAO as CompanyDAO;
 use DAO\AdminDAO as AdminDAO;
+use DAO\JobOfferDAO;
+use DAO\JobPositionDAO as JobPositionDAO;
+use Models\JobPosition;
 
 class HomeController
 {
@@ -125,42 +128,27 @@ class HomeController
 
     public function ShowCompanyListStudent()
     {
+        $companyList=null;
         if (isset($_GET['search'])) {
-            $companyList = $this->companyDAO->read($_GET['search']);
+            $companyList = $this->companyDAO->buscarNombre($_GET['search']);
+           
         } else {
             $companyList = $this->companyDAO->readAll();
         }
-
+        if ($companyList==null){
+            ?> <script language="javascript">
+                        alert("Empresa no encontrada");
+                        
+                    </script>
+                <?php
+               
+        }
         require_once(VIEWS_PATH . "validate-session.php");
         require_once(VIEWS_PATH . "studentCompanyList.php");
     }
 
 
-
-    public function ShowJobsOfferListStudent()
-    {
-        switch (get_class($_SESSION["loggedUser"])) {
-            case 'Models\Admin':
-                
-                break;
-            
-            case 'Models\Student':
-                
-                break;
-            default:
-                $ret = "nav.php";
-                break;
-        }
-       
-        $jobOfferList = $this->JobOfferDAO->GetByJobPosition(($_SESSION["loggedUser"]->getId));//aca va el sutendetCarrerId, de donde lo saco?//
-        
-
-        require_once(VIEWS_PATH . "validate-session.php");
-        require_once(VIEWS_PATH . "studentJobOfferList.php");
-    }
-
-
-
+   
     public function ShowRegisterView()
     {
 
@@ -172,13 +160,45 @@ class HomeController
     {
         $company = $this->companyDAO->read($companyID);
         require_once(VIEWS_PATH . "companyFullData.php");
+
+
     }
 
-    public function ShowFullDataJobOffer($jobOfferID)
-    {
-        $company = $this->JobOfferDAO->read($jobOfferID);
-        require_once(VIEWS_PATH . "jobOfferFullData.php");
+    public function ShowJobPositionList($studentCarrerId)
+    {   
+
+        $jobPositionList = new JobPositionDAO();
+        
+       
+         
+        $jobPositionList= $this->JobPositionDAO->getByCareerId($studentCarrerId);
+        
+       
+
+     
+        
+
+       /* 
+        if ($jobPositionList==null)
+        {
+            ?> <script language="javascript">
+                        alert("Empresa no encontrada");
+                        
+                    </script>
+                <?php
+               
+        }
+        */
+
+       
+        
+        require_once(VIEWS_PATH . "validate-session.php");
+        require_once(VIEWS_PATH . "studentJobPositionList.php");
+    
     }
+
+ 
+
 
     public function ShowStudentView($email)
     {
@@ -189,7 +209,7 @@ class HomeController
 
     public function ShowAdminView()
     {
-        header("Location: ../Company/ShowListView");
+        header("Location: ../Admin/ShowAll");
     }
 
 
@@ -214,9 +234,4 @@ class HomeController
     }
 
 
-
-    public function AddToDataBase()
-    {
-        require_once(VIEWS_PATH . "studentADDtoDB.php");
-    }
 }

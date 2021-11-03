@@ -6,7 +6,7 @@ use DAO\Connection as Connection;
 use Models\JobOffer as JobOffer;
 
 use DAO\JobPositionDAO as JobPositionDAO;
-
+use Models\JobPosition;
 
 class JobOfferDAO
 {
@@ -131,4 +131,43 @@ class JobOfferDAO
     {
         $result = $this->db->Execute($this->insertBuilder($description, $company, $position));
     }
+
+
+    function jobOfferByCareerId(){
+       
+        $jobPositionList = new JobPosition();
+         
+        $jobPositionList = $this->JobPositionDAO->getByCareerId();
+        $newList = array();
+         
+        foreach($jobPositionList as $position){
+          
+             
+            $result = $this->db->Execute('SELECT * FROM JobsOffer WHERE JobPositionId = ' . $position[" JobPositionId"] . " && active=1");
+           
+           
+           
+            array_push($newList, $result);  
+             
+
+
+
+        }
+            //recorrer la lista de jobposition
+                 // query a base de dato devolver lista por jobpositionID, devuelve lista 
+                 //  recorrer la lista, nuevo dao con joboffer mas jobpositionList, guardar conjunto de datos
+                        //nuevo bojeto cada vez que la recorra los datos, nueva lista del nuevo dao      
+     
+
+
+
+
+
+
+
+
+
+    }
+    
+
 }
