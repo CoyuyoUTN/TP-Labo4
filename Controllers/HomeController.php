@@ -135,6 +135,32 @@ class HomeController
         require_once(VIEWS_PATH . "studentCompanyList.php");
     }
 
+
+
+    public function ShowJobsOfferListStudent()
+    {
+        switch (get_class($_SESSION["loggedUser"])) {
+            case 'Models\Admin':
+                
+                break;
+            
+            case 'Models\Student':
+                
+                break;
+            default:
+                $ret = "nav.php";
+                break;
+        }
+       
+        $jobOfferList = $this->JobOfferDAO->GetByJobPosition(($_SESSION["loggedUser"]->getId));//aca va el sutendetCarrerId, de donde lo saco?//
+        
+
+        require_once(VIEWS_PATH . "validate-session.php");
+        require_once(VIEWS_PATH . "studentJobOfferList.php");
+    }
+
+
+
     public function ShowRegisterView()
     {
 
@@ -146,6 +172,12 @@ class HomeController
     {
         $company = $this->companyDAO->read($companyID);
         require_once(VIEWS_PATH . "companyFullData.php");
+    }
+
+    public function ShowFullDataJobOffer($jobOfferID)
+    {
+        $company = $this->JobOfferDAO->read($jobOfferID);
+        require_once(VIEWS_PATH . "jobOfferFullData.php");
     }
 
     public function ShowStudentView($email)

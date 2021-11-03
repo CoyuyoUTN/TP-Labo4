@@ -113,6 +113,20 @@ class JobOfferDAO
         return $list;
     }
 
+    function GetByJobPosition($studentCareerId)
+    {
+        $result = $this->db->Execute('SELECT * FROM JobsOffer WHERE jobPositionId =' . $studentCareerId . " && active=1");
+        $list = array();
+
+        foreach ($result as $value) {
+            array_push($list, JobOffer::fromArray($value));
+        }
+
+        return $list;
+    }
+
+
+
     function Add(string $description, int $company, int $position)
     {
         $result = $this->db->Execute($this->insertBuilder($description, $company, $position));
