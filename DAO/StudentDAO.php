@@ -305,6 +305,7 @@ namespace DAO;
             $student = new Student();
             $student->setDbId($row["id"]);
             $student->setPassword($row["Password"]);
+            $student->setStudentId($row["apiId"]);
         }
 
         return $student;
@@ -368,7 +369,25 @@ namespace DAO;
 
     }
 
+    public function getCareerIdForStudent($id){
 
+
+        $this->RetrieveData();
+        
+        $return=null;
+        for ($i=0; $i < count($this->studentList); $i++) { 
+            if($this->studentList[$i]->getStudentId() == $id){
+               
+                $return = $this->studentList[$i]->getCareerId();
+                
+            }
+        }
+
+        
+        return $return;
+
+
+    }
 
 
 

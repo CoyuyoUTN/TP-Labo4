@@ -145,15 +145,41 @@ class JobOfferDAO
                         //nuevo bojeto cada vez que la recorra los datos, nueva lista del nuevo dao      
      
 
-
-
-
-
-
-
-
-
     }
     
+
+
+    public function getJobOfferByPositionId($listJobsPosition){
+
+        try{
+       //select a.id ,a.Description from JobsOffer a where jobPositionId = 8 order by a.id;
+        $newList = array();
+         
+        $query='SELECT * FROM JobsOffer WHERE JobPositionId = ' . $position["JobPositionId"] . " && active=1";
+        $result = $this->db->Execute($query);
+        foreach($result as $row){
+          
+            $jobPosition= new JobPosition();
+            $jobPosition->setJobPositionId($row['id']);
+            $jobPosition->setDescription($row['Description']);
+            
+            array_push($newList, $jobPosition);  
+
+
+        }
+        
+        return $newList;
+    }
+    catch(Exception $ex)
+    {
+        throw $ex;
+    }
+
+    }
+
+
+
+
+   
 
 }

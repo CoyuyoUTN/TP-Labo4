@@ -61,4 +61,34 @@ class JobPosition
     {
         return $this->jobPositionId;
     }
+
+
+   
+
+
+
+
+    /**
+     * Set the value of description
+     *
+     * @return  self
+     */ 
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of jobPositionId
+     *
+     * @return  self
+     */ 
+    public function setJobPositionId($jobPositionId)
+    {
+        $this->jobPositionId = $jobPositionId;
+
+        return $this;
+    }
 }
