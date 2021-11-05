@@ -14,6 +14,12 @@ if (isset($_SERVER["HTTP_REFERER"])) {
     <section id="listado" class="mb-5">
         <div class="container">
             <h2 class="mb-4">Listado de ofertas de empleo</h2>
+            <a href="<?= $back ?>">Atras</a>
+            <br />
+            <form action="<?php echo FRONT_ROOT . "Home/ShowCompanyListStudent" ?>" method="get">
+                <input type="search" id="search" name="search">
+                <button type="submit">Buscar</button>
+            </form>
             <form action="<?php echo FRONT_ROOT . "Home/ShowFullData" ?>" method="get">
 
                 <table class="table bg-light-alpha" border="3">
@@ -46,12 +52,7 @@ if (isset($_SERVER["HTTP_REFERER"])) {
                 </table>
             </form>
             
-            <a href="<?= $back ?>">Atras</a>
-            <br />
-            <form action="<?php echo FRONT_ROOT . "Home/ShowCompanyListStudent" ?>" method="get">
-                <input type="search" id="search" name="search">
-                <button type="submit">Buscar</button>
-            </form>
+       
 
         </div>
     </section>

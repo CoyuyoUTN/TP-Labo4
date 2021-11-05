@@ -12,7 +12,8 @@ use Models\JobPosition;
 class JobOfferDAO
 {
     private $db;
-
+    private $table='JobOffer';
+    private $offersList;
     function __construct()
     {
         $this->db = Connection::getInstance();
@@ -202,7 +203,40 @@ class JobOfferDAO
 
     }
 
+    public function buscarDescription($description){
 
+
+        try
+                {
+                    $offersList = array();
+                   var_dump($description);
+                    $query = "SELECT id, Description, JobPositionId, CompanyId  FROM ".$this->table." WHERE Description like '".$description."%' ";
+    
+                    
+                    
+                    $this->connection = Connection::GetInstance();
+                   
+                    $resultSet = $this->connection->Execute($query);
+                   
+                    foreach ($resultSet as $row)
+                    {
+                        $offer = new JobOffer();
+                        $offer->setId($row["id"]);
+                        $offer->setDescription($row["Description"]);
+                        $offer->setJobPositionId($row["JobPositionId"]);
+                        $offer->setCompanyId($row["CompanyId"]);
+                        array_push($offersList, $offer);
+                    }
+                  
+                    return $offersList;
+                }
+                catch(Exception $ex)
+                {
+                    throw $ex;
+                }
+    
+        }
+    
 
 
    

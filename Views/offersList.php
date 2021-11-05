@@ -4,6 +4,11 @@ use DAO\NavDAO as NavDAO;
 
 NavDAO::getNav();
 require_once("validate-session.php");
+if (isset($_SERVER["HTTP_REFERER"])) {
+     $back = $_SERVER["HTTP_REFERER"];
+ } else {
+     $back = NULL;
+ }
 ?>
 
 <main class="py-5">
@@ -12,9 +17,16 @@ require_once("validate-session.php");
                <h2 class="mb-4">Listado de Ofertas</h2>
                <a class="btn btn-default" href="AddForm" >Nueva Oferta</a>
                <br /><br />
+               
+            <a href="<?= $back ?>">Atras</a>
+            <br />
+            <form action="<?php echo FRONT_ROOT. "Offers/ShowOffersList" ?>" method="get">
+            <input type="search" id="search" name="search">
+                <button type="submit">Buscar</button>
+            </form>
                <form action="<?php echo FRONT_ROOT . "Offers/AddOffer" ?>" method="">
 
-                    <button type=submit>Buscar</button>
+                   
 
                     <br />
                     <br />

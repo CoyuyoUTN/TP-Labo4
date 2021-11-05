@@ -46,7 +46,25 @@
         }
 
 
-
+public function ShowOffersList(){
+    $offersList=null;
+        if (isset($_GET['search'])) {
+            $offersList = $this->JobOfferDAO->buscarDescription($_GET['search']);
+           
+        } else {
+            $offersList = $this->JobOfferDAO->GetAll();
+        }
+        if ($offersList==null){
+            ?> <script language="javascript">
+                        alert("Empresa no encontrada");
+                        
+                    </script>
+                <?php
+               
+        }
+        require_once(VIEWS_PATH . "validate-session.php");
+        require_once(VIEWS_PATH . "offersList.php");
+}
 
         public function ShowJobPositionList()
     {   
