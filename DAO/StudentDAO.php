@@ -294,7 +294,7 @@ namespace DAO;
     {
         $student = null;
 
-        $query = "SELECT * from ".$this->table. " WHERE apiId = ".$apiId." AND active = '1'";
+        $query = "SELECT * from ".$this->table. " WHERE apiId = ".$apiId;
         
         $this->connection = Connection::GetInstance();
 
@@ -305,7 +305,6 @@ namespace DAO;
             $student = new Student();
             $student->setDbId($row["id"]);
             $student->setPassword($row["Password"]);
-            $student->setStudentId($row["apiId"]);
         }
 
         return $student;
@@ -318,7 +317,7 @@ namespace DAO;
         $return=null; 
        
         for ($i=0; $i < count($this->studentList); $i++) { 
-            if(($this->studentList[$i]->getEmail() == $mail) && ($this->studentList[$i]->getActive() == true) ){
+            if($this->studentList[$i]->getEmail() == $mail){
                
                 $return = $this->studentList[$i]->getStudentId();
                 
@@ -329,7 +328,25 @@ namespace DAO;
     }
 
     
-    
+    public function existsMail($mail){
+
+        $this->RetrieveData();
+        
+        $return=null;
+        for ($i=0; $i < count($this->studentList); $i++) { 
+            if($this->studentList[$i]->getEmail() == $mail){
+               
+                $return = $this->studentList[$i];
+                
+            }
+        }
+
+        
+        return $return;
+
+
+
+    }
 
     public function existsCareerId($careerId){
 
@@ -351,25 +368,7 @@ namespace DAO;
 
     }
 
-    public function getCareerIdForStudent($id){
 
-
-        $this->RetrieveData();
-        
-        $return=null;
-        for ($i=0; $i < count($this->studentList); $i++) { 
-            if($this->studentList[$i]->getStudentId() == $id){
-               
-                $return = $this->studentList[$i]->getCareerId();
-                
-            }
-        }
-
-        
-        return $return;
-
-
-    }
 
 
 

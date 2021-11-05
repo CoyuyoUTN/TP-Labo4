@@ -56,11 +56,10 @@ class HomeController
 
             if (($user != null) && ($user->getPassword() == $password)) {
                 $_SESSION["loggedUser"] = $user;
-    
                 $this->ShowStudentView($email);
             } else {
                 ?> <script language="javascript">
-                        alert("Usuario y/o Contraseña incorrectos o usuario no activo");
+                        alert("Usuario y/o Contraseña incorrectos");
                     </script>
                 <?php
                 $this->Index("Usuario y/o Contraseña incorrectos");
@@ -87,7 +86,7 @@ class HomeController
     {
 
 
-        $student = $this->studentDAO->existsMailPorId($email);
+        $student = $this->studentDAO->existsMail($email);
 
 
         if ($student != null) {
@@ -165,7 +164,38 @@ class HomeController
 
     }
 
+    public function ShowJobPositionList($studentCarrerId)
+    {   
 
+        $jobPositionList = new JobPositionDAO();
+        
+       
+         
+        $jobPositionList= $this->JobPositionDAO->getByCareerId($studentCarrerId);
+        
+       
+
+     
+        
+
+       /* 
+        if ($jobPositionList==null)
+        {
+            ?> <script language="javascript">
+                        alert("Empresa no encontrada");
+                        
+                    </script>
+                <?php
+               
+        }
+        */
+
+       
+        
+        require_once(VIEWS_PATH . "validate-session.php");
+        require_once(VIEWS_PATH . "studentJobPositionList.php");
+    
+    }
 
  
 
