@@ -40,13 +40,13 @@ require_once("validate-session.php");
                          </thead>
                          <tbody>
                               <?php
-                              foreach ($offers as $offer) {
+                              foreach ($offersList as $offer) {
                               ?>
                                    <tr>
-                                        <td><?php echo $offer->getId() ?></td>
-                                        <td><?php echo $offer->getDescription() ?></td>
-                                        <td><?php echo $this->companyDao->read($offer->getCompanyId())->getName() ?></td>
-                                        <td><?php echo $offer->getJobPosition()->getDescription() ?></td>
+                                        <td><?php echo $offer->getId(); ?></td>
+                                        <td><?php echo $offer->getDescription(); ?></td>
+                                        <td><?php echo $offer->getCompanyId(); ?></td>
+                                        <td><?php echo $offer->getJobPositionId(); ?></td>
                                    </tr>
                               <?php
                               }

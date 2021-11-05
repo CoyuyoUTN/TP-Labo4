@@ -53,7 +53,7 @@ class JobPositionDAO
     }
 
 
-    function getByCareerId($studentCareerId){
+    /*function getByCareerId($studentCareerId){
       
         $listByCareer = array();
 
@@ -75,11 +75,11 @@ class JobPositionDAO
 
      return $listByCareer;
 
-    }
+    }*/
 
 
     
-    function searchByDescription($description){
+    public function searchByDescription($description){
         $ret = array();
         foreach ($this->jobPositionList as $value) {
             if(str_contains($value->getDescription(), $description)){
@@ -88,4 +88,48 @@ class JobPositionDAO
         }
         return $ret;
     }
+
+
+
+    public function getJobsPositionsForCareerId($careerId){
+
+        $listJobsPosition=array();
+
+        for($i=0;$i<count($this->jobPositionList);$i++){
+
+            if($this->jobPositionList[$i]->getCareerId=$careerId){
+
+                $jobPosition= new JobPosition();
+
+                $jobPosition->setDescription($this->jobPositionList[$i]->getDescription());
+                $jobPosition->setJobPositionId($this->jobPositionList[$i]->getJobPositionId());
+
+                array_push($listJobsPosition,$jobPosition);
+
+            }
+
+
+        }
+
+                return $listJobsPosition;
+
+     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
