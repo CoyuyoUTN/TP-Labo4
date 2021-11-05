@@ -58,8 +58,7 @@
         if($careerId != null){
 
            $listJobsPosition= $this->jobPositionDAO->getJobsPositionsForCareerId($careerId);
-          
-           $newList=$this->jobOffersDAO->getJobOfferByPositionId($listJobsPosition);
+           $offersList=$this->jobOffersDAO->getJobOfferByPositionId($listJobsPosition);
            require_once(VIEWS_PATH."offersList.php");
          }
         else{

@@ -2,6 +2,7 @@
 
 namespace DAO;
 
+use Exception as Exception;
 use DAO\Connection as Connection;
 use Models\JobOffer as JobOffer;
 
@@ -119,7 +120,7 @@ class JobOfferDAO
     }
 
 
-    function jobOfferByCareerId(){
+  /*public function jobOfferByCareerId(){
        
         $jobPositionList = new JobPosition();
          
@@ -145,7 +146,7 @@ class JobOfferDAO
                         //nuevo bojeto cada vez que la recorra los datos, nueva lista del nuevo dao      
      
 
-    }
+    }*/
     
 
 
@@ -153,24 +154,34 @@ class JobOfferDAO
 
         try{
        //select a.id ,a.Description from JobsOffer a where jobPositionId = 8 order by a.id;
-        $newList = array();
+         $newList = array();
          
-        $query='SELECT * FROM JobsOffer WHERE JobPositionId = ' . $position["JobPositionId"] . " && active=1";
-        $result = $this->db->Execute($query);
-        foreach($result as $row){
+         foreach($listJobsPosition as $position){
+
+            $query='SELECT * FROM JobsOffer WHERE JobPositionId  = ' . $position->getJobPositionId() . " && active=1";
+            $result = $this->db->Execute($query);
+
+            foreach($result as $row){
           
-            $jobPosition= new JobPosition();
-            $jobPosition->setJobPositionId($row['id']);
-            $jobPosition->setDescription($row['Description']);
-            
-            array_push($newList, $jobPosition);  
+                $jobsOffer= new JobOffer();
+                $jobsOffer->setId($row['id']);
+                $jobsOffer->setDescription($row['Description']);
+                $jobsOffer->setCompanyId($row['CompanyId']);
+                $jobsOffer->setJobPositionId($row['JobPositionId']);
+                
+                
+                array_push($newList, $jobsOffer);  
+    
+    
+            }
+
 
 
         }
-        
+
         return $newList;
     }
-    catch(Exception $ex)
+         catch(Exception $ex)
     {
         throw $ex;
     }

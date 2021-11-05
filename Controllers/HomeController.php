@@ -60,7 +60,7 @@ class HomeController
                 $this->ShowStudentView($email);
             } else {
                 ?> <script language="javascript">
-                        alert("Usuario y/o Contraseña incorrectos");
+                        alert("Usuario y/o Contraseña incorrectos o usuario no activo");
                     </script>
                 <?php
                 $this->Index("Usuario y/o Contraseña incorrectos");
@@ -87,7 +87,7 @@ class HomeController
     {
 
 
-        $student = $this->studentDAO->existsMail($email);
+        $student = $this->studentDAO->existsMailPorId($email);
 
 
         if ($student != null) {
