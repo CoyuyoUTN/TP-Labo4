@@ -298,7 +298,38 @@ class JobOfferDAO
 
 
 
-
+        public function readAll(){
+            try
+                {
+                    $offersList = array();
+    
+                    $query = "SELECT * FROM ".$this->table. " WHERE active = 1 ";
+    
+                    $this->connection = Connection::GetInstance();
+    
+                    $resultSet = $this->connection->Execute($query);
+                    
+                    foreach ($resultSet as $row)
+                    {                
+                        $offer = new jobOffer();
+                        $offer->setId($row["id"]);
+                        $offer->setDescription($row["Description"]);
+                        $offer->setJobPositionId($row["JobPositionId"]);
+                        $offer->setCompanyId($row["CompanyId"]);
+                       
+                        
+                        
+    
+                        array_push($offersList, $offer);
+                    }
+    
+                    return $offersList;
+                }
+                catch(Exception $ex)
+                {
+                    throw $ex;
+                }
+        }
 
 
 

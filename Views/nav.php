@@ -10,7 +10,7 @@
           </li>     
           <li class="nav-item">
                <a class="nav-link" href="<?php echo  FRONT_ROOT."Offers/ShowJobPositionList"?>">Listar ofertas de posiciones</a>
-          </li>    
+          </li>     
           <li class="nav-item">
                <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/Logout "?>">Cerrar sesion</a>
           </li>   

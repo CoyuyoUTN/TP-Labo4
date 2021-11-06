@@ -113,7 +113,26 @@ public function ShowOffersList(){
 
     }
 
+public function showAllOffers(){
 
+    $offersList=$this->jobOffersDAO->readAll();
+
+    if($offersList !=null){
+        require_once(VIEWS_PATH . "validate-session.php");
+        require_once(VIEWS_PATH."offersList.php");
+
+    }
+    else{
+        ?> <script language="javascript">
+        alert("Error!, no se encuentran ofertas disponibles");
+        
+    </script>
+<?php
+     require_once(VIEWS_PATH."offersList.php");
+    }
+
+
+}
 
 
 
