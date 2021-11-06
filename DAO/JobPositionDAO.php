@@ -79,11 +79,19 @@ class JobPositionDAO
 
 
     
-    public function searchByDescription($description){
+    }
+
+
+    
+    function searchByDescription($description){
+        $prueba = $description;
         $ret = array();
+
         foreach ($this->jobPositionList as $value) {
-            if(str_contains($value->getDescription(), $description)){
-                array_push($ret,$value);
+            if(!is_array($prueba)){
+                if(str_contains($value->getDescription(), $prueba)){
+                    array_push($ret,$value);
+                }
             }
         }
         return $ret;
