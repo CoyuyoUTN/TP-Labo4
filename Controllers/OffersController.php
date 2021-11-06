@@ -71,32 +71,28 @@ public function ShowOffersList(){
 
         public function ShowJobPositionList()
     {   
+        require_once(VIEWS_PATH . "validate-session.php");
         $id=$_SESSION["loggedUser"]->getStudentId();
         
        
         $careerId= $this->StudentDAO->getCareerIdForStudent($id);
       
-        if($careerId != null){
+        
 
            $listJobsPosition= $this->jobPositionDAO->getJobsPositionsForCareerId($careerId);
            $offersList=$this->jobOffersDAO->getJobOfferByPositionId($listJobsPosition);
            require_once(VIEWS_PATH."offersList.php");
-         }
-        else{
-            echo "todo mal";
-            
-        }
-
-
-      /*  require_once(VIEWS_PATH . "validate-session.php");
-        require_once(VIEWS_PATH . "studentJobPositionList.php");*/
-    
+ 
     }
 
 
     public function postularse($data){
         require_once(VIEWS_PATH . "validate-session.php");
       $idStudent =  $_SESSION["loggedUser"]->getDbId();
+
+
+
+        if( $this->jobOffersDAO->verificarPostulacionExists($idStudent, $data)==null){
          $this->jobOffersDAO->postularse($idStudent, $data);
          ?> <script language="javascript">
          alert("Postulado con exito");
@@ -104,7 +100,15 @@ public function ShowOffersList(){
      </script>
  <?php
      $this->ShowJobPositionList();
-
+        }
+        else{
+            ?> <script language="javascript">
+         alert("Error!, ya se encuentra postulado");
+         
+     </script>
+ <?php
+    $this->ShowJobPositionList();
+        }
 
 
     }

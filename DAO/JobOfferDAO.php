@@ -239,6 +239,37 @@ class JobOfferDAO
     
         
 
+        
+
+        public function verificarPostulacionExists($studentId, $jobOfferId){
+
+            try{
+                $resultSet=null;
+                $query0 = "SELECT StudentId FROM  Student_x_JobOffer WHERE JobOfferId like :JobOfferId ";
+    
+                    
+                    
+                    $parameters["JobOfferId"] = intval($jobOfferId);
+    
+                    $this->connection = Connection::GetInstance();
+    
+    
+                    $resultSet= $this->connection->ExecuteNonQuery($query0, $parameters);
+       
+                        return   $resultSet;
+            }
+                catch(Exception $ex)
+                {
+                    throw $ex;
+                }
+
+
+
+        }
+
+
+
+
 
         public function postularse ($studentId, $jobOfferId){
 
