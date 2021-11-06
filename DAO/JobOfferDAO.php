@@ -237,6 +237,42 @@ class JobOfferDAO
     
         }
     
+        
+
+
+        public function postularse ($studentId, $jobOfferId){
+
+          
+            
+        try{
+            $query0 = "INSERT INTO Student_x_JobOffer ( StudentId, JobOfferId ) VALUES ( :StudentId, :JobOfferId ) ";
+
+                
+                $parameters["StudentId"] = intval($studentId);
+                $parameters["JobOfferId"] = intval($jobOfferId);
+
+                $this->connection = Connection::GetInstance();
+
+
+                $this->connection->ExecuteNonQuery($query0, $parameters);
+   
+                       
+        }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+
+        }
+
+
+
+
+
+
+
+
+
 
 
    

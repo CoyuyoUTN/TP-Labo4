@@ -6,5 +6,5 @@ namespace TP4\DAO;
 
 class CareerDAO
 {
-    
+    //NACISTE MUERTO PA
 }

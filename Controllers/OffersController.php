@@ -94,7 +94,20 @@ public function ShowOffersList(){
     }
 
 
+    public function postularse($data){
+        require_once(VIEWS_PATH . "validate-session.php");
+      $idStudent =  $_SESSION["loggedUser"]->getDbId();
+         $this->jobOffersDAO->postularse($idStudent, $data);
+         ?> <script language="javascript">
+         alert("Postulado con exito");
+         
+     </script>
+ <?php
+     $this->ShowJobPositionList();
 
+
+
+    }
 
 
 

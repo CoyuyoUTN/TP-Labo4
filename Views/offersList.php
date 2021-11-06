@@ -9,7 +9,24 @@ if (isset($_SERVER["HTTP_REFERER"])) {
  } else {
      $back = NULL;
  }
+
+ $action = null;
+ if(get_class($_SESSION["loggedUser"]) == 'Models\Admin') {
+     
+     $action = "Offers/AddOffer";
+ }
+ else{
+     $action="Offers/postularse";
+ }
+
+    
+ 
 ?>
+
+
+            
+        
+
 
 <main class="py-5">
      <section id="listado" class="mb-5">
@@ -24,7 +41,7 @@ if (isset($_SERVER["HTTP_REFERER"])) {
             <input type="search" id="search" name="search" placeholder="Descripcion">
                 <button type="submit">Buscar</button>
             </form>
-               <form action="<?php echo FRONT_ROOT . "Offers/AddOffer" ?>" method="">
+               <form action="<?php echo FRONT_ROOT . $action ?>" method="">
 
                    
 
@@ -49,6 +66,10 @@ if (isset($_SERVER["HTTP_REFERER"])) {
                                      <?php echo "Posicion" ?>
                                   
                               </th>
+                              <th>
+                              <?php echo "Postularse" ?>
+                                  
+                              </th>
                          </thead>
                          <tbody>
                               <?php
@@ -59,6 +80,9 @@ if (isset($_SERVER["HTTP_REFERER"])) {
                                         <td><?php echo $offer->getDescription(); ?></td>
                                         <td><?php echo $offer->getCompanyId(); ?></td>
                                         <td><?php echo $offer->getJobPositionId(); ?></td>
+                                        <td>     
+                                              <button type="submit" id="see-more" name="data" value="<?php echo $offer->getJobPositionId(); ?>">Postularse</button> 
+                                         </td>
                                    </tr>
                               <?php
                               }
