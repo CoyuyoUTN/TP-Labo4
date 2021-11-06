@@ -49,10 +49,13 @@
 public function ShowOffersList(){
     $offersList=null;
         if (isset($_GET['search'])) {
-            $offersList = $this->JobOfferDAO->buscarDescription($_GET['search']);
+            
+            $description = $_GET['search'];
+            var_dump($description);
+            $offersList = $this->jobOffersDAO->buscarDescription($description);
            
         } else {
-            $offersList = $this->JobOfferDAO->GetAll();
+            $offersList = $this->jobOffersDAO->GetAll();
         }
         if ($offersList==null){
             ?> <script language="javascript">

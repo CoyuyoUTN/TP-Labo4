@@ -256,6 +256,29 @@ public function update($admin){
 
 
 
+    public function VerificarAdminExsist($email)
+    {
+        try
+        {
+            
+
+            $query = "SELECT name FROM ".$this->table." WHERE Email like '".$email."' ";
+
+           
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+            
+            
+            return $resultSet;
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
+    }
+
 
 
 

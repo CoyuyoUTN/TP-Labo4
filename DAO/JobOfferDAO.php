@@ -7,12 +7,12 @@ use DAO\Connection as Connection;
 use Models\JobOffer as JobOffer;
 
 use DAO\JobPositionDAO as JobPositionDAO;
-use Models\JobPosition;
+use Models\JobPosition as JobPosition;
 
 class JobOfferDAO
 {
     private $db;
-    private $table='JobOffer';
+    private $table='JobsOffer';
     private $offersList;
     function __construct()
     {
@@ -209,7 +209,7 @@ class JobOfferDAO
         try
                 {
                     $offersList = array();
-                   var_dump($description);
+                    
                     $query = "SELECT id, Description, JobPositionId, CompanyId  FROM ".$this->table." WHERE Description like '".$description."%' ";
     
                     

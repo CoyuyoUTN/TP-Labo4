@@ -121,9 +121,16 @@ class HomeController
 
     public function ShowListView()
     {
-        $studentList = $this->studentDAO->GetAll();
+        $studentList2=array();
+        $studentList2 = $this->studentDAO->getAllBdd();
+        $studentList= $this->studentDAO->getAllApiId($studentList2);
+
         require_once(VIEWS_PATH . "validate-session.php");
         require_once(VIEWS_PATH . "student-list.php");
+
+        /*$studentList = $this->studentDAO->GetAll();
+        require_once(VIEWS_PATH . "validate-session.php");
+        require_once(VIEWS_PATH . "student-list.php");*/
     }
 
 

@@ -21,7 +21,7 @@ if (isset($_SERVER["HTTP_REFERER"])) {
             <a href="<?= $back ?>">Atras</a>
             <br />
             <form action="<?php echo FRONT_ROOT. "Offers/ShowOffersList" ?>" method="get">
-            <input type="search" id="search" name="search">
+            <input type="search" id="search" name="search" placeholder="Descripcion">
                 <button type="submit">Buscar</button>
             </form>
                <form action="<?php echo FRONT_ROOT . "Offers/AddOffer" ?>" method="">
@@ -34,20 +34,20 @@ if (isset($_SERVER["HTTP_REFERER"])) {
                     <table class="table bg-light-alpha" border="3">
                          <thead>
                               <th>
-                                   ID
-                                   <input class="form-control" type="text" id="id" name="id">
+                              <?php echo "ID" ?>
+                                  
                               </th>
                               <th>
-                                   Descripcion
-                                   <input class="form-control" type="text" id="description" name="description">
+                                   <?php echo "Descripcion" ?>
+                                  
                               </th>
                               <th>
-                                   Compañia
-                                   <input class="form-control" type="text" id="company" name="company">
+                                    <?php echo "Compañia" ?>
+                                   
                               </th>
                               <th>
-                                   Posicion
-                                   <input class="form-control" type="text" id="position" name="position">
+                                     <?php echo "Posicion" ?>
+                                  
                               </th>
                          </thead>
                          <tbody>

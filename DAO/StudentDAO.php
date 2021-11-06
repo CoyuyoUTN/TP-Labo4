@@ -374,4 +374,65 @@ namespace DAO;
 
 
 
+
+    public function getAllBdd()
+    {
+        $student = null;
+        $studentList2=array();
+
+        $query = "SELECT apiId from ".$this->table. " WHERE active = '1'";
+        
+        $this->connection = Connection::GetInstance();
+
+        $results = $this->connection->Execute($query);
+       
+        foreach($results as $row)
+        {
+            $student = new Student();
+            $student->setDbId($row["apiId"]);
+
+            array_push($studentList2, $student); // devuelve una lista unicametne con los apiId
+           
+        }
+
+      
+        return $studentList2;
+    }  
+
+
+
+
+    public function getAllApiId($studentList2){
+
+       
+        $this->RetrieveData();
+        $studentListaFull=array();
+        $return=null;
+
+
+        for($j=0; $j < count($studentList2); $j++) {
+         for ($i=0; $i < count($this->studentList); $i++) { 
+           
+            if($this->studentList[$i]->getStudentId() == $studentList2[$j]->getDbId() ){
+               
+                array_push($studentListaFull, $this->studentList[$i] );
+                
+            }
+        }
+    }
+
+        
+        return $studentListaFull;
+
+
+
+    }
+
+
+
+
+
+
+
+
 }
