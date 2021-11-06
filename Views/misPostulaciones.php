@@ -38,7 +38,7 @@ if (isset($_SERVER["HTTP_REFERER"])) {
                         </thead>
                         <tbody>
                             <?php
-                              foreach ($idList as $offer) {
+                              foreach ($DescrptionList as $offer) {
                               ?>
                             <tr>
                                 <td><?php echo $offer->getId(); ?></td>

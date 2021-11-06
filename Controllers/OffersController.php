@@ -143,8 +143,8 @@ public function showAllOffers(){
         require_once(VIEWS_PATH . "validate-session.php");
         $idStudent =  $_SESSION["loggedUser"]->getDbId();
         $idList= $this->jobOffersDAO->misPostulaciones($idStudent);
-
-        if($idList !=null){
+       
+       if($idList !=null){
              $DescrptionList=   $this->jobOffersDAO->getDescrptionPostulaciones($idList);
 
             if($DescrptionList != null){
@@ -158,8 +158,8 @@ public function showAllOffers(){
                 
             </script>
             <?php
-
-             require_once(VIEWS_PATH."student-info.php");
+            $this->ShowOffersList();
+            
             }
 
         }
@@ -170,8 +170,8 @@ public function showAllOffers(){
             
         </script>
         <?php
-
-         require_once(VIEWS_PATH."student-info.php");
+        $this->ShowOffersList();
+         
         }
 
 
