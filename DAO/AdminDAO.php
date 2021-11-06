@@ -178,7 +178,7 @@ class AdminDAO implements Crud{
                 {
                     $adminList = array();
                    
-                    $query = "SELECT Id, Email, Name FROM ".$this->table." WHERE Email like '".$email."%' ";
+                    $query = "SELECT Id, Email, Name, Password, Active FROM ".$this->table." WHERE Email like '".$email."%' ";
     
                     
                     
@@ -192,6 +192,8 @@ class AdminDAO implements Crud{
                         $admin->setId($row["Id"]);
                         $admin->setEmail($row["Email"]);
                         $admin->setName($row["Name"]);
+                        $admin->setPassword($row["Password"]);
+                        $admin->setActive($row["Active"]);
                       
                         array_push($adminList, $admin);
                     }

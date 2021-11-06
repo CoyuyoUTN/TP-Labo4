@@ -22,25 +22,22 @@ if (isset($_SERVER["HTTP_REFERER"])) {
                <br />
                
                <table class="table bg-light-alpha" border="3">
-                    <thead>
+               <thead>
                         <th>
-                              ID
-                              <input class="form-control" type="text" id="id" name="id">
+                        <?php echo "Id" ?>
+                              
                          </th>
                         <th>
-                             Email
-                             <input class="form-control" type="text" id="description" name="description">
+                        <?php echo "Email" ?>
                          </th>
                         <th>
-                             Password
-                             <input class="form-control" type="text" id="company" name="company">
+                        <?php echo "Password" ?>
                          </th>
                         <th>
-                            Name
-                             <input class="form-control" type="text" id="position" name="position">
+                        <?php echo "Name" ?>
                          </th>
                          <th>
-                            Active
+                         <?php echo "Active" ?>
                              
                          </th>
                     </thead>
