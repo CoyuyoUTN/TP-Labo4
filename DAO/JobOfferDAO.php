@@ -11,18 +11,25 @@ use Models\JobPosition;
 class JobOfferDAO
 {
     private $db;
+    private $jobPositionDao;
 
     function __construct()
     {
         $this->db = Connection::getInstance();
+        $this->jobPositionDao = JobPositionDAO::getInstance();
     }
 
     function GetAll($id = null, $description = null, $company = null, $position = null)
     {
         $result = array();
         $list = array();
+        $positionId = null;
 
-        $result = $this->db->Execute($this->selectBuilder($id, $description, $company, $position));
+        if($position != null){
+            $positionId = $this->jobPositionDao->searchByDescription($position);
+        }
+
+        $result = $this->db->Execute($this->selectBuilder($id, $description, $company, $positionId));
 
         foreach ($result as $value) {
             array_push($list, JobOffer::fromArray($value));
@@ -36,21 +43,53 @@ class JobOfferDAO
         $query = "SELECT * FROM JobsOffer WHERE active=" . strval(1);
 
         if (isset($id) && $id != "") {
-            $query = $query . " && id=" . $id;
-        }
-        if (isset($description) && $description != "") {
-            $query = $query . ' && Description="' . $description . '"';
-        }
-        if (isset($company) && $company != "") {
-            $query = $query . " && CompanyId=" . $company;
-        }
-        if (isset($position) && $position != "") {
-            $possible = JobPositionDAO::getInstance()->searchByDescription($position);
-            foreach ($possible as $posibility) {
-                $query = $query . " && JobPositionId=" . $posibility->getCareerId();
+            if(is_array($id)){
+                $query = $query . " && ";
+                foreach ($id as $option){
+                    $query = $query . "id=" . $option ." OR ";
+                }
+                $query = substr($query, 0, -4);
+            }
+            else{
+                $query = $query . " && id=" . $id;
             }
         }
-
+        if (isset($description) && $description != "") {
+            if(is_array($description)){
+                $query = $query . " && ";
+                foreach ($description as $option){
+                    $query = $query . "Description=" . $option ." OR ";
+                }
+                $query = substr($query, 0, -4);
+            }
+            else{
+                $query = $query . ' && Description="' . $description . '"';
+            }
+        }
+        if (isset($company) && $company != "") {
+            if(is_array($company)){
+                $query = $query . " && ";
+                foreach ($company as $option){
+                    $query = $query . "CompanyId=" . $option ." OR ";
+                }
+                $query = substr($query, 0, -4);
+            }
+            else{
+                $query = $query . " && CompanyId=" . $company;
+            }
+        }
+        if (isset($position) && $position != "") {
+            if(is_array($position)){
+                $query = $query . " && ";
+                foreach ($position as $option){
+                    $query = $query . "JobPositionId=" . $option->getJobPositionId() ." OR ";
+                }
+                $query = substr($query, 0, -4);
+            }
+            else{
+                $query = $query . " && JobPositionId=" . $position->getCareerId();
+            }
+        }
         return $query;
     }
 

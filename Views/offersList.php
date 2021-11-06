@@ -12,9 +12,9 @@ require_once("validate-session.php");
                <h2 class="mb-4">Listado de Ofertas</h2>
                <a class="btn btn-default" href="AddForm" >Nueva Oferta</a>
                <br /><br />
-               <form action="<?php echo FRONT_ROOT . "Offers/AddOffer" ?>" method="">
+               <form action="<?php echo FRONT_ROOT . "Offers/ShowAll" ?>" method="">
 
-                    <button type=submit>Buscar</button>
+                    <button type=submit autofocus >Buscar</button>
 
                     <br />
                     <br />
