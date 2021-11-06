@@ -20,7 +20,7 @@ require_once("validate-session.php");
                         <label for="position">Puesto: </label>
                         <select name="position" id="position">
                             <?php
-                            foreach ($this->jobPositionDao->getAll() as $position) {
+                            foreach ($positionList as $position) {
                             ?>
                                 <option value="<?php echo $position->getJobPositionId() ?>"><?php echo $position->getDescription() ?></option>
                             <?php

@@ -13,6 +13,7 @@ class JobOfferDAO
 {
     private $db;
     private $jobPositionDao;
+    private $table = 'JobsOffer';
 
     function __construct()
     {

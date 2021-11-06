@@ -26,26 +26,29 @@ class JobPositionDAO
         $array = ($aux) ? json_decode($aux, true) : array();
 
         foreach ($array as $value) {
-            array_push($this->jobPositionList, new JobPosition($value["jobPositionId"],$value["careerId"],$value["description"]));
+            array_push($this->jobPositionList, new JobPosition($value["jobPositionId"], $value["careerId"], $value["description"]));
         }
     }
 
-    static function getInstance(){
-        if(self::$instance == null){
+    static function getInstance()
+    {
+        if (self::$instance == null) {
             self::$instance = new self();
         }
 
         return self::$instance;
     }
 
-    function getAll(){
+    function getAll()
+    {
         return $this->jobPositionList;
     }
 
-    function getById($id){
+    function getById($id)
+    {
         $ret = new JobPosition;
         foreach ($this->jobPositionList as $value) {
-            if($value->getJobPositionId() == $id){
+            if ($value->getJobPositionId() == $id) {
                 $ret = $value;
             }
         }
@@ -78,19 +81,16 @@ class JobPositionDAO
     }*/
 
 
-    
-    }
 
-
-    
-    function searchByDescription($description){
+    function searchByDescription($description)
+    {
         $prueba = $description;
         $ret = array();
 
         foreach ($this->jobPositionList as $value) {
-            if(!is_array($prueba)){
-                if(str_contains($value->getDescription(), $prueba)){
-                    array_push($ret,$value);
+            if (!is_array($prueba)) {
+                if (str_contains($value->getDescription(), $prueba)) {
+                    array_push($ret, $value);
                 }
             }
         }
@@ -99,45 +99,24 @@ class JobPositionDAO
 
 
 
-    public function getJobsPositionsForCareerId($careerId){
+    public function getJobsPositionsForCareerId($careerId)
+    {
 
-        $listJobsPosition=array();
+        $listJobsPosition = array();
 
-        for($i=0;$i<count($this->jobPositionList);$i++){
+        for ($i = 0; $i < count($this->jobPositionList); $i++) {
 
-            if($this->jobPositionList[$i]->getCareerId=$careerId){
+            if ($this->jobPositionList[$i]->getCareerId = $careerId) {
 
-                $jobPosition= new JobPosition();
+                $jobPosition = new JobPosition();
 
                 $jobPosition->setDescription($this->jobPositionList[$i]->getDescription());
                 $jobPosition->setJobPositionId($this->jobPositionList[$i]->getJobPositionId());
 
-                array_push($listJobsPosition,$jobPosition);
-
+                array_push($listJobsPosition, $jobPosition);
             }
-
-
         }
 
-                return $listJobsPosition;
-
-     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return $listJobsPosition;
+    }
 }
