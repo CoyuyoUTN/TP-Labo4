@@ -335,6 +335,61 @@ class JobOfferDAO
 
 
 
+        
+    public function misPostulaciones($Id){
+
+        
+        $jobOffer = null;
+        $idList=array();
+
+        $query = "SELECT JobOfferId from Student_x_JobOffer WHERE StudentId = " .$Id. " ";
+        
+        $this->connection = Connection::GetInstance();
+        
+        $results = $this->connection->Execute($query);
+        
+        foreach($results as $row)
+        {
+            $jobOffer = new JobOffer();
+            $jobOffer->setId($row["JobOfferId"]);
+
+            array_push($idList, $jobOffer); // devuelve una lista unicametne con los apiId
+           
+        }
+
+        return $idList;
+
+    }
+
+
+
+
+    public function getDescrptionPostulaciones ($idList){
+
+       
+        $postList=array();
+
+        for($i=0; $i < count($idList); $i++){
+            //select id, Description from JobsOffer jo where id= 3;
+            $query = "SELECT id, Description from " .$this->table. " WHERE id = " .$idList[$i]->getId(). " ";   
+
+            $this->connection = Connection::GetInstance();
+            $results = $this->connection->Execute($query);
+
+            foreach($results as $row)
+            {
+                $jobOffer = new JobOffer();
+                $jobOffer->setId($row["id"]);
+                $jobOffer->setDescription($row["Description"]);
+    
+                array_push($idList, $jobOffer); // devuelve una lista unicametne con los apiId
+               
+            }
+        }
+        return $idList;
+    }
+
+
 
 
    

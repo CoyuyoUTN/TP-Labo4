@@ -128,11 +128,61 @@ public function showAllOffers(){
         
     </script>
 <?php
-     require_once(VIEWS_PATH."offersList.php");
+     require_once(VIEWS_PATH."student-info.php");
     }
 
 
 }
+
+
+
+
+    public Function showMisPostulaciones(){
+
+
+        require_once(VIEWS_PATH . "validate-session.php");
+        $idStudent =  $_SESSION["loggedUser"]->getDbId();
+        $idList= $this->jobOffersDAO->misPostulaciones($idStudent);
+
+        if($idList !=null){
+             $DescrptionList=   $this->jobOffersDAO->getDescrptionPostulaciones($idList);
+
+            if($DescrptionList != null){
+
+                require_once(VIEWS_PATH."misPostulaciones.php");
+
+            }
+            else{
+                ?> <script language="javascript">
+                alert("Error!, no se encuentran postulaciones");
+                
+            </script>
+            <?php
+
+             require_once(VIEWS_PATH."student-info.php");
+            }
+
+        }
+        else{
+
+            ?> <script language="javascript">
+            alert("Error!, no se encuentran postulaciones");
+            
+        </script>
+        <?php
+
+         require_once(VIEWS_PATH."student-info.php");
+        }
+
+
+
+
+
+    }
+
+
+
+
 
 
 
