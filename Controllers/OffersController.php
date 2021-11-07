@@ -102,9 +102,10 @@ class OffersController
         require_once(VIEWS_PATH . "validate-session.php");
         $idStudent =  $_SESSION["loggedUser"]->getDbId();
 
-
+        
 
         if ($this->jobOffersDAO->verificarPostulacionExists($idStudent, $data) == null) {
+            
             $this->jobOffersDAO->postularse($idStudent, $data);
         ?> <script language="javascript">
                 alert("Postulado con exito");

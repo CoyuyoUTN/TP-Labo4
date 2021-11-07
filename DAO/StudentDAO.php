@@ -328,6 +328,31 @@ namespace DAO;
         return $return;
     }
 
+
+    public function getStudentForIdApi($id){
+
+        $this->RetrieveData();
+        $return=null; 
+       
+        for ($i=0; $i < count($this->studentList); $i++) { 
+            if(($this->studentList[$i]->getStudentId() == $id) && ($this->studentList[$i]->getActive() == true) ){
+               
+                $return = $this->studentList[$i];
+                
+            }
+        }
+        
+        return $return;
+    }
+
+
+
+
+
+
+
+
+
     
     
 

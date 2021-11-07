@@ -87,7 +87,8 @@ class HomeController
     {
 
 
-        $student = $this->studentDAO->existsMailPorId($email);
+        $studentIdApi = $this->studentDAO->existsMailPorId($email);
+        $student= $this->studentDAO-> getStudentForIdApi($studentIdApi);
 
 
         if ($student != null) {
