@@ -74,10 +74,7 @@ if (get_class($_SESSION["loggedUser"]) == 'Models\Admin') {
                             <?php echo "Posicion" ?>
 
                         </th>
-                        <th>
-                            <?php echo "Nombre Empresa" ?>
-
-                        </th>
+                     
                         <th>
                             <?php echo "Postularse" ?>
 
@@ -92,7 +89,7 @@ if (get_class($_SESSION["loggedUser"]) == 'Models\Admin') {
                                 <td><?php echo $offersList[$i]->getDescription(); ?></td>
                                 <td><?php echo $offersList[$i]->getCompanyId(); ?></td>
                                 <td><?php echo $offersList[$i]->getJobPositionId(); ?></td>
-                                <td><?php echo $nameCompanyList[$i]->getName(); ?></td> 
+                                
                                 <td>
                                     <button type="submit" id="see-more" name="data" value="<?php echo $offersList[$i]->getId(); ?>"><?php echo $actionName ?></button>
                                 </td>

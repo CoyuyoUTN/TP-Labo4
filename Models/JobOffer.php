@@ -12,6 +12,7 @@ class JobOffer
     private $companyId;
     private $jobPositionId;
     private $jobPosition;
+    private $active;
 
     public function __construct($id=NULL, $description=NULL, $companyId=NULL, $jobPositionId=NULL)
     {   
@@ -154,6 +155,26 @@ class JobOffer
     public function setJobPosition($jobPosition)
     {
         $this->jobPosition = $jobPosition;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of active
+     */ 
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set the value of active
+     *
+     * @return  self
+     */ 
+    public function setActive($active)
+    {
+        $this->active = $active;
 
         return $this;
     }

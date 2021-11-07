@@ -52,9 +52,7 @@ class OffersController
         }
     }
 
-    public function EditOffer($offerId){
-        //todo
-    }
+
 
 
     public function ShowOffersList()
@@ -63,7 +61,7 @@ class OffersController
         if (isset($_GET['search'])) {
 
             $description = $_GET['search'];
-            var_dump($description);
+           
             $offersList = $this->jobOffersDAO->buscarDescription($description);
         } else {
             $offersList = $this->jobOffersDAO->GetAll();
@@ -170,5 +168,64 @@ class OffersController
             $this->ShowOffersList();
         }
     }
+
+    public function EditOffer(){
+        require_once(VIEWS_PATH . "validate-session.php");
+        require_once(VIEWS_PATH . "JobOfferModify.php");
+      
+    }
+
+    public function jobOfferModify($id, $Description, $companyId, $jobPositionId, $active )
+    {
+
+        
+        $jobOffer = $this->jobOffersDAO->read($id);
+       
+        if ($jobOffer == NULL) {
+            ?> <script language="javascript">
+            alert("Id no existe");
+        </script>
+<?php
+            $this->ShowOffersList();
+
+           
+        } else {
+            
+            if($id != null){
+            $jobOffer->setId($id);
+            }
+            if($Description!=null){
+            $jobOffer->setDescription($Description);
+            }
+            if($companyId!=null){
+                $jobOffer->setCompanyId($companyId);
+            }
+            if($jobPositionId!=null){
+                $jobOffer->setJobPositionId($jobPositionId);
+            }
+            if($active!=null){
+                $jobOffer->setActive($active);
+            }
+           
+            
+
+            $this->jobOffersDAO->update($jobOffer);
+            $this->ShowOffersList();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 ?>

@@ -431,7 +431,78 @@ class JobOfferDAO
 
 
 
+    public function read($jobOfferId)
+    {
+        try
+        {
+            $JobOffer = null;
 
+            $query = "SELECT * FROM ".$this->table." WHERE id = " .$jobOfferId. " ";
+
+           
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+            
+            foreach ($resultSet as $row)
+            {
+                $JobOffer = new JobOffer();
+                $JobOffer->setId($row["id"]);
+                $JobOffer->setDescription($row["Description"]);
+                $JobOffer->setCompanyId($row["CompanyId"]);
+                $JobOffer->setJobPositionId($row["JobPositionId"]);
+                $JobOffer->setJobPosition($row["active"]);
+              
+            }
+                        
+            return $JobOffer;
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
+    }
    
+
+
+ 
+    public function update ($jobOffer){
+
+        try
+            {
+                $query = "UPDATE ".$this->table." SET Description = :Description, CompanyId = :CompanyId, JobPositionId = :JobPositionId, active = :active  WHERE ( id = :id ) ";
+
+                 $parameters["id"] = $jobOffer->getId(); 
+                $parameters["Description"] = $jobOffer->getDescription();
+                $parameters["CompanyId"] =$jobOffer->getCompanyId();
+                $parameters["JobPositionId"] =$jobOffer->getJobPositionId();
+                $parameters["active"] = $jobOffer->getActive();
+             
+             
+                
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
