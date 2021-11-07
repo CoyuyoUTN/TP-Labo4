@@ -91,6 +91,8 @@ class OffersController
 
         $listJobsPosition = $this->jobPositionDAO->getJobsPositionsForCareerId($careerId);
         $offersList = $this->jobOffersDAO->getJobOfferByPositionId($listJobsPosition);
+        $nameCompanyList=$this->companyDAO->getNameCompanyForId($offersList);//ACA
+      
         require_once(VIEWS_PATH . "offersList.php");
     }
 
@@ -148,9 +150,8 @@ class OffersController
 
         if ($idList != null) {
             $DescrptionList =   $this->jobOffersDAO->getDescrptionPostulaciones($idList);
-
             if ($DescrptionList != null) {
-
+               
                 require_once(VIEWS_PATH . "misPostulaciones.php");
             } else {
             ?> <script language="javascript">

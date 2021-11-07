@@ -70,6 +70,10 @@ if (get_class($_SESSION["loggedUser"]) == 'Models\Admin') {
 
                         </th>
                         <th>
+                            <?php echo "CompañiaId" ?>
+
+                        </th>
+                        <th>
                             <?php echo "Posicion" ?>
 
                         </th>
@@ -80,15 +84,16 @@ if (get_class($_SESSION["loggedUser"]) == 'Models\Admin') {
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($offersList as $offer) {
+                        for ( $i=0; $i<count($offersList);$i++) {
                         ?>
                             <tr>
-                                <td><?php echo $offer->getId(); ?></td>
-                                <td><?php echo $offer->getDescription(); ?></td>
-                                <td><?php echo $offer->getCompanyId(); ?></td>
-                                <td><?php echo $offer->getJobPositionId(); ?></td>
+                                <td><?php echo $offersList[$i]->getId(); ?></td>
+                                <td><?php echo $offersList[$i]->getDescription(); ?></td>
+                                <td><?php echo $nameCompanyList[$i]->getName(); ?></td>
+                                <td><?php echo $offersList[$i]->getCompanyId(); ?></td>
+                                <td><?php echo $offersList[$i]->getJobPositionId(); ?></td>
                                 <td>
-                                    <button type="submit" id="see-more" name="data" value="<?php echo $offer->getJobPositionId(); ?>"><?php echo $actionName ?></button>
+                                    <button type="submit" id="see-more" name="data" value="<?php echo $offersList[$i]->getJobPositionId(); ?>"><?php echo $actionName ?></button>
                                 </td>
                             </tr>
                         <?php

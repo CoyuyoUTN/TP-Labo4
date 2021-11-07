@@ -489,6 +489,37 @@ class CompanyDAO implements Crud{
 
 
 
+        public function getNameCompanyForId($idList){
+
+
+           // select a.name from Company a inner join JobsOffer jo on a.id= jo.CompanyId; 
+           $nameCompanyList=array();
+
+           for($i=0; $i < count($idList); $i++){
+              
+               $query = "SELECT b.name from Company b INNER JOIN JobsOffer a on  b.id = ".$idList[$i]->getCompanyId(). " limit 1 ";   
+                
+               $this->connection = Connection::GetInstance();
+               $results = $this->connection->Execute($query);
+               
+               foreach($results as $row)
+               {
+                   $company = new company();
+                   $company->setName($row["name"]);
+                  
+       
+                   array_push($nameCompanyList, $company); // devuelve una lista unicametne con los names de company
+                  
+               }
+           }
+          
+           return $nameCompanyList;
+
+
+        }
+
+
+
 
 
 
