@@ -24,14 +24,14 @@ if (isset($_SERVER["HTTP_REFERER"])) {
                <table class="table bg-light-alpha" border="3">
                <thead>
                         <th>
-                        <?php echo "StudentId" ?>
+                        <?php echo "Legajo" ?>
                               
                          </th>
                         <th>
-                        <?php echo "JobOfferId" ?>
+                        <?php echo "Nombre Oferta" ?>
                          </th>
                         <th>
-                        <?php echo "Date" ?>
+                        <?php echo "Fecha" ?>
                          </th>
                     </thead>
                     <tbody>
