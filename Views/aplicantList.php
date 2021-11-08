@@ -36,7 +36,7 @@ if (isset($_SERVER["HTTP_REFERER"])) {
                     </thead>
                     <tbody>
                          <?php
-                              foreach($aplicantList as $aplicant)
+                              foreach($listaDatosReales as $aplicant)
                               {
                                    ?>
                                         <tr>

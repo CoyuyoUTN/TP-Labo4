@@ -20,12 +20,7 @@ class AplicantDAO {
 
     public function readAll(){
 
-        /*select 
-        (select apiId from Student where id=7) as Nombre, 
-        (select Description from JobsOffer jo where id=3) as Oferta,
-        Date 
-        from Student_x_JobOffer sxjo 
-        where StudentId=7 ;*/
+    
 
         try
             {
@@ -65,7 +60,52 @@ class AplicantDAO {
 
 
 
+    public function datosRealesPorId($aplicantList){
+ 
+        
+       
+        try
+            {
+                $datosRealesLis=array();
 
+                for($i=0; $i < count($aplicantList); $i++){
+
+
+                $query = "SELECT ( SELECT apiId from Student where id = " .$aplicantList[$i]->getStudentId(). "  ) as Nombre, ( SELECT Description from JobsOffer where id = " .$aplicantList[$i]->getJobOfferId(). " ) as Oferta, Date FROM ".$this->table. " where StudentId = " .$aplicantList[$i]->getStudentId(). " limit 1";
+
+                
+                   
+
+
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $aplicant = new Aplicant();
+                    $aplicant->setStudentId($row["Nombre"]);
+                    $aplicant->setJobOfferId($row["Oferta"]);
+                    $aplicant->setDate($row["Date"]);
+                   
+                    
+                    
+
+                    array_push($datosRealesLis, $aplicant);
+                }
+            }
+            
+                return $datosRealesLis;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+
+
+
+    }
 
 
 

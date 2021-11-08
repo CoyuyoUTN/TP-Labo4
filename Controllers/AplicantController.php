@@ -23,6 +23,7 @@
         public function showAllPostulations(){
 
             $aplicantList=$this->aplicantDAO->readAll();
+            $listaDatosReales=$this->aplicantDAO->datosRealesPorId($aplicantList);
             require_once(VIEWS_PATH . "aplicantList.php");
 
 
