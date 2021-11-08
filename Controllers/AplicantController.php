@@ -17,11 +17,6 @@
             $this->aplicantDAO = new AplicantDAO();
         }
 
-
-
-
-
-
         public function showAllPostulations(){
 
             $aplicantList=$this->aplicantDAO->readAll();
@@ -43,22 +38,6 @@
             }
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 

@@ -10,7 +10,7 @@
                     $ret = "navADMIN.php";
                     break;
             
-                case ' Models\Admin':
+                case ' Models\Student':
                     $ret = "nav.php";
                     break;
                 default:
