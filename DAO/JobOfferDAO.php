@@ -315,7 +315,7 @@ class JobOfferDAO
           
             
         try{
-            $query0 = "INSERT INTO Student_x_JobOffer ( StudentId, JobOfferId ) VALUES ( :StudentId, :JobOfferId ) ";
+            $query0 = "INSERT INTO Student_x_JobOffer ( StudentId, JobOfferId, Date ) VALUES ( :StudentId, :JobOfferId, date(now( )) ) ";
 
                 
                 $parameters["StudentId"] = intval($studentId);
@@ -410,9 +410,9 @@ class JobOfferDAO
         $postList=array();
 
         for($i=0; $i < count($idList); $i++){
+           //select id, Description,( select Date from Student_x_JobOffer sxjo where JobOfferId = 3 ) as Date from JobsOffer where id =3;
+            $query = "SELECT id, Description, (SELECT Date from Student_x_JobOffer WHERE JobOfferId = " .$idList[$i]->getId(). " ) as Date from " .$this->table. " WHERE id = " .$idList[$i]->getId(). " ";   
            
-            $query = "SELECT id, Description from " .$this->table. " WHERE id = " .$idList[$i]->getId(). " ";   
-
             $this->connection = Connection::GetInstance();
             $results = $this->connection->Execute($query);
             
@@ -421,6 +421,9 @@ class JobOfferDAO
                 $jobOffer = new JobOffer();
                 $jobOffer->setId($row["id"]);
                 $jobOffer->setDescription($row["Description"]);
+                $jobOffer->setDate($row["Date"]);
+
+                
     
                 array_push($postList, $jobOffer); // devuelve una lista unicametne con los apiId
                

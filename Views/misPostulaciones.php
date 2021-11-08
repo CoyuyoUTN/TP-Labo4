@@ -35,6 +35,10 @@ if (isset($_SERVER["HTTP_REFERER"])) {
                                 <?php echo "Descripcion" ?>
 
                             </th>
+                            <th>
+                                <?php echo "Date" ?>
+
+                            </th>
                         </thead>
                         <tbody>
                             <?php
@@ -43,6 +47,7 @@ if (isset($_SERVER["HTTP_REFERER"])) {
                             <tr>
                                 <td><?php echo $offer->getId(); ?></td>
                                 <td><?php echo $offer->getDescription(); ?></td>
+                                <td><?php echo $offer->getDate(); ?></td>
                             </tr>
                             <?php
                               }

@@ -13,6 +13,7 @@ class JobOffer
     private $jobPositionId;
     private $jobPosition;
     private $active;
+    private $date;
 
     public function __construct($id=NULL, $description=NULL, $companyId=NULL, $jobPositionId=NULL)
     {   
@@ -175,6 +176,26 @@ class JobOffer
     public function setActive($active)
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of date
+     */ 
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set the value of date
+     *
+     * @return  self
+     */ 
+    public function setDate($date)
+    {
+        $this->date = $date;
 
         return $this;
     }
