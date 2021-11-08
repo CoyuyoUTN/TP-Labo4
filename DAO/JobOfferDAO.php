@@ -410,7 +410,7 @@ class JobOfferDAO
         $postList=array();
 
         for($i=0; $i < count($idList); $i++){
-           //select id, Description,( select Date from Student_x_JobOffer sxjo where JobOfferId = 3 ) as Date from JobsOffer where id =3;
+          
             $query = "SELECT id, Description, (SELECT Date from Student_x_JobOffer WHERE JobOfferId = " .$idList[$i]->getId(). " ) as Date from " .$this->table. " WHERE id = " .$idList[$i]->getId(). " ";   
            
             $this->connection = Connection::GetInstance();
