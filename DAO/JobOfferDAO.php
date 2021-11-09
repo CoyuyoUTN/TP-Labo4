@@ -209,7 +209,7 @@ class JobOfferDAO
         try{
        //select a.id ,a.Description from JobsOffer a where jobPositionId = 8 order by a.id;
          $newList = array();
-         var_dump($listJobsPosition);
+         
          foreach($listJobsPosition as $position){
 
             $query='SELECT * FROM JobsOffer WHERE JobPositionId  = ' . $position->getJobPositionId() . " && active=1 ";

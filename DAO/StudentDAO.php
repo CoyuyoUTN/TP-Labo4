@@ -220,7 +220,7 @@ namespace DAO;
             $student->setFirstName($valuesArray["firstName"]);
             $student->setLastName($valuesArray["lastName"]);
             $student->setCareerId($valuesArray["careerId"]);
-            $student->setCareerId($valuesArray["dni"]);
+            $student->setDni($valuesArray["dni"]);
             $student->setFileNumber($valuesArray["fileNumber"]);
             $student->setGender($valuesArray["gender"]);
             $student->setBirthDate($valuesArray["birthDate"]);
@@ -382,9 +382,12 @@ namespace DAO;
         $this->RetrieveData();
         
         $return=null;
+
+
         for ($i=0; $i < count($this->studentList); $i++) { 
             if($this->studentList[$i]->getStudentId() == $id){
                
+             
                 $return = $this->studentList[$i]->getCareerId(); // retorna el idCareer del alumno
                 
             }
