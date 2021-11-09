@@ -103,7 +103,7 @@ class JobPositionDAO
     {
 
         $listJobsPosition = array();
-      
+     
         for ($i = 0; $i < count($this->jobPositionList); $i++) {
 
             if ($this->jobPositionList[$i]->getCareerId() == $careerId) {
