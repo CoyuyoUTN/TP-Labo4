@@ -71,9 +71,9 @@ if (get_class($_SESSION["loggedUser"]) == 'Models\Admin') {
                             Posicion
                             <input class="form-control" type="text" id="position" name="position">
                         </th>
-                        <th>
-                            <input type="submit" class="btn" value="Buscar" style="background-color:#DC8E47;color:white;" />
-                        </th>
+                        <!-- <th>
+
+                        </th> -->
                     </thead>
                     <tbody>
                         <?php
