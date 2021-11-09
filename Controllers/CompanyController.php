@@ -20,7 +20,7 @@ class CompanyController
         require_once(VIEWS_PATH . "companyADD.php");
     }
 
-    public function ShowListView()
+    public function ShowListView($onAction = "Company/Remove",$actionName = "Eliminar")
     {
         $companyList=null;
         if (isset($_GET['search'])) {
@@ -42,6 +42,7 @@ class CompanyController
         require_once(VIEWS_PATH . "validate-session.php");
         require_once(VIEWS_PATH . "companyList.php");
     }
+    
 
     public function Add($name, $cuil, $shortDesc = null, $ranking = null, $email = null, $phone = null, $city = null, $address = null, $jobOffers = null, $linkedin = null, $webpage = null, $facebook = null, $img = null, $bio = null)
     {
