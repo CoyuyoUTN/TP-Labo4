@@ -64,31 +64,6 @@ class OffersController
         }
     }
 
-
-
-
-    public function ShowOffersList()
-    {
-        $offersList = null;
-        if (isset($_GET['search'])) {
-
-            $description = $_GET['search'];
-           
-            $offersList = $this->jobOffersDAO->buscarDescription($description);
-        } else {
-            $offersList = $this->jobOffersDAO->GetAll();
-        }
-        if ($offersList == null) {
-?> <script language="javascript">
-                alert("Empresa no encontrada");
-            </script>
-        <?php
-
-        }
-        require_once(VIEWS_PATH . "validate-session.php");
-        require_once(VIEWS_PATH . "offersList.php");
-    }
-
     public function ShowJobPositionList()
     {
         require_once(VIEWS_PATH . "validate-session.php");
@@ -194,11 +169,12 @@ class OffersController
         $jobOffer = $this->jobOffersDAO->read($id);
        
         if ($jobOffer == NULL) {
-            ?> <script language="javascript">
+        ?>
+        <script language="javascript">
             alert("Id no existe");
         </script>
-<?php
-            $this->ShowOffersList();
+        <?php
+            header("Location: ../Offers/ShowAll");
 
            
         } else {
@@ -222,7 +198,7 @@ class OffersController
             
 
             $this->jobOffersDAO->update($jobOffer);
-            $this->ShowOffersList();
+            header("Location: ../Offers/ShowAll");
         }
     }
 
