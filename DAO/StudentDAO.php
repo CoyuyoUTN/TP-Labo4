@@ -345,7 +345,28 @@ namespace DAO;
         return $return;
     }
 
+    public function VerificarStudentExsistInDb($apiId)
+    {
+        try
+        {
+            
 
+            $query = "SELECT apiId FROM ".$this->table." WHERE apiId like '".$apiId."' ";
+
+           
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+            
+            
+            return $resultSet;
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
+    }
 
 
 

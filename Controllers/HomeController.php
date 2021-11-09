@@ -88,24 +88,32 @@ class HomeController
 
 
         $studentIdApi = $this->studentDAO->existsMailPorId($email);
-        $student= $this->studentDAO-> getStudentForIdApi($studentIdApi);
+       
+        if($this->studentDAO->VerificarStudentExsistInDb($studentIdApi) != null){
 
+            ?> <script language="javascript">alert("Usuario ya existente");</script>
+            <?php
+            require_once(VIEWS_PATH."loguin.php");
 
-        if ($student != null) {
-            $student->setPassword($password);
+        }
+        else{
+            $student= $this->studentDAO-> getStudentForIdApi($studentIdApi);
+            if ($student != null) {
+             $student->setPassword($password);
 
-            $this->studentDAO->create($student);
-            ?> <script language="javascript">
+                $this->studentDAO->create($student);
+                ?> <script language="javascript">
                 alert("Cuenta creada exitosamente, inicie sesion");
-            </script>
-        <?php
-            require_once(VIEWS_PATH . "loguin.php");
-        } else {
-        ?> <script language="javascript">
+                </script>
+            <?php
+                require_once(VIEWS_PATH . "loguin.php");
+            } else {
+            ?> <script language="javascript">
                 alert("No existe Mail");
-            </script>
-<?php
+                </script>
+            <?php
             require_once(VIEWS_PATH . "loguin.php");
+        }
         }
     }
 
