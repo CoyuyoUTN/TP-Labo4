@@ -124,11 +124,17 @@ class AdminDAO implements Crud{
 
         $query = 'SELECT * FROM '.$this->table.' WHERE Email = "'.$email.'" && Password = "'.$password.'"';
 
-        $results = $this->db->Execute($query);
+        $this->connection = Connection::GetInstance();
+
+        $results = $this->connection->Execute($query);
       
         foreach($results as $row)
         {
-            $admin = Admin::fromArray($row);
+            $admin = new Admin();
+            $admin->setId($row["Id"]);
+            $admin->setPassword($row["Password"]);
+            $admin->setEmail($row["Email"]);
+            $admin->setName($row["Name"]);
         }
 
         return $admin;

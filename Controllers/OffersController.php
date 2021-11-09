@@ -25,20 +25,8 @@ class OffersController
     public function ShowAll($id = null, $description = null, $company = null, $position = null)
     {
         $offersList = $this->jobOffersDAO->GetAll($id, $description, $company, $position);
-        $reset = false;
-
-        if ($id != null || $description != null || $company != null || $position != null) {
-            $reset = true;
-        }
 
         require_once(VIEWS_PATH . "offersList.php");
-    }
-
-    public function CarreerOffers($careerId)
-    {
-        $jobPosition = $this->jobPositionDAO->getByCareerId($careerId);
-
-        $this->ShowAll(null, null, null, $jobPosition);
     }
 
     public function AddForm($id = NULL)
@@ -99,10 +87,10 @@ class OffersController
 
 
 
-        $listJobsPosition = $this->jobPositionDAO->getByCareerId($careerId);
+        $listJobsPosition = $this->jobPositionDAO->getJobsPositionsForCareerId($careerId);
         $offersList = $this->jobOffersDAO->getJobOfferByPositionId($listJobsPosition);
-        $nameCompanyList = $this->companyDAO->getNameCompanyForId($offersList); //ACA
-
+        $nameCompanyList=$this->companyDAO->getNameCompanyForId($offersList);//ACA
+      
         require_once(VIEWS_PATH . "offersList.php");
     }
 
@@ -112,10 +100,10 @@ class OffersController
         require_once(VIEWS_PATH . "validate-session.php");
         $idStudent =  $_SESSION["loggedUser"]->getDbId();
 
-
+        
 
         if ($this->jobOffersDAO->verificarPostulacionExists($idStudent, $data) == null) {
-
+            
             $this->jobOffersDAO->postularse($idStudent, $data);
         ?> <script language="javascript">
                 alert("Postulado con exito");
@@ -151,7 +139,7 @@ class OffersController
 
 
 
-    /* public function showMisPostulaciones()
+    public function showMisPostulaciones()
     {
 
 
@@ -162,7 +150,7 @@ class OffersController
         if ($idList != null) {
             $DescrptionList =   $this->jobOffersDAO->getDescrptionPostulaciones($idList);
             if ($DescrptionList != null) {
-
+               
                 require_once(VIEWS_PATH . "misPostulaciones.php");
             } else {
             ?> <script language="javascript">
@@ -179,7 +167,7 @@ class OffersController
 <?php
             $this->ShowOffersList();
         }
-    }*/
+    }
 
     public function EditOffer(){
         require_once(VIEWS_PATH . "validate-session.php");

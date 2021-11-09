@@ -56,21 +56,29 @@ class JobPositionDAO
     }
 
 
-    function getByCareerId($careerId){
+    /*function getByCareerId($studentCareerId){
       
         $listByCareer = array();
 
         foreach ($this->jobPositionList as $value) {
 
-            if($value->getCareerId() == $careerId){
-                array_push($listByCareer, $value);
+            if($value->getCareerId() == $studentCareerId){
+              
+                $jobPosition = new JobPosition;
+               
+                $jobPosition["jobPositionID"] = $value->getJobPositionId();
+                $jobPosition["careerId"] = $value->getCareerId();
+                $jobPosition["description"] = $value->getJobPositionId();
 
-            }
+                  array_push($listByCareer, $jobPosition);
+
+             }
                
         }
 
-        return $listByCareer;
-    }
+     return $listByCareer;
+
+    }*/
 
 
 
@@ -87,5 +95,28 @@ class JobPositionDAO
             }
         }
         return $ret;
+    }
+
+
+
+    public function getJobsPositionsForCareerId($careerId)
+    {
+
+        $listJobsPosition = array();
+
+        for ($i = 0; $i < count($this->jobPositionList); $i++) {
+
+            if ($this->jobPositionList[$i]->getCareerId = $careerId) {
+
+                $jobPosition = new JobPosition();
+
+                $jobPosition->setDescription($this->jobPositionList[$i]->getDescription());
+                $jobPosition->setJobPositionId($this->jobPositionList[$i]->getJobPositionId());
+
+                array_push($listJobsPosition, $jobPosition);
+            }
+        }
+
+        return $listJobsPosition;
     }
 }

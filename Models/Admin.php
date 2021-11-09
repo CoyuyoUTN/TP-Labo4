@@ -13,13 +13,12 @@ class Admin implements IUser
     private $name;
     private $active;
 
-    public function __construct($id = null, $email = null, $password = null, $name = null, $active=null)
+    public function __construct($email = null, $password = null, $name = null)
     {
-        $this->id = $id;
+
         $this->email = $email;
         $this->password = $password;
         $this->name = $name;
-        $this->active = $active;
     }
 
     public static function fromArray($array)
@@ -28,7 +27,6 @@ class Admin implements IUser
         $email = null;
         $password = null;
         $name = null;
-        $active = null;
 
         if (isset($array["id"])) {
             $id = $array["id"];
@@ -50,14 +48,9 @@ class Admin implements IUser
         } else {
             $name = null;
         }
-        if (isset($array["Active"])) {
-            $active = $array["Active"];
-        } else {
-            $active = null;
-        }
 
 
-        return new self($id, $email, $password, $name, $active);
+        return new self($id, $email, $password, $name);
     }
 
 

@@ -22,6 +22,7 @@
 
         function __construct(
                 $studentId=NULL,
+                $dbId = NULL,
                 $firstName=NULL,
                 $lastName=NULL,
                 $careerId=NULL,
@@ -31,8 +32,7 @@
                 $birthDate=NULL,
                 $email=NULL,
                 $phoneNumber=NULL,
-                $active=NULL,
-                $dbId = NULL
+                $active=NULL
                 )
         {
                 $this->studentId = $studentId;
@@ -48,6 +48,7 @@
                 $this->phoneNumber = $phoneNumber;
                 $this->active = $active;
         }
+
 
         /**
          * Get the value of studentId

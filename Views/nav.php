@@ -9,10 +9,10 @@
                <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/ShowCompanyListStudent "?>">Listar Empresas</a>
           </li>     
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo  FRONT_ROOT."Offers/CarreerOffers?career=".$_SESSION["loggedUser"]->getCareerId()?>">Listar ofertas de posiciones</a>
+               <a class="nav-link" href="<?php echo  FRONT_ROOT."Offers/ShowJobPositionList"?>">Listar ofertas de posiciones</a>
           </li>     
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo  FRONT_ROOT."Aplicant/showAllPostulations" ?>">Mis postulaciones</a>
+               <a class="nav-link" href="<?php echo  FRONT_ROOT."Offers/showMisPostulaciones"?>">Mis postulaciones</a>
           </li>     
           <li class="nav-item">
                <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/Logout "?>">Cerrar sesion</a>

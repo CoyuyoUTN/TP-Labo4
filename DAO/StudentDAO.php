@@ -214,21 +214,20 @@ namespace DAO;
         $array = ($aux) ? json_decode($aux, true) : array();
 
 
-
         foreach ($array as $valuesArray) {
-            $student = new Student(
-                $valuesArray["studentId"],
-                $valuesArray["firstName"],
-                $valuesArray["lastName"],
-                $valuesArray["careerId"],
-                $valuesArray["dni"],
-                $valuesArray["fileNumber"],
-                $valuesArray["gender"],
-                $valuesArray["birthDate"],
-                $valuesArray["email"],
-                $valuesArray["phoneNumber"],
-                $valuesArray["active"]
-            );
+            $student = new Student();
+            $student->setStudentId($valuesArray["studentId"]);
+            $student->setFirstName($valuesArray["firstName"]);
+            $student->setLastName($valuesArray["lastName"]);
+            $student->setCareerId($valuesArray["careerId"]);
+            $student->setCareerId($valuesArray["dni"]);
+            $student->setFileNumber($valuesArray["fileNumber"]);
+            $student->setGender($valuesArray["gender"]);
+            $student->setBirthDate($valuesArray["birthDate"]);
+            $student->setEmail($valuesArray["email"]);
+            $student->setPhoneNumber($valuesArray["phoneNumber"]);
+            $student->setActive($valuesArray["active"]);
+
 
             array_push($this->studentList, $student);
         }
@@ -297,20 +296,23 @@ namespace DAO;
 
         $query = "SELECT * from ".$this->table. " WHERE apiId = ".$apiId." AND active = '1'";
         
+        $this->connection = Connection::GetInstance();
+
         $results = $this->connection->Execute($query);
        
         foreach($results as $row)
         {
-            $student = $this->getStudentByApiId($row["apiId"]);
+            $student = new Student();
             $student->setDbId($row["id"]);
             $student->setPassword($row["Password"]);
+            $student->setStudentId($row["apiId"]);
         }
 
         return $student;
     }  
 
 
-    public function getIdWithEmail($mail){
+    public function existsMailPorId($mail){
 
         $this->RetrieveData();
         $return=null; 
@@ -327,14 +329,16 @@ namespace DAO;
     }
 
 
-    public function getStudentByApiId($id){
+    public function getStudentForIdApi($id){
 
         $this->RetrieveData();
         $return=null; 
        
         for ($i=0; $i < count($this->studentList); $i++) { 
             if(($this->studentList[$i]->getStudentId() == $id) && ($this->studentList[$i]->getActive() == true) ){
+               
                 $return = $this->studentList[$i];
+                
             }
         }
         

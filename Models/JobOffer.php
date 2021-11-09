@@ -2,16 +2,14 @@
 
 namespace Models;
 
-
+use Models\JobPosition as JobPosition;
 use DAO\JobPositionDAO as JobPositionDAO;
-use DAO\CompanyDAO as CompanyDAO;
 
 class JobOffer
 {
     private $id;
     private $description;
     private $companyId;
-    private $company;
     private $jobPositionId;
     private $jobPosition;
     private $active;
@@ -20,14 +18,10 @@ class JobOffer
     public function __construct($id=NULL, $description=NULL, $companyId=NULL, $jobPositionId=NULL)
     {   
         $positionInstance = JobPositionDAO::getInstance();
-        $companyInstance = new CompanyDAO();
 
         $this->id = $id;
         $this->description = $description;
         $this->companyId = $companyId;
-        if(isset($this->companyId)){
-            $this->company = $companyInstance->read($this->companyId);
-        }
         $this->jobPositionId = $jobPositionId;
         if(isset($this->jobPositionId)){
             $this->jobPosition = $positionInstance->getById($this->jobPositionId);
@@ -202,26 +196,6 @@ class JobOffer
     public function setDate($date)
     {
         $this->date = $date;
-        
-        return $this;
-    }
-    
-	/**
-     * Get the value of company
-     */ 
-    public function getCompany()
-    {
-        return $this->company;
-    }
-
-    /**
-     * Set the value of company
-     *
-     * @return  self
-     */ 
-    public function setCompany($company)
-    {
-        $this->company = $company;
 
         return $this;
     }

@@ -37,25 +37,27 @@ class HomeController
 
     public function Login($email, $password)
     {
-        // $password= md5($password);
+           // $password= md5($password);
         
         $userAdmin= $this->adminDAO->GetByEmail($email, $password);
         
-        if ($userAdmin!=null) {
+        if ($userAdmin!=null && $userAdmin->getEmail() == $email  && $userAdmin->getPassword() == $password ) {
             $_SESSION["loggedUser"] = $userAdmin;
             $this->ShowAdminView();
+
         } else {
-            $apiId = $this->studentDAO->getIdWithEmail($email); //valida si exite por api y devuelve studentId, sino null
+            $dbId = $this->studentDAO->existsMailPorId($email); //valida si exite por api y devuelve studentId, sino null
             $user=null;
 
-            if ($apiId != null) {
-                $user = $this->studentDAO->GetByUserId($apiId, $password);
+            if ($dbId != null) {
+                $user = $this->studentDAO->GetByUserId($dbId, $password);
             }
 
 
-            if (($user != null)) {
+            if (($user != null) && ($user->getPassword() == $password)) {
                 $_SESSION["loggedUser"] = $user;
-                header("Location: ./ShowStudentView");
+    
+                $this->ShowStudentView($email);
             } else {
                 ?> <script language="javascript">
                         alert("Usuario y/o Contraseña incorrectos o usuario no activo");
@@ -85,8 +87,8 @@ class HomeController
     {
 
 
-        $studentIdApi = $this->studentDAO->getIdWithEmail($email);
-        $student= $this->studentDAO-> getStudentByApiId($studentIdApi);
+        $studentIdApi = $this->studentDAO->existsMailPorId($email);
+        $student= $this->studentDAO-> getStudentForIdApi($studentIdApi);
 
 
         if ($student != null) {
@@ -176,10 +178,10 @@ class HomeController
  
 
 
-    public function ShowStudentView()
+    public function ShowStudentView($email)
     {
+        $studentList = $this->studentDAO->getStudentData($email);
         require_once(VIEWS_PATH . "validate-session.php");
-        $studentList = array($_SESSION["loggedUser"]);
         require_once(VIEWS_PATH . "student-Info.php");
     }
 

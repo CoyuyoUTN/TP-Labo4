@@ -1,8 +1,7 @@
 <?php
 
-    use DAO\NavDAO as NavDAO;
-    require_once("validate-session.php");
-    NavDAO::getNav();
+     include('nav.php');
+     require_once("validate-session.php");
    
 ?>
 
