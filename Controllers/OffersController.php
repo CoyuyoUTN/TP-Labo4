@@ -89,7 +89,7 @@ class OffersController
 
         $listJobsPosition = $this->jobPositionDAO->getJobsPositionsForCareerId($careerId);
         $offersList = $this->jobOffersDAO->getJobOfferByPositionId($listJobsPosition);
-        $nameCompanyList=$this->companyDAO->getNameCompanyForId($offersList);//ACA
+        //$nameCompanyList=$this->companyDAO->getNameCompanyForId($offersList);//ACA
       
         require_once(VIEWS_PATH . "offersList.php");
     }

@@ -205,14 +205,14 @@ class JobOfferDAO
 
 
     public function getJobOfferByPositionId($listJobsPosition){
-
+      
         try{
        //select a.id ,a.Description from JobsOffer a where jobPositionId = 8 order by a.id;
          $newList = array();
-         
+         var_dump($listJobsPosition);
          foreach($listJobsPosition as $position){
 
-            $query='SELECT * FROM JobsOffer WHERE JobPositionId  = ' . $position->getJobPositionId() . " && active=1";
+            $query='SELECT * FROM JobsOffer WHERE JobPositionId  = ' . $position->getJobPositionId() . " && active=1 ";
             $result = $this->db->Execute($query);
 
             foreach($result as $row){
@@ -228,8 +228,8 @@ class JobOfferDAO
     
     
             }
-
-
+           
+            
 
         }
 

@@ -385,7 +385,7 @@ namespace DAO;
         for ($i=0; $i < count($this->studentList); $i++) { 
             if($this->studentList[$i]->getStudentId() == $id){
                
-                $return = $this->studentList[$i]->getCareerId();
+                $return = $this->studentList[$i]->getCareerId(); // retorna el idCareer del alumno
                 
             }
         }

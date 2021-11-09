@@ -91,4 +91,18 @@ class JobPosition
 
         return $this;
     }
+
+
+
+    /**
+     * Set the value of careerId
+     *
+     * @return  self
+     */ 
+    public function setCareerId($careerId)
+    {
+        $this->careerId = $careerId;
+
+        return $this;
+    }
 }

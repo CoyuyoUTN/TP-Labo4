@@ -103,17 +103,18 @@ class JobPositionDAO
     {
 
         $listJobsPosition = array();
-
+      
         for ($i = 0; $i < count($this->jobPositionList); $i++) {
 
-            if ($this->jobPositionList[$i]->getCareerId = $careerId) {
+            if ($this->jobPositionList[$i]->getCareerId() == $careerId) {
 
                 $jobPosition = new JobPosition();
 
                 $jobPosition->setDescription($this->jobPositionList[$i]->getDescription());
                 $jobPosition->setJobPositionId($this->jobPositionList[$i]->getJobPositionId());
+                $jobPosition->setCareerId($this->jobPositionList[$i]->getCareerId());
 
-                array_push($listJobsPosition, $jobPosition);
+                array_push($listJobsPosition, $jobPosition);  // retorna todas las jobPosition para ese career id
             }
         }
 
