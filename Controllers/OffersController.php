@@ -215,7 +215,50 @@ class OffersController
     }
 
 
+    public function ShowSubidaCurriculum(){
 
+        $nombre=$_FILES['curriculum']['name'];
+        $guardado=$_FILES['curriculum']['tmp_name'];
+
+        if(!file_exists('curriculums')){
+            mkdir('curriculums',0777,true);
+            if(file_exists('curriculums')){
+                if(move_uploaded_file($guardado, 'Curriculums/'.$nombre)){
+                    ?> <script language="javascript">
+                    alert("Curriculum Subido con Exito! Postulacion Exitosa");
+                </script>
+                 <?php
+                $this->ShowOffersList();
+                
+                        }else{
+                            ?> <script language="javascript">
+                    alert("Curriculum No se pudo guardar, intente de nuevo");
+                         </script>
+                          <?php
+                $this->ShowOffersList();
+
+                }
+            }
+        }else{
+            if(move_uploaded_file($guardado, 'Curriculums/'.$nombre)){
+                ?> <script language="javascript">
+                alert("Curriculum Subido con Exito! Postulacion Exitosa");
+            </script>
+             <?php
+                $this->ShowOffersList();
+                    }else{
+                        ?> <script language="javascript">
+                alert("Curriculum No se pudo guardar, intente de nuevo");
+                     </script>
+                      <?php
+                $this->ShowOffersList();
+
+            }
+        }
+            require_once(VIEWS_PATH . "validate-session.php");
+            require_once(VIEWS_PATH . "offersList.php");
+    }
+    
 
 
 

@@ -47,7 +47,13 @@ if (get_class($_SESSION["loggedUser"]) == 'Models\Admin') {
                 <button type="submit">Buscar</button>
 
             </form>
-
+            <br />
+            <form action="<?php echo FRONT_ROOT . "Offers/ShowSubidaCurriculum" ?>" method="post" enctype="multipart/form-data">
+		    <input type="file" name="curriculum">
+		    <br><br>
+		    <button>Subir Curriculum</button>
+            <br />
+	        </form>
             <form action="<?php echo FRONT_ROOT . "Offers/showAllOffers" ?>" method="get">
 
                 <button type="submit">Mostrar todas las ofertas</button>
