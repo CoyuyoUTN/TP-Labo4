@@ -29,7 +29,6 @@ $jobPositionDao = JobPositionDAO::getInstance();
 
 ?>
 
-
 <main class="py-5">
     <section id="listado" class="mb-5">
         <div class="container">
@@ -41,15 +40,13 @@ $jobPositionDao = JobPositionDAO::getInstance();
 
             <a href="<?= $back ?>">Atras</a>
             <br />
-
             <form action="<?php echo FRONT_ROOT . "Offers/ShowOffersList" ?>" method="get">
                 <input type="search" id="search" name="search" placeholder="Descripcion">
-                <button type="submit">Buscar</button>   
+                <button type="submit">Buscar</button>
+
             </form>
             <br />
-            
-            <?php if(get_class($_SESSION["loggedUser"]) == 'Models\Admin'){ ?>
-         
+            <?php if(get_class($_SESSION["loggedUser"]) == 'Models\Student'){ ?>
             <form action="<?php echo FRONT_ROOT . "Offers/ShowSubidaCurriculum" ?>" method="post" enctype="multipart/form-data">
 		    <input type="file" name="curriculum">
 		    <br><br>
@@ -58,9 +55,6 @@ $jobPositionDao = JobPositionDAO::getInstance();
 	        </form>
             <?php } ?>
             <br /><br />
-           
-            
-            
             <form action="<?php echo FRONT_ROOT . "Offers/showAllOffers" ?>" method="get">
 
                 <button type="submit">Mostrar todas las ofertas</button>
