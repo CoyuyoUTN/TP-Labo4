@@ -50,6 +50,19 @@ class CompanyController
         require_once(VIEWS_PATH . "validate-session.php");
 
             $companyList=$this->companyDAO->verificarSiExisteEmpresa($name);
+            $boolExist=$this->companyDAO->VerificarCuilExist($cuil);
+
+            if($boolExist !=null){
+
+                ?> <script language="javascript">
+                alert("Cuil ya existente");
+                </script>
+                <?php
+                 $this->ShowListView();
+            }
+
+
+
             if($companyList==null){
         
             $company = new Company($name, $cuil, $img, $shortDesc, $ranking, $email, $phone, $city, $address, $jobOffers, $bio, $linkedin, $webpage, $facebook);
@@ -74,6 +87,31 @@ alert("Empresa ya existente");
     {
 
         require_once(VIEWS_PATH . "validate-session.php");
+
+
+        $boolExist=$this->companyDAO->VerificarCuilExist($cuil);
+
+        $companyList=$this->companyDAO->verificarSiExisteEmpresa($name);
+
+        if($companyList!=null){
+            ?> <script language="javascript">
+            alert("Empresa ya existente");
+            </script>
+            <?php
+                    
+                    $this->ShowListView();
+        }
+
+        if($boolExist !=null){
+
+            ?> <script language="javascript">
+                alert("Cuil ya existente");
+                </script>
+                <?php
+                 $this->ShowListView();
+        }
+
+
         $company = $this->companyDAO->read($id);
        
         if ($company == NULL) {

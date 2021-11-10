@@ -3,12 +3,15 @@
      include('nav.php');
      require_once("validate-session.php");
    
+
+
+   
 ?>
 
 <main class="py-5">
     <section id="listado" class="mb-5">
         <div class="container">
-            <h2 class="mb-4">Listado de estudiantes</h2>
+            <h2 class="mb-4"> Perfil de estudiante</h2>
             <form action="<?php echo FRONT_ROOT."Home/loguin" ?>" method="post">
                 <table class="table bg-light-alpha" border="3">
                     <thead>
