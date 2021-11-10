@@ -520,6 +520,42 @@ class CompanyDAO implements Crud{
 
 
 
+        public function VerificarCuilExist($cuil)
+        {
+            try
+            {
+                
+    
+                $query = "SELECT cuil FROM ".$this->table." WHERE cuil like '".$cuil."' ";
+    
+               
+    
+                $this->connection = Connection::GetInstance();
+    
+                $resultSet = $this->connection->Execute($query);
+                
+                
+                return $resultSet;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

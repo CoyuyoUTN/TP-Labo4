@@ -22,13 +22,13 @@ require_once("validate-session.php");
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="name">Nombre</label>
-                            <input type="text" name="name" id="name" class="form-control" required>
+                            <input type="text" name="name" id="name" class="form-control" >
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="cuil">Cuil</label>
-                            <input type="text" name="cuil" id="cuil" class="form-control" required>
+                            <input type="text" name="cuil" id="cuil" class="form-control" >
                         </div>
                     </div>
                 </div>
