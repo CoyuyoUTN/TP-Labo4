@@ -27,6 +27,10 @@ if (get_class($_SESSION["loggedUser"]) == 'Models\Admin') {
 ?>
 
 
+
+
+
+
 <main class="py-5">
     <section id="listado" class="mb-5">
         <div class="container">
@@ -38,26 +42,18 @@ if (get_class($_SESSION["loggedUser"]) == 'Models\Admin') {
 
             <a href="<?= $back ?>">Atras</a>
             <br />
-
             <form action="<?php echo FRONT_ROOT . "Offers/ShowOffersList" ?>" method="get">
                 <input type="search" id="search" name="search" placeholder="Descripcion">
-                <button type="submit">Buscar</button>   
+                <button type="submit">Buscar</button>
+
             </form>
             <br />
-            
-            <?php if(get_class($_SESSION["loggedUser"]) == 'Models\Admin'){ ?>
-         
             <form action="<?php echo FRONT_ROOT . "Offers/ShowSubidaCurriculum" ?>" method="post" enctype="multipart/form-data">
 		    <input type="file" name="curriculum">
 		    <br><br>
 		    <button>Subir Curriculum</button>
             <br />
 	        </form>
-            <?php } ?>
-            <br /><br />
-           
-            
-            
             <form action="<?php echo FRONT_ROOT . "Offers/showAllOffers" ?>" method="get">
 
                 <button type="submit">Mostrar todas las ofertas</button>
