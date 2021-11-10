@@ -300,16 +300,14 @@ class JobOfferDAO
 
 
         try {
-            $query0 = "INSERT INTO Student_x_JobOffer ( StudentId, JobOfferId ) VALUES ( :StudentId, :JobOfferId ) ";
-
+            $query = "INSERT INTO Student_x_JobOffer ( StudentId, JobOfferId, Date ) VALUES ( :StudentId, :JobOfferId, date(now()) ) ";
 
             $parameters["StudentId"] = intval($studentId);
             $parameters["JobOfferId"] = intval($jobOfferId);
 
             $this->connection = Connection::GetInstance();
 
-
-            $this->connection->ExecuteNonQuery($query0, $parameters);
+            $this->connection->ExecuteNonQuery($query, $parameters);
         } catch (Exception $ex) {
             throw $ex;
         }
@@ -334,9 +332,6 @@ class JobOfferDAO
                 $offer->setDescription($row["Description"]);
                 $offer->setJobPositionId($row["JobPositionId"]);
                 $offer->setCompanyId($row["CompanyId"]);
-
-
-
 
                 array_push($offersList, $offer);
             }
