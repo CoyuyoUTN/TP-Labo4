@@ -54,7 +54,10 @@ class AdminDAO implements Crud{
             throw $ex;
         }
     }
-    private function selectBuilder($id=null,$email=null,$password=null, $name=null)
+
+
+
+   /* private function selectBuilder($id=null,$email=null,$password=null, $name=null)
     {
         $query = "SELECT * FROM  WHERE active=" . strval(1);
 
@@ -82,9 +85,9 @@ class AdminDAO implements Crud{
         $values = $values . '"' .strval($email) . ','  . strval($password) . ',' . strval($name) . ')';
 
         return $query.$values;
-    }
+    }*/
 
-
+    
     function readAll(){
         try
             {
@@ -117,7 +120,10 @@ class AdminDAO implements Crud{
                 throw $ex;
             }
     }
-
+/**
+ * Verifica si existe un Admin en base de datos y retorna los datos.
+ * @param email y password del admin.
+ */
     function GetByEmail($email, $password){
        
         $admin = null;
@@ -170,6 +176,12 @@ class AdminDAO implements Crud{
             throw $ex;
         }
     }
+
+/**
+ * Busca y retorna un Admin o varios en la base de datos dependiendo la busqueda a realizar.
+ * @param email completo o incompleto del admin o lso administradores a buscar.
+ * 
+ */
 
     public function buscarEmail($email){
 
@@ -255,7 +267,11 @@ public function update($admin){
         }            
     }
 
-
+/**
+ * Busca y retorna un admin en particular en la base de datos.
+ * @param email del admin
+ * 
+ */
 
 
     public function VerificarAdminExsist($email)
