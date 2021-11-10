@@ -14,7 +14,7 @@ require_once("validate-session.php");
                 <div class="row">
                     <div class="col-lg-12">
                         <label for="company">Compañia: </label>
-                        <a class="btn btn-default" name="company" href="../Company/ShowListView?onAction=Offers/AddForm&actionName=Elegir"><?php echo $company ?></a>
+                        <a class="btn btn-default" name="company" href="../Company/ShowListView"><?php echo $company ?></a>
                     </div>
                     <div class="col-lg-12">
                         <label for="position">Puesto: </label>

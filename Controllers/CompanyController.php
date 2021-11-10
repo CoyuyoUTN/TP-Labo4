@@ -20,24 +20,10 @@ class CompanyController
         require_once(VIEWS_PATH . "companyADD.php");
     }
 
-    public function ShowListView()
+    public function ShowListView($id = null, $name = null, $cuil = null)
     {
-        $companyList=null;
-        if (isset($_GET['search'])) {
-            $search=$_GET['search'];
-            $companyList = $this->companyDAO->buscarNombre($search);
-           
-        } else {
-            $companyList = $this->companyDAO->readAll();
-        }
-        if ($companyList==null){
-            ?> <script language="javascript">
-                        alert("Empresa no encontrada");
-                        
-                    </script>
-                <?php
-               
-        }
+        $companyList = $this->companyDAO->readAll($id = null, $name = null, $cuil = null);
+
 
        
         require_once(VIEWS_PATH . "validate-session.php");
@@ -66,21 +52,20 @@ class CompanyController
             if($companyList==null){
         
             $company = new Company($name, $cuil, $img, $shortDesc, $ranking, $email, $phone, $city, $address, $jobOffers, $bio, $linkedin, $webpage, $facebook);
-            
+
             $this->companyDAO->create($company);
 
             $this->ShowAdminView();
-            }
-            else{
-               
-                ?> <script language="javascript">
-alert("Empresa ya existente");
-</script>
-<?php
-        
-        $this->ShowListView();
-               
-            }
+        } else {
+
+            ?> 
+            <script language="javascript">
+                alert("Empresa ya existente");
+            </script>
+            <?php
+
+            header("Location: ../Company/ShowListView");
+        }
     }
 
     public function Modify($id, $name, $cuil, $shortDesc = null, $ranking = null, $email = null, $phone = null, $city = null, $address = null, $jobOffers = null, $linkedin = null, $webpage = null, $facebook = null, $img = null, $bio = null)
@@ -113,67 +98,64 @@ alert("Empresa ya existente");
 
 
         $company = $this->companyDAO->read($id);
-       
+
         if ($company == NULL) {
             $this->ShowAdminView();
 
             echo "<center><H3> 'Id no existe' </center></H3>";
         } else {
-            
-            if($name!=null){
-            $company->setName($name);
+
+            if ($name != null) {
+                $company->setName($name);
             }
-            if($cuil!=null){
-            $company->setCuil($cuil);
+            if ($cuil != null) {
+                $company->setCuil($cuil);
             }
-            if($shortDesc!=null){
+            if ($shortDesc != null) {
                 $company->setShortDesc($shortDesc);
             }
-            if($ranking!=null){
+            if ($ranking != null) {
                 $company->setRanking($ranking);
             }
-            if($email!=null){
+            if ($email != null) {
                 $company->setEmail($email);
             }
-            if($phone!=null){
+            if ($phone != null) {
                 $company->setPhone($phone);
             }
-            if($city!=null){
+            if ($city != null) {
                 $company->setCity($city);
             }
-            if($address!=null){
+            if ($address != null) {
                 $company->setAddress($address);
             }
-            if($jobOffers!=null){
+            if ($jobOffers != null) {
                 $company->setJobOffers($jobOffers);
             }
-            if($shortDesc!=null){
+            if ($shortDesc != null) {
                 $company->setShortDesc($shortDesc);
             }
-            if($linkedin!=null){
+            if ($linkedin != null) {
                 $company->setLinkedin($linkedin);
             }
-            if($webpage!=null){
+            if ($webpage != null) {
                 $company->setWebpage($webpage);
             }
-            if($facebook!=null){
+            if ($facebook != null) {
                 $company->setFacebook($facebook);
             }
-            if($img!=null){
+            if ($img != null) {
                 $company->setImg($img);
             }
-            if($bio!=null){
+            if ($bio != null) {
                 $company->setBio($bio);
             }
-            
+
 
             $this->companyDAO->update($company);
             $this->ShowAdminView();
         }
     }
-
-
-
 
     public function Remove($id)
     {

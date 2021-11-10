@@ -22,9 +22,21 @@ require_once("validate-session.php");
             <form action="<?php echo FRONT_ROOT . "Company/Remove" ?>" method="post">
                 <table class="table bg-light-alpha" border="3">
                     <thead>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>CUIL</th>
+                        <th>
+                            Id
+                            <input class="form-control" type="text" id="id" name="id">
+                        </th>
+                        <th>
+                            Name
+                            <input class="form-control" type="text" id="name" name="name">
+                        </th>
+                        <th>
+                            CUIL
+                            <input class="form-control" type="text" id="cuil" name="cuil">
+                        </th>
+                        <th>
+                            <input type="submit" class="btn" value="Buscar" style="background-color:#DC8E47;color:white;" />
+                        </th>
                     </thead>
                     <tbody>
                         <?php

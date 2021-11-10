@@ -26,6 +26,9 @@
                 case 'Company':
                     $ret = "navCompanyAdmin.php";
                     break;
+                case 'Admin':
+                    $ret = "navAdmins.php";
+                    break;
                     
             }
             require_once(VIEWS_PATH . $ret);
@@ -34,9 +37,7 @@
             $ret = null;
          
                 switch ($table1) {
-                case 'Admin':
-                    $ret = "navAdmins.php";
-                    break;
+                
                     
             }
             require_once(VIEWS_PATH . $ret);

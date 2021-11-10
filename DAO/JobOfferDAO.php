@@ -27,8 +27,12 @@ class JobOfferDAO
         $list = array();
         $positionId = null;
 
-        if($position != null){
-            $positionId = $this->jobPositionDao->searchByDescription($position);
+        if ($position != null) {
+            if (is_string($position)) {
+                $positionId = $this->jobPositionDao->searchByDescription($position);
+            } else {
+                $positionId = $position;
+            }
         }
 
         $result = $this->db->Execute($this->selectBuilder($id, $description, $company, $positionId));
@@ -494,18 +498,4 @@ class JobOfferDAO
             }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
