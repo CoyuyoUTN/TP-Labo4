@@ -1,7 +1,7 @@
 <?php
 use DAO\NavDAO as NavDAO;
 NavDAO::getNav();
-NavDAO::getTableNav1('Admin');
+NavDAO::getTableNav('Admin');
 require_once("validate-session.php");
 if (isset($_SERVER["HTTP_REFERER"])) {
      $back = $_SERVER["HTTP_REFERER"];
