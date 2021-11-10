@@ -179,7 +179,9 @@ class CompanyDAO implements Crud{
     }
 
     public function verificarSiExisteEmpresa($name){
-
+                /**
+                 * Funcion para verificar si una empresa esta en la base de datos a partir del nombre 
+                 */
 
         try
                 {
@@ -214,6 +216,9 @@ class CompanyDAO implements Crud{
    
 
     public function buscarNombre($name){
+                    /**
+                 * Funcion para buscar empresas que tengan parte de las letras que se pasan por parametro
+                 */
 
 
         try
@@ -254,7 +259,8 @@ class CompanyDAO implements Crud{
 
 
     public function read($companyId)
-        {
+        { 
+
             try
             {
                 $company = null;
@@ -368,7 +374,7 @@ class CompanyDAO implements Crud{
 
 
     public function Edit(Company $company){
-
+        
         
         $this->RetrieveData();
         
@@ -378,7 +384,7 @@ class CompanyDAO implements Crud{
 
     }
     private function SaveData()
-    {
+    {   
         $arrayToEncode = array();
 
         foreach($this->companyList as $company)
@@ -425,7 +431,7 @@ class CompanyDAO implements Crud{
                 $answer=true;
                 
             }
-        
+            
         }
         return $answer;
     }
@@ -492,12 +498,15 @@ class CompanyDAO implements Crud{
         public function getNameCompanyForId($idList){
 
 
-           // select a.name from Company a inner join JobsOffer jo on a.id= jo.CompanyId; 
+           /**
+            * Funcion utilizada para fijarnos si el nombre de una empresa  ya esta en la base de datos a partir de su  id
+            *
+            */
            $nameCompanyList=array();
 
            for($i=0; $i < count($idList); $i++){
               
-               $query = "SELECT b.name from Company b INNER JOIN JobsOffer a on  b.id = ".$idList[$i]->getCompanyId(). " limit 1 ";   
+               $query = "SELECT b.name from Company b INNER JOIN JobsOffer a on b.id = ".$idList[$i]->getCompanyId(). " limit 1 ";   
                 
                $this->connection = Connection::GetInstance();
                $results = $this->connection->Execute($query);
@@ -525,6 +534,9 @@ class CompanyDAO implements Crud{
             try
             {
                 
+           /**
+            * Funcion utilizada para fijarnos si el cuil de una empresa  ya esta en la base de datos 
+            */
     
                 $query = "SELECT cuil FROM ".$this->table." WHERE cuil like '".$cuil."' ";
     
