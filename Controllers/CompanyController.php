@@ -20,11 +20,12 @@ class CompanyController
         require_once(VIEWS_PATH . "companyADD.php");
     }
 
-    public function ShowListView($onAction = "Company/Remove",$actionName = "Eliminar")
+    public function ShowListView()
     {
         $companyList=null;
         if (isset($_GET['search'])) {
-            $companyList = $this->companyDAO->buscarNombre($_GET['search']);
+            $search=$_GET['search'];
+            $companyList = $this->companyDAO->buscarNombre($search);
            
         } else {
             $companyList = $this->companyDAO->readAll();
