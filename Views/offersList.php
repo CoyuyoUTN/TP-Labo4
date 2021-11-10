@@ -1,6 +1,8 @@
 <?php
 
 use DAO\NavDAO as NavDAO;
+use DAO\CompanyDAO as CompanyDAO;
+use DAO\JobPositionDAO as JobPositionDAO;
 
 NavDAO::getNav();
 require_once("validate-session.php");
@@ -22,7 +24,8 @@ if (get_class($_SESSION["loggedUser"]) == 'Models\Admin') {
     $actionName = "Postularse";
 }
 
-
+$companyDao = new CompanyDAO;
+$jobPositionDao = JobPositionDAO::getInstance();
 
 ?>
 
@@ -97,8 +100,8 @@ if (get_class($_SESSION["loggedUser"]) == 'Models\Admin') {
                             <tr>
                                 <td><?php echo $offersList[$i]->getId(); ?></td>
                                 <td><?php echo $offersList[$i]->getDescription(); ?></td>
-                                <td><?php echo $offersList[$i]->getCompanyId(); ?></td>
-                                <td><?php echo $offersList[$i]->getJobPositionId(); ?></td>
+                                <td><?php echo $companyDao->read($offersList[$i]->getCompanyId())->getName(); ?></td>
+                                <td><?php echo $jobPositionDao->getById($offersList[$i]->getJobPositionId())->getDescription(); ?></td>
                                 
                                 <td>
                                     <button type="submit" id="see-more" name="data" value="<?php echo $offersList[$i]->getId(); ?>"><?php echo $actionName ?></button>
