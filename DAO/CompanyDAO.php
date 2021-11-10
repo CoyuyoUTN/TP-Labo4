@@ -115,16 +115,52 @@ class CompanyDAO implements Crud
         }
     }
 
+    private function selectBuilder($id = null, $name = null, $cuil = null)
+    {
+        $query = "SELECT * FROM Company WHERE active=" . strval(1);
 
+        if (isset($id) && $id != "") {
+            if (is_array($id)) {
+                $query = $query . " && ";
+                foreach ($id as $option) {
+                    $query = $query . "id=" . $option . " OR ";
+                }
+                $query = substr($query, 0, -4);
+            } else {
+                $query = $query . " && id=" . $id;
+            }
+        }
+        if (isset($name) && $name != "") {
+            if (is_array($name)) {
+                $query = $query . " && ";
+                foreach ($name as $option) {
+                    $query = $query . "name=" . $option . " OR ";
+                }
+                $query = substr($query, 0, -4);
+            } else {
+                $query = $query . ' && name="' . $name . '"';
+            }
+        }
+        if (isset($cuil) && $cuil != "") {
+            if (is_array($cuil)) {
+                $query = $query . " && ";
+                foreach ($cuil as $option) {
+                    $query = $query . "cuil=" . $option . " OR ";
+                }
+                $query = substr($query, 0, -4);
+            } else {
+                $query = $query . " && cuil=" . $cuil;
+            }
+        }
+        return $query;
+    }
 
-    public function readAll()
+    public function readAll($id = null, $name = null, $cuil = null)
     {
         try {
             $companyList = array();
 
-            $query = "SELECT * FROM " . $this->table . " WHERE active = 1 ";
-
-            $this->connection = Connection::GetInstance();
+            $query = $this->selectBuilder($id, $name, $cuil);
 
             $resultSet = $this->connection->Execute($query);
 
@@ -146,8 +182,6 @@ class CompanyDAO implements Crud
                 $company->setWebpage($row["webpage"]);
                 $company->setFacebook($row["facebook"]);
                 $company->setActive($row["active"]);
-
-
 
                 array_push($companyList, $company);
             }
@@ -429,34 +463,32 @@ class CompanyDAO implements Crud
 
 
 
-        public function getNameCompanyForId($idList){
+    public function getNameCompanyForId($idList)
+    {
 
 
-           // select a.name from Company a inner join JobsOffer jo on a.id= jo.CompanyId; 
-           $nameCompanyList=array();
+        // select a.name from Company a inner join JobsOffer jo on a.id= jo.CompanyId; 
+        $nameCompanyList = array();
 
-           for($i=0; $i < count($idList); $i++){
-              
-               $query = "SELECT b.name from Company b INNER JOIN JobsOffer a on  b.id = ".$idList[$i]->getCompanyId(). " limit 1 ";   
-                
-               $this->connection = Connection::GetInstance();
-               $results = $this->connection->Execute($query);
-               
-               foreach($results as $row)
-               {
-                   $company = new company();
-                   $company->setName($row["name"]);
-                  
-       
-                   array_push($nameCompanyList, $company); // devuelve una lista unicametne con los names de company
-                  
-               }
-           }
-          
-           return $nameCompanyList;
+        for ($i = 0; $i < count($idList); $i++) {
+
+            $query = "SELECT b.name from Company b INNER JOIN JobsOffer a on  b.id = " . $idList[$i]->getCompanyId() . " limit 1 ";
+
+            $this->connection = Connection::GetInstance();
+            $results = $this->connection->Execute($query);
+
+            foreach ($results as $row) {
+                $company = new company();
+                $company->setName($row["name"]);
 
 
+                array_push($nameCompanyList, $company); // devuelve una lista unicametne con los names de company
+
+            }
         }
+
+        return $nameCompanyList;
+    }
 
 
 

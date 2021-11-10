@@ -138,16 +138,15 @@ class HomeController
         $companyList=null;
         if (isset($_GET['search'])) {
             $companyList = $this->companyDAO->buscarNombre($_GET['search']);
-           
         } else {
             $companyList = $this->companyDAO->readAll();
         }
         if ($companyList==null){
-            ?> <script language="javascript">
+            ?>  <script language="javascript">
                         alert("Empresa no encontrada");
                         
-                    </script>
-                <?php
+                </script>
+            <?php
                
         }
         require_once(VIEWS_PATH . "validate-session.php");

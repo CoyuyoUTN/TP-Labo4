@@ -82,8 +82,9 @@ class OffersController
     }
 
 
-    public function postularse($data)
+    public function Postularse($data)
     {
+        echo "WAWAWA";
         require_once(VIEWS_PATH . "validate-session.php");
         $idStudent =  $_SESSION["loggedUser"]->getDbId();
 
@@ -92,17 +93,22 @@ class OffersController
         if ($this->jobOffersDAO->verificarPostulacionExists($idStudent, $data) == null) {
 
             $this->jobOffersDAO->postularse($idStudent, $data);
-        ?> <script language="javascript">
+
+            ?>
+            <script language="javascript">
                 alert("Postulado con exito");
             </script>
-        <?php
-            $this->ShowJobPositionList();
+            <?php
+
+            header("Location: ../Offers/ShowAll");
         } else {
-        ?> <script language="javascript">
+            ?>
+            <script language="javascript">
                 alert("Error!, ya se encuentra postulado");
             </script>
-        <?php
-            $this->ShowJobPositionList();
+            <?php
+            
+            header("Location: ../Offers/ShowAll");
         }
     }
 
