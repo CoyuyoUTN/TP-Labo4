@@ -414,7 +414,7 @@ class JobOfferDAO
 
         
           
-            $query = "SELECT Student.apiId, Student_x_JobOffer.Date, JobsOffer.Description FROM ((Student_x_JobOffer INNER JOIN Student ON Student_x_JobOffer.StudentId = Student.Id) INNER JOIN JobsOffer ON Student_x_JobOffer.JobOfferId = JobsOffer.id) WHERE Student.id = 7";  
+            $query = "SELECT Student.apiId, Student_x_JobOffer.Date, JobsOffer.Description FROM ((Student_x_JobOffer INNER JOIN Student ON Student_x_JobOffer.StudentId = Student.Id) INNER JOIN JobsOffer ON Student_x_JobOffer.JobOfferId = JobsOffer.id) WHERE Student.id = " . $_SESSION["loggedUser"]->getDbId() . " ";  
            
             $this->connection = Connection::GetInstance();
             $results = $this->connection->Execute($query);
