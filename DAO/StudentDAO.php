@@ -178,11 +178,15 @@ namespace DAO;
         return $this->studentList;
     }
 
-   
+   /**
+    * Recibe un mail  y busca dentro de la lista cargada por la api estudiantes
+    *@param mail del estudiante a buscar
+    *Si no lo encuentra retorna null
+    */
    
     public function GetByStudentMail($mail)
     {
-        $student = null;
+        $students = null; // cambio
 
         $this->RetrieveData();
 
@@ -196,7 +200,9 @@ namespace DAO;
     }
 
 
-
+/**
+ * carga la lista de la clase con los datos de la api
+ */
     private function RetrieveData()
     {
         $this->studentList = array();
@@ -279,7 +285,9 @@ namespace DAO;
 
         array_push($this->studentList, $student);
     }
-
+    /**
+     * Obtiene todos los datos de la api y los carga en la lista de la clase
+     */
     public function GetAll()
     {
         $this->RetrieveData();
@@ -289,7 +297,10 @@ namespace DAO;
 
     
 
-
+/**
+ * Devuelve un estudiante buscandolo en la base de datos por el id de la api
+ * @param apiId
+ */
     public function GetByUserId($apiId)
     {
         $student = null;
@@ -312,6 +323,10 @@ namespace DAO;
     }  
 
 
+    /**
+     * Buscan un estudiante en la api por mail
+     * @param mail
+     */
     public function existsMailPorId($mail){
 
         $this->RetrieveData();
@@ -328,7 +343,10 @@ namespace DAO;
         return $return;
     }
 
-
+    /**
+     * Busca un estudiante por id en la api
+     * @param id del estudiante
+     */
     public function getStudentForIdApi($id){
 
         $this->RetrieveData();
@@ -345,6 +363,11 @@ namespace DAO;
         return $return;
     }
 
+    /**
+     * Retorna un estudiante buscandolo en la abse de datos por el apiId
+     * @param apiId
+     * 
+     */
     public function VerificarStudentExsistInDb($apiId)
     {
         try
@@ -375,7 +398,10 @@ namespace DAO;
 
 
     
-    
+    /**
+     * busca y retorna un estudiante de la api por el careerId
+     * @param careerId 
+     */
 
     public function existsCareerId($careerId){
 
@@ -396,6 +422,11 @@ namespace DAO;
 
 
     }
+
+   /**
+     * busca y retorna un estudiante de la api por id
+     * @param id
+     */
 
     public function getCareerIdForStudent($id){
 
@@ -421,7 +452,10 @@ namespace DAO;
     }
 
 
-
+/**
+ * Obtiene todos los apiId de la base de datos de estudiantes 
+ * 
+ */
 
 
     public function getAllBdd()
@@ -449,7 +483,10 @@ namespace DAO;
     }  
 
 
-
+/**
+ * Obtiene una lista con los o el estudainte que coincida con la apiId
+ * @param lista estudiantes
+ */
 
     public function getAllApiId($studentList2){
 
