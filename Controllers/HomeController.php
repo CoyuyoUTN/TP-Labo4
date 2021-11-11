@@ -33,7 +33,9 @@ class HomeController
     {
         phpinfo();
     }
-
+       /**
+         * Funcion utilizada para Loguearse trayendo los datos de la Base de Datos y de la Api
+         */
 
     public function Login($email, $password)
     {
@@ -82,6 +84,9 @@ class HomeController
     {
         require_once(VIEWS_PATH . "loguin.php");
     }
+        /**
+         * Funcion utilizada para registrarse al programa, fijandose si ya hay un usuario con ese mail en la Base de Datos y la Api
+         */
 
     public function Check($email, $password)
     {
@@ -142,6 +147,9 @@ class HomeController
         require_once(VIEWS_PATH . "student-list.php");*/
     }
 
+        /**
+         * Funcion utilizada para listar las Company para que el Student pueda filtrarlas
+         */
 
     public function ShowCompanyListStudent()
     {
@@ -199,6 +207,9 @@ class HomeController
     }
 
 
+     /**
+         * Funcion utilizada para agregar Student a la Base de Datos 
+         */
 
     public function Add($studentId, $firstName, $lastName, $careerId, $dni, $fileNumber, $gender, $birthDate, $email, $phoneNumber, $active)
     {
@@ -209,7 +220,9 @@ class HomeController
         $this->ShowAddView();
     }
 
-
+ /**
+         * Funcion utilizada para eliminar Student de la Base de Datos 
+         */
     public function Remove($name)
     {
         require_once(VIEWS_PATH . "validate-session.php");

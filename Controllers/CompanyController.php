@@ -44,7 +44,9 @@ class CompanyController
         require_once(VIEWS_PATH . "companyList.php");
     }
     
-
+       /**
+         * Funcion utilizada para agregar una Company en la Base de Datos
+         */
     public function Add($name, $cuil, $shortDesc = null, $ranking = null, $email = null, $phone = null, $city = null, $address = null, $jobOffers = null, $linkedin = null, $webpage = null, $facebook = null, $img = null, $bio = null)
     {
         require_once(VIEWS_PATH . "validate-session.php");
@@ -82,7 +84,9 @@ alert("Empresa ya existente");
                
             }
     }
-
+     /**
+         * Funcion utilizada para modificar una Company en la Base de Datos
+         */
     public function Modify($id, $name, $cuil, $shortDesc = null, $ranking = null, $email = null, $phone = null, $city = null, $address = null, $jobOffers = null, $linkedin = null, $webpage = null, $facebook = null, $img = null, $bio = null)
     {
 
@@ -173,7 +177,9 @@ alert("Empresa ya existente");
     }
 
 
-
+   /**
+         * Funcion utilizada para eliminar una Company en la Base de Datos
+         */
 
     public function Remove($id)
     {

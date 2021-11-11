@@ -17,10 +17,9 @@
             $this->aplicantDAO = new AplicantDAO();
         }
 
-
-
-
-
+         /**
+         * Funcion utilizada para retornar una lista con todos los datos de los postulaciones de la Base de Datos
+         */
 
         public function showAllPostulations(){
 

@@ -14,8 +14,11 @@
         {
             $this->adminDAO = new AdminDAO();
         }
-
+        /**
+         * Funcion utilizada para retornar una lista con los datos de todos los Admins de la Base de Datos
+         */
         public function ShowAll(){
+            
             $adminList=null;
             if (isset($_GET['search'])) {
                 $adminList = $this->adminDAO->buscarEmail($_GET['search']);
@@ -53,7 +56,9 @@
                 require_once(VIEWS_PATH."companyModify.php");
             
         }
-
+        /**
+         * Funcion utilizada para agregar un Admin a la Base de Datos
+         */
 
         public function addADMIN($email,$password,$name){
 

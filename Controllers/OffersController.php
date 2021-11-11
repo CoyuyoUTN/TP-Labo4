@@ -138,7 +138,9 @@ class OffersController
     }
 
 
-
+     /**
+         * Funcion utilizada para ver las postulaciones de un Student 
+         */
 
     public function showMisPostulaciones()
     {
@@ -175,7 +177,9 @@ class OffersController
         require_once(VIEWS_PATH . "JobOfferModify.php");
       
     }
-
+     /**
+         * Funcion utilizada para modificar las JobOffer en la Base de Datos 
+         */
     public function jobOfferModify($id, $Description, $companyId, $jobPositionId, $active )
     {
 
@@ -214,7 +218,9 @@ class OffersController
             $this->ShowOffersList();
         }
     }
-
+     /**
+         * Funcion utilizada para agregar PDF a la carpeta de Curriculums 
+         */
 
     public function ShowSubidaCurriculum(){
 
