@@ -74,7 +74,7 @@ $jobPositionDao = JobPositionDAO::getInstance();
                         </th>
                     
                         <th>
-                            <?php echo "CompañiaId" ?>
+                            <?php echo "Compañia" ?>
 
                         </th>
                         <th>
