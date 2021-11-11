@@ -406,14 +406,14 @@ class JobOfferDAO
          */
 
 
-    public function getDescrptionPostulaciones ($idList){
+    public function getDescrptionPostulaciones (){
 
        
         $postList=array();
 
-        for($i=0; $i < count($idList); $i++){
+        
           
-            $query = "SELECT id, Description, (SELECT Date from Student_x_JobOffer WHERE JobOfferId = " .$idList[$i]->getId(). " ) as Date from " .$this->table. " WHERE id = " .$idList[$i]->getId(). " ";   
+            $query = "SELECT Student.apiId, Student_x_JobOffer.Date, JobsOffer.Description FROM ((Student_x_JobOffer INNER JOIN Student ON Student_x_JobOffer.StudentId = Student.Id) INNER JOIN JobsOffer ON Student_x_JobOffer.JobOfferId = JobsOffer.id) WHERE Student.id = 7";  
            
             $this->connection = Connection::GetInstance();
             $results = $this->connection->Execute($query);
@@ -421,7 +421,7 @@ class JobOfferDAO
             foreach($results as $row)
             {
                 $jobOffer = new JobOffer();
-                $jobOffer->setId($row["id"]);
+                $jobOffer->setId($row["apiId"]);
                 $jobOffer->setDescription($row["Description"]);
                 $jobOffer->setDate($row["Date"]);
 
@@ -430,7 +430,7 @@ class JobOfferDAO
                 array_push($postList, $jobOffer); // devuelve una lista unicametne con los apiId
                
             }
-        }
+        
         return $postList;
     }
 

@@ -151,7 +151,7 @@ class OffersController
         $idList = $this->jobOffersDAO->misPostulaciones($idStudent);
 
         if ($idList != null) {
-            $DescrptionList =   $this->jobOffersDAO->getDescrptionPostulaciones($idList);
+            $DescrptionList =   $this->jobOffersDAO->getDescrptionPostulaciones();
             if ($DescrptionList != null) {
                
                 require_once(VIEWS_PATH . "misPostulaciones.php");
