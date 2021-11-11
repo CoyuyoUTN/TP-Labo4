@@ -280,11 +280,12 @@ class JobOfferDAO
 
             try{
                 $resultSet=null;
-                $query0 = "SELECT StudentId FROM  Student_x_JobOffer WHERE JobOfferId like :JobOfferId ";
+                $query0 = "SELECT StudentId FROM  Student_x_JobOffer WHERE JobOfferId = :JobOfferId and StudentId = :StudentId ";
     
                     
                     
                     $parameters["JobOfferId"] = intval($jobOfferId);
+                    $parameters["StudentId"] = intval($studentId);
     
                     $this->connection = Connection::GetInstance();
     
@@ -413,7 +414,7 @@ class JobOfferDAO
 
         for($i=0; $i < count($idList); $i++){
           
-            $query = "SELECT id, Description, (SELECT Date from Student_x_JobOffer WHERE JobOfferId = " .$idList[$i]->getId(). " ) as Date from " .$this->table. " WHERE id = " .$idList[$i]->getId(). " ";   
+            $query = "SELECT id, Description, (SELECT Date from Student_x_JobOffer WHERE JobOfferId = " .$idList[$i]->getId(). " limit 1) as Date from " .$this->table. " WHERE id = " .$idList[$i]->getId(). " ";   
            
             $this->connection = Connection::GetInstance();
             $results = $this->connection->Execute($query);
