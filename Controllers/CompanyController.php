@@ -20,7 +20,7 @@ class CompanyController
         require_once(VIEWS_PATH . "companyADD.php");
     }
 
-    public function ShowListView()
+    public function ShowListView($onAction = "Company/Remove",$actionName = "Eliminar")
     {
         $companyList=null;
         if (isset($_GET['search'])) {

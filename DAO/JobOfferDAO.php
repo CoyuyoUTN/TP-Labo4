@@ -242,7 +242,7 @@ class JobOfferDAO
                 {
                     $offersList = array();
                     
-                    $query = "SELECT id, Description, JobPositionId, CompanyId  FROM ".$this->table." WHERE Description like '".$description."%' ";
+                    $query = "SELECT id, Description, JobPositionId, CompanyId  FROM ".$this->table." WHERE Description like '".$description."%' && active = 1 ";
     
                     
                     

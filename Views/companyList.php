@@ -19,7 +19,7 @@ require_once("validate-session.php");
                 <input type="search" id="search" name="search">
                 <button type="submit">Buscar</button>
             </form>
-            <form action="<?php echo FRONT_ROOT . "Company/Remove" ?>" method="post">
+            <form action="<?php echo FRONT_ROOT . $onAction ?>" method="post">
                 <table class="table bg-light-alpha" border="3">
                     <thead>
                         <th>Id</th>
@@ -35,7 +35,7 @@ require_once("validate-session.php");
                                 <td><?php echo $company->getName() ?></td>
                                 <td><?php echo $company->getCuil() ?></td>
                                 <td>
-                                <button type="submit" class="btn" name="id" value="<?php echo $company->getId() ?>">Eliminar</button>
+                                <button type="submit" class="btn" name="id" value="<?php echo $company->getId() ?>"><?php echo $actionName ?></button>
                                 </td>
                                 <td>
                                     <a class="btn btn-default" href="../Home/ShowFullData?data=<?php echo $company->getId() ?>" >Mostrar</a>
