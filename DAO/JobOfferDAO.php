@@ -23,6 +23,9 @@ class JobOfferDAO
 
     function GetAll($id = null, $description = null, $company = null, $position = null)
     {
+        /**
+         * Retorna una lista con todos los datos de una tabla en particular.
+         */
         $result = array();
         $list = array();
         $positionId = null;
@@ -41,7 +44,10 @@ class JobOfferDAO
     }
 
     private function selectBuilder($id = null, $description = null, $company = null, $position = null)
-    {
+    {   
+        /**
+         * Funcion utilizada para armar la query e igualar los parametros a las variables de la query
+         */
         $query = "SELECT * FROM JobsOffer WHERE active=" . strval(1);
 
         if (isset($id) && $id != "") {
@@ -97,6 +103,9 @@ class JobOfferDAO
 
     private function insertBuilder($description, $company, $position)
     {
+        /**
+         * Funcion utilizada para armar la query e igualar los parametros a las variables de la query
+         */
         $query = "INSERT INTO JobsOffer (";
         $values = ") VALUES (";
 
@@ -109,6 +118,9 @@ class JobOfferDAO
 
     private function updateBuilder($id, $description=NULL, $company=NULL, $position=NULL)
     {
+        /**
+         * Funcion utilizada para armar la query e igualar los parametros a las variables de la query
+         */
         $query = "UPDATE JobsOffer SET ";
         $set = array();
         $first = true;
@@ -153,9 +165,12 @@ class JobOfferDAO
 
         return $list;
     }
-
+        /**
+         * Funcion utilizada para retornar una lista JobPositionId
+         */
     function GetByJobPosition($studentCareerId)
     {
+      
         $result = $this->db->Execute('SELECT * FROM JobsOffer WHERE jobPositionId =' . $studentCareerId . " && active=1");
         $list = array();
 
@@ -166,48 +181,23 @@ class JobOfferDAO
         return $list;
     }
 
-
+        /**
+         * Funcion utilizada para agregar Students a la base de datos
+         */
 
     function Add(string $description, int $company, int $position)
     {
         $result = $this->db->Execute($this->insertBuilder($description, $company, $position));
     }
 
-
-  /*public function jobOfferByCareerId(){
-       
-        $jobPositionList = new JobPosition();
-         
-        $jobPositionList = $this->JobPositionDAO->getByCareerId();
-        $newList = array();
-         
-        foreach($jobPositionList as $position){
-          
-             
-            $result = $this->db->Execute('SELECT * FROM JobsOffer WHERE JobPositionId = ' . $position[" JobPositionId"] . " && active=1");
-           
-           
-           
-            array_push($newList, $result);  
-             
-
-
-
-        }
-            //recorrer la lista de jobposition
-                 // query a base de dato devolver lista por jobpositionID, devuelve lista 
-                 //  recorrer la lista, nuevo dao con joboffer mas jobpositionList, guardar conjunto de datos
-                        //nuevo bojeto cada vez que la recorra los datos, nueva lista del nuevo dao      
-     
-
-    }*/
-    
-
-
+        
+        /**
+         * Funcion utilizada para retornar una lista de JobsOffer en base a la JobPositionId
+         */
     public function getJobOfferByPositionId($listJobsPosition){
       
         try{
-       //select a.id ,a.Description from JobsOffer a where jobPositionId = 8 order by a.id;
+   
          $newList = array();
          
          foreach($listJobsPosition as $position){
@@ -241,7 +231,10 @@ class JobOfferDAO
     }
 
     }
-
+    
+        /**
+         * Funcion utilizada para filtrar la lista de JobOffers por descripcion
+         */
     public function buscarDescription($description){
 
 
@@ -279,6 +272,9 @@ class JobOfferDAO
         
 
         
+        /**
+         * Funcion utilizada para a partir del JobOfferId obtener el StudentId
+         */ 
 
         public function verificarPostulacionExists($studentId, $jobOfferId){
 
@@ -306,9 +302,9 @@ class JobOfferDAO
 
         }
 
-
-
-
+        /**
+         * Funcion utilizada para que el alumno se postule a la JobOffer en la base de datos
+         */
 
         public function postularse ($studentId, $jobOfferId){
 
@@ -373,7 +369,10 @@ class JobOfferDAO
 
 
 
-
+            
+        /**
+         * Funcion utilizada para que el Student vea sus postulaciones 
+         */
         
     public function misPostulaciones($Id){
 
@@ -401,7 +400,10 @@ class JobOfferDAO
 
     }
 
-
+        
+        /**
+         * Funcion utilizada para devolver la descripcion de las postulaciones del Student
+         */
 
 
     public function getDescrptionPostulaciones ($idList){
@@ -467,13 +469,16 @@ class JobOfferDAO
         }
     }
    
-
+        /**
+         * Funcion utilizada para armar la query e igualar los parametros a las variables de la query
+         */
 
  
     public function update ($jobOffer){
 
         try
             {
+         
                 $query = "UPDATE ".$this->table." SET Description = :Description, CompanyId = :CompanyId, JobPositionId = :JobPositionId, active = :active  WHERE ( id = :id ) ";
 
                  $parameters["id"] = $jobOffer->getId(); 
