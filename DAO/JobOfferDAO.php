@@ -280,11 +280,12 @@ class JobOfferDAO
 
             try{
                 $resultSet=null;
-                $query0 = "SELECT StudentId FROM  Student_x_JobOffer WHERE JobOfferId like :JobOfferId ";
+                $query0 = "SELECT StudentId FROM  Student_x_JobOffer WHERE JobOfferId = :JobOfferId and StudentId = :StudentId ";
     
                     
                     
                     $parameters["JobOfferId"] = intval($jobOfferId);
+                    $parameters["StudentId"] = intval($studentId);
     
                     $this->connection = Connection::GetInstance();
     
