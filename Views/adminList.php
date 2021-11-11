@@ -30,9 +30,7 @@ if (isset($_SERVER["HTTP_REFERER"])) {
                         <th>
                         <?php echo "Email" ?>
                          </th>
-                        <th>
-                        <?php echo "Password" ?>
-                         </th>
+                       
                         <th>
                         <?php echo "Name" ?>
                          </th>
@@ -49,7 +47,7 @@ if (isset($_SERVER["HTTP_REFERER"])) {
                                         <tr>
                                              <td><?php echo $admin->getId() ?></td>
                                              <td><?php echo $admin->getEmail() ?></td>
-                                             <td><?php echo $admin->getPassword() ?></td>
+                    
                                              <td><?php echo $admin->getName() ?></td>
                                              <td><?php echo $admin->getActive() ?></td>
 

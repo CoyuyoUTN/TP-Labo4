@@ -13,7 +13,7 @@
           </li>
 
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo  FRONT_ROOT . "Home/ShowListView " ?>">Listar Alumnos</a>
+               <a class="nav-link" href="<?php echo  FRONT_ROOT . "Home/ShowListView " ?>">Listar Usuarios</a>
           </li>
 
           <li class="nav-item">

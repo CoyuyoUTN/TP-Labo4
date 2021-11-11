@@ -7,7 +7,7 @@
 <main class="py-5">
      <section id="listado" class="mb-5">
           <div class="container">
-               <h2 class="mb-4">Listado de estudiantes</h2>
+               <h2 class="mb-4">Listado de Usuarios del Programa</h2>
                <form action="<?php echo FRONT_ROOT."Home/ShowListView" ?>"  method="">
                <table class="table bg-light-alpha" border="3">
                     <thead>
