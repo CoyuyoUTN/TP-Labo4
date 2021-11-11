@@ -58,7 +58,10 @@ class AplicantDAO {
 
     }
 
-
+    /**
+     * Busca y retorna estudianes que se aplicaron a una oferta con sus datos completos y no por numero de id
+     * @param lista de aplicantes.
+     */
 
     public function datosRealesPorId($aplicantList){
  

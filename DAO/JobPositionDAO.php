@@ -9,6 +9,9 @@ class JobPositionDAO
     private $jobPositionList;
     private static $instance;
 
+    /**
+     * Constructor de la clase donde ya carga de manera automatica la lista de posiciones con los datos de la api.
+     */
     function __construct()
     {
         $this->jobPositionList = array();
@@ -44,6 +47,10 @@ class JobPositionDAO
         return $this->jobPositionList;
     }
 
+    /**
+     * Retorna una posicion por id.
+     * @param id de la posicion.
+     */
     function getById($id)
     {
         $ret = new JobPosition;
@@ -55,32 +62,10 @@ class JobPositionDAO
         return $ret;
     }
 
-
-    /*function getByCareerId($studentCareerId){
-      
-        $listByCareer = array();
-
-        foreach ($this->jobPositionList as $value) {
-
-            if($value->getCareerId() == $studentCareerId){
-              
-                $jobPosition = new JobPosition;
-               
-                $jobPosition["jobPositionID"] = $value->getJobPositionId();
-                $jobPosition["careerId"] = $value->getCareerId();
-                $jobPosition["description"] = $value->getJobPositionId();
-
-                  array_push($listByCareer, $jobPosition);
-
-             }
-               
-        }
-
-     return $listByCareer;
-
-    }*/
-
-
+    /**
+     * Busca uns posicion por la descripcion en la lista cargada por la api
+     * @param descripcion de la posicion.
+     */
 
     function searchByDescription($description)
     {
@@ -97,7 +82,10 @@ class JobPositionDAO
         return $ret;
     }
 
-
+    /**
+     * Obtiene una lista cargada con las posiciones donde estas pertenezcan a una misma carrera
+     * @param el id de la carrera
+     */
 
     public function getJobsPositionsForCareerId($careerId)
     {
