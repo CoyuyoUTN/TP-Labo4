@@ -19,6 +19,7 @@ class Company
     private $linkedin;
     private $webpage;
     private $facebook;
+    private $password;
     private $active;
 
 
@@ -36,6 +37,7 @@ class Company
         $bio = null,
         $linkedin = null,
         $webpage = null,
+        $password = null,
         $facebook = null
     ) {
 
@@ -53,6 +55,7 @@ class Company
         $this->linkedin = $linkedin;
         $this->webpage = $webpage;
         $this->facebook = $facebook;
+        $this->password = $password;
     }
 
     public static function fromJson($json): static
@@ -453,4 +456,24 @@ class Company
 
                 return $this;
         }
+
+    /**
+     * Get the value of password
+     */ 
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set the value of password
+     *
+     * @return  self
+     */ 
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
 }

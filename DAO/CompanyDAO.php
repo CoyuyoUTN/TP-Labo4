@@ -559,13 +559,107 @@ class CompanyDAO implements Crud{
 
 
 
+        public function VerificarCompanyExsistInDb($mail)
+        {
+            try
+            {
+                $listCompa=array();
+    
+                $query = "SELECT email, password FROM ".$this->table." WHERE email like '".$mail."'and active = 1 ";
+    
+               
+                
+                $this->connection = Connection::GetInstance();
+    
+                $resultSet = $this->connection->Execute($query);
+                
+
+                foreach($resultSet as $row)
+                {
+                    $company = new company();
+                    $company->setEmail($row["email"]);
+                    $company->setPassword($row["password"]);
+                   
+        
+                    array_push($listCompa, $company); // devuelve una lista unicametne con los names de company
+                   
+                }
 
 
 
+                return $listCompa;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+
+        public function altaCompany($company){
+
+            try
+            {
+                $query = "UPDATE ".$this->table." SET password = :password WHERE ( email = :email ) ";
+
+                 $parameters["password"] = $company->getPassword(); 
+                 $parameters["email"] = $company->getEmail(); 
+                
+                
+             
+                
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
 
 
 
+        }
 
+
+        function GetByEmail($email, $password){
+       
+            $admin = null;
+    
+            $query = 'SELECT * FROM '.$this->table.' WHERE Email = "'.$email.'" && Password = "'.$password.'and active = 1"';
+    
+            $this->connection = Connection::GetInstance();
+    
+            $results = $this->connection->Execute($query);
+          
+            foreach ($results as $row)
+                {                
+                    $company = new Company();
+                    $company->setName($row["name"]);
+                    $company->setCuil($row["cuil"]);
+                    $company->setId($row["id"]);
+                    $company->setImg($row["img"]);
+                    $company->setShortDesc($row["shortDesc"]);
+                    $company->setRanking($row["ranking"]);
+                    $company->setEmail($row["email"]);
+                    $company->setPhone($row["phone"]);
+                    $company->setCity($row["city"]);
+                    $company->setAddress($row["address"]);
+                    $company->setJobOffers($row["jobOffers"]);
+                    $company->setBio($row["bio"]);
+                    $company->setLinkedin($row["linkedin"]);
+                    $company->setWebpage($row["webpage"]);
+                    $company->setFacebook($row["facebook"]);
+                    $company->setActive($row["active"]);
+                    $company->setPassword($row["password"]);
+                    
+                    
+
+                    array_push($companyList, $company);
+                }
+    
+            return $admin;
+        }
 
 
 

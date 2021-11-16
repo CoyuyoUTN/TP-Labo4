@@ -39,8 +39,7 @@ class HomeController
 
     public function Login($email, $password)
     {
-           // $password= md5($password);
-        
+           
         $userAdmin= $this->adminDAO->GetByEmail($email, $password);
         
         if ($userAdmin!=null && $userAdmin->getEmail() == $email  && $userAdmin->getPassword() == $password ) {
@@ -91,35 +90,65 @@ class HomeController
     public function Check($email, $password)
     {
 
+        $companyExist= $this->companyDAO->VerificarCompanyExsistInDb($email);
 
-        $studentIdApi = $this->studentDAO->existsMailPorId($email);
-       
-        if($this->studentDAO->VerificarStudentExsistInDb($studentIdApi) != null){
+            if($companyExist!= null){
 
-            ?> <script language="javascript">alert("Usuario ya existente");</script>
-            <?php
-            require_once(VIEWS_PATH."loguin.php");
+                foreach($companyExist as $company){
 
+                    if($company->getPassword() != null){
+
+                        ?> <script language="javascript">alert("Empresa ya existente");</script>
+                        <?php
+                        require_once(VIEWS_PATH."loguin.php");
+                    }
+                    else{
+                        $this->companyDAO->altaCompany($company);
+                        ?> <script language="javascript">
+                        alert("Cuenta dada de alta con exito");
+                        </script>
+                    <?php
+                    require_once(VIEWS_PATH . "loguin.php");
+
+                    }
+
+                }
+
+          }
+
+             else{
+
+        
+
+                    $studentIdApi = $this->studentDAO->existsMailPorId($email);
+                
+                    if($this->studentDAO->VerificarStudentExsistInDb($studentIdApi) != null){
+
+                        ?> <script language="javascript">alert("Usuario ya existente");</script>
+                        <?php
+                        require_once(VIEWS_PATH."loguin.php");
+
+                    }
+                    else{
+                        $student= $this->studentDAO-> getStudentForIdApi($studentIdApi);
+                        if ($student != null) {
+                        $student->setPassword($password);
+
+                            $this->studentDAO->create($student);
+                            ?> <script language="javascript">
+                            alert("Cuenta creada exitosamente, inicie sesion");
+                            </script>
+                        <?php
+                            require_once(VIEWS_PATH . "loguin.php");
+                        } else {
+                        ?> <script language="javascript">
+                            alert("No existe Mail");
+                            </script>
+                        <?php
+                        require_once(VIEWS_PATH . "loguin.php");
         }
-        else{
-            $student= $this->studentDAO-> getStudentForIdApi($studentIdApi);
-            if ($student != null) {
-             $student->setPassword($password);
-
-                $this->studentDAO->create($student);
-                ?> <script language="javascript">
-                alert("Cuenta creada exitosamente, inicie sesion");
-                </script>
-            <?php
-                require_once(VIEWS_PATH . "loguin.php");
-            } else {
-            ?> <script language="javascript">
-                alert("No existe Mail");
-                </script>
-            <?php
-            require_once(VIEWS_PATH . "loguin.php");
         }
-        }
+    }
     }
 
 
