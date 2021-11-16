@@ -600,17 +600,11 @@ class CompanyDAO implements Crud{
 
             try
             {
-                $query = "UPDATE ".$this->table." SET password = :password WHERE ( email = :email ) ";
+                $query = "UPDATE ".$this->table." SET password = '".$company->getPassword()."' WHERE ( email = '".$company->getEmail()."' ) ";
 
-                 $parameters["password"] = $company->getPassword(); 
-                 $parameters["email"] = $company->getEmail(); 
-                
-                
-             
-                
                 $this->connection = Connection::GetInstance();
 
-                $this->connection->ExecuteNonQuery($query, $parameters);
+                $this->connection->ExecuteNonQuery($query);
             }
             catch(Exception $ex)
             {
@@ -622,7 +616,7 @@ class CompanyDAO implements Crud{
         }
 
 
-        function GetByEmail($email, $password){
+        function GetCompanyByEmail($email, $password){
        
             $admin = null;
     

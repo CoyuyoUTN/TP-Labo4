@@ -2,9 +2,9 @@
 
 namespace Models;
 
-use Models\IUser as IUser;
 
-class Admin implements IUser
+
+class Admin 
 {
 
     private $id;

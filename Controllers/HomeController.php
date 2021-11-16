@@ -41,7 +41,8 @@ class HomeController
     {
            
         $userAdmin= $this->adminDAO->GetByEmail($email, $password);
-        
+        $userCompany= $this->companyDAO->getCompanyByEmail($email, $password);
+      
         if ($userAdmin!=null && $userAdmin->getEmail() == $email  && $userAdmin->getPassword() == $password ) {
             $_SESSION["loggedUser"] = $userAdmin;
             $this->ShowAdminView();
@@ -60,11 +61,19 @@ class HomeController
     
                 $this->ShowStudentView($email);
             } else {
+
+                if($userCompany!=null && $userCompany->getEmail() == $email  && $userCompany->getPassword() == $password){
+                    
+                    $_SESSION["loggedUser"] = $userCompany;
+                    $this->ShowFullData($userCompany->getId());
+        
+                } else {
                 ?> <script language="javascript">
                         alert("Usuario y/o Contraseña incorrectos o usuario no activo");
                     </script>
                 <?php
                 $this->Index("Usuario y/o Contraseña incorrectos");
+                        }
             }
         }
         
