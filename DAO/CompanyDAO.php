@@ -600,7 +600,7 @@ class CompanyDAO implements Crud{
 
             try
             {
-                $query = "UPDATE ".$this->table." SET password = '".$company->getPassword()."' WHERE ( email = '".$company->getEmail()."' ) ";
+                $query = "UPDATE ".$this->table." SET password = '".$company->getPassword()." WHERE ( email = '".$company->getEmail()."' ) ";
 
                 $this->connection = Connection::GetInstance();
 
@@ -618,16 +618,18 @@ class CompanyDAO implements Crud{
 
         function GetCompanyByEmail($email, $password){
        
-            $admin = null;
+            
+            $query = "SELECT * FROM " .$this->table. " WHERE Email = '".$email."'  && Password = '".$password."' and active = 1 ";
     
-            $query = 'SELECT * FROM '.$this->table.' WHERE Email = "'.$email.'" && Password = "'.$password.'and active = 1"';
-    
-            $this->connection = Connection::GetInstance();
-    
-            $results = $this->connection->Execute($query);
+
           
-            foreach ($results as $row)
-                {                
+            $this->connection = Connection::GetInstance();
+          
+            $companyList = $this->connection->Execute($query);
+           
+           
+           foreach($companyList as $row){
+                              
                     $company = new Company();
                     $company->setName($row["name"]);
                     $company->setCuil($row["cuil"]);
@@ -647,12 +649,13 @@ class CompanyDAO implements Crud{
                     $company->setActive($row["active"]);
                     $company->setPassword($row["password"]);
                     
-                    
+                
+           }
 
-                    array_push($companyList, $company);
-                }
+                  
+            
     
-            return $admin;
+            return $company;
         }
 
 

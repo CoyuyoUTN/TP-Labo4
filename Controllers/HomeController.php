@@ -41,13 +41,15 @@ class HomeController
     {
            
         $userAdmin= $this->adminDAO->GetByEmail($email, $password);
-        $userCompany= $this->companyDAO->getCompanyByEmail($email, $password);
+       
       
         if ($userAdmin!=null && $userAdmin->getEmail() == $email  && $userAdmin->getPassword() == $password ) {
             $_SESSION["loggedUser"] = $userAdmin;
             $this->ShowAdminView();
 
         } else {
+
+
             $dbId = $this->studentDAO->existsMailPorId($email); //valida si exite por api y devuelve studentId, sino null
             $user=null;
 
@@ -61,8 +63,9 @@ class HomeController
     
                 $this->ShowStudentView($email);
             } else {
+                $userCompany= $this->companyDAO->getCompanyByEmail($email, $password);
 
-                if($userCompany!=null && $userCompany->getEmail() == $email  && $userCompany->getPassword() == $password){
+                if($userCompany !=null && $userCompany->getEmail() == $email  && $userCompany->getPassword() == $password){
                     
                     $_SESSION["loggedUser"] = $userCompany;
                     $this->ShowFullData($userCompany->getId());
