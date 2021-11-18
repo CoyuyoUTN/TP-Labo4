@@ -600,7 +600,8 @@ class CompanyDAO implements Crud{
 
             try
             {
-                $query = "UPDATE ".$this->table." SET password = '".$company->getPassword()." WHERE ( email = '".$company->getEmail()."' ) ";
+                $query = "UPDATE ".$this->table." SET password = '".$company->getPassword()."' WHERE ( email = '".$company->getEmail()."' ) ";
+                
 
                 $this->connection = Connection::GetInstance();
 
@@ -621,7 +622,7 @@ class CompanyDAO implements Crud{
             
             $query = "SELECT * FROM " .$this->table. " WHERE Email = '".$email."'  && Password = '".$password."' and active = 1 ";
     
-
+           
           
             $this->connection = Connection::GetInstance();
           

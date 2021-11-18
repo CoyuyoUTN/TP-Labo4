@@ -115,6 +115,7 @@ class HomeController
                         require_once(VIEWS_PATH."loguin.php");
                     }
                     else{
+                        $company->setPassword($password);
                         $this->companyDAO->altaCompany($company);
                         ?> <script language="javascript">
                         alert("Cuenta dada de alta con exito");
