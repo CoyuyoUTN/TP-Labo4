@@ -86,6 +86,7 @@ $jobPositionDao = JobPositionDAO::getInstance();
                             <?php echo "Postularse" ?>
 
                         </th>
+                    
                     </thead>
                     <tbody>
                         <?php
@@ -96,6 +97,7 @@ $jobPositionDao = JobPositionDAO::getInstance();
                                 <td><?php echo $offersList[$i]->getDescription(); ?></td>
                                 <td><?php echo $companyDao->read($offersList[$i]->getCompanyId())->getName(); ?></td>
                                 <td><?php echo $jobPositionDao->getById($offersList[$i]->getJobPositionId())->getDescription(); ?></td>
+                               
                                 
                                 <td>
                                     <button type="submit" id="see-more" name="data" value="<?php echo $offersList[$i]->getId(); ?>"><?php echo $actionName ?></button>

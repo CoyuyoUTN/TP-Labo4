@@ -42,12 +42,12 @@ class OffersController
         require_once(VIEWS_PATH . "offersNew.php");
     }
 
-    public function AddOffer($position, $description, $companyId, $vencimiento)
+    public function AddOffer($position, $description, $companyId)
     {
         if ($companyId == "" || $companyId == NULL) {
             $this->AddForm();
         } else {
-            $this->jobOffersDAO->Add($description, $companyId, $position, $vencimiento);
+            $this->jobOffersDAO->Add($description, $companyId, $position);
             $this->ShowAll();
         }
     }
@@ -211,10 +211,16 @@ class OffersController
             if($active!=null){
                 $jobOffer->setActive($active);
             }
-           
-            
-
             $this->jobOffersDAO->update($jobOffer);
+
+            if($active==0){
+
+                mail("herrero_gonza@hotmail.com","Cierre Oferta Laboral", "Gracias por haber participado!" );
+
+
+            }
+
+
             $this->ShowOffersList();
         }
     }

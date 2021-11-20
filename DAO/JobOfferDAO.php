@@ -21,7 +21,7 @@ class JobOfferDAO
         $this->jobPositionDao = JobPositionDAO::getInstance();
     }
 
-    function GetAll($id = null, $description = null, $company = null, $position = null, $vencimiento = null )
+    function GetAll($id = null, $description = null, $company = null, $position = null )
     {
         /**
          * Retorna una lista con todos los datos de una tabla en particular.
@@ -34,7 +34,7 @@ class JobOfferDAO
             $positionId = $this->jobPositionDao->searchByDescription($position);
         }
 
-        $result = $this->db->Execute($this->selectBuilder($id, $description, $company, $positionId, $vencimiento));
+        $result = $this->db->Execute($this->selectBuilder($id, $description, $company, $positionId));
 
         foreach ($result as $value) {
             array_push($list, JobOffer::fromArray($value));
@@ -43,7 +43,7 @@ class JobOfferDAO
         return $list;
     }
 
-    private function selectBuilder($id = null, $description = null, $company = null, $position = null, $vencimiento = null)
+    private function selectBuilder($id = null, $description = null, $company = null, $position = null)
     {   
         /**
          * Funcion utilizada para armar la query e igualar los parametros a las variables de la query
@@ -99,22 +99,12 @@ class JobOfferDAO
             }
         }
 
-        if (isset($vencimiento) && $vencimiento != "") {
-            if(is_array($vencimiento)){
-                $query = $query . " && ";
-                foreach ($vencimiento as $option){
-                    $query = $query . "vencimiento=" . $option ." OR ";
-                }
-                $query = substr($query, 0, -4);
-            }
-            else{
-                $query = $query . " && vencimiento=" . $id;
-            }
+    
         return $query;
     }
-}
 
-    private function insertBuilder($description, $company, $position, $vencimiento)
+
+    private function insertBuilder($description, $company, $position)
     {
         /**
          * Funcion utilizada para armar la query e igualar los parametros a las variables de la query
@@ -123,8 +113,8 @@ class JobOfferDAO
         $values = ") VALUES (";
 
 
-        $query = $query . "Description,CompanyId,JobPositionId, vencimiento";
-        $values = $values . '"' . $description . '",' . strval($company) . ',' . strval($position) . '",' . $vencimiento . ')';
+        $query = $query . "Description,CompanyId,JobPositionId";
+        $values = $values . '"' . $description . '",' . strval($company) . ',' . strval($position) .')';
 
         return $query.$values;
     }
@@ -198,9 +188,9 @@ class JobOfferDAO
          * Funcion utilizada para agregar Students a la base de datos
          */
 
-    function Add(string $description, int $company, int $position, DateTime $vencimiento)
+    function Add(string $description, int $company, int $position)
     {
-        $result = $this->db->Execute($this->insertBuilder($description, $company, $position, $vencimiento));
+        $result = $this->db->Execute($this->insertBuilder($description, $company, $position));
     }
 
         
