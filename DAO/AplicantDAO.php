@@ -112,7 +112,39 @@ class AplicantDAO {
 
 
 
+    public function getMailsForJobId($jobId){
 
+
+        try
+        {
+            $mailsList = array();
+    
+
+            $query = "SELECT StudentId FROM Student_x_JobOffer WHERE JobOfferId = " .$jobId. " ";
+    
+           
+    
+            $this->connection = Connection::GetInstance();
+    
+            $resultSet = $this->connection->Execute($query);
+            
+            foreach ($resultSet as $row)
+            {
+                $Aplicant = new Aplicant();
+                $Aplicant->setStudentId($row["StudentId"]);
+
+                array_push($mailsList,$Aplicant);
+     
+            }
+                        
+            return $mailsList;
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
+    
+    }
 
 
 

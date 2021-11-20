@@ -6,6 +6,7 @@ use DAO\JobOfferDAO as JobOfferDAO;
 use DAO\CompanyDAO as CompanyDAO;
 use DAO\JobPositionDAO as JobPositionDAO;
 use DAO\StudentDAO as StudentDAO;
+use DAO\AplicantDAO as AplicantDAO;
 
 class OffersController
 {
@@ -13,6 +14,7 @@ class OffersController
     private $companyDAO;
     private $jobPositionDAO;
     private $StudentDAO;
+    private $AplicantDAO;
 
     public function __construct()
     {
@@ -20,6 +22,7 @@ class OffersController
         $this->companyDAO = new CompanyDAO();
         $this->jobPositionDAO = JobPositionDAO::getInstance();
         $this->StudentDAO = new StudentDAO();
+        $this->AplicantDAO= new AplicantDAO();
     }
 
     public function ShowAll($id = null, $description = null, $company = null, $position = null)
@@ -214,6 +217,30 @@ class OffersController
             $this->jobOffersDAO->update($jobOffer);
 
             if($active==0){
+                $listaIdsAplicants = $this->AplicantDAO->getMailsForJobId($id);
+
+                
+           
+                if($listaIdsAplicants != null){
+                    $listMails= array();
+                    foreach($listaIdsAplicants as $aplica){
+
+                        array_push($listMails, $this->StudentDAO->getStudentForIdApi($aplica->getStudentId()));
+
+                    }
+
+                    if($listMails != null){
+                       
+                       foreach($listMails as $mails){ 
+                        mail($mails,"Cierre Oferta Laboral", "Gracias por haber participado!" );         
+              
+                       }
+                       ?> <script language="javascript">
+                       alert("Emails enviados correctamente");
+                   </script>
+                   <?php
+                    }
+                }
 
                 mail("herrero_gonza@hotmail.com","Cierre Oferta Laboral", "Gracias por haber participado!" );
 
