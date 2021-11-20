@@ -32,6 +32,7 @@ CREATE TABLE `Company` (
   `city` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `jobOffers` int(11) DEFAULT NULL,
+  'password' varchar(30),
   `bio` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `linkedin` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `webpage` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,

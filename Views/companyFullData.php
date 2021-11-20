@@ -1,6 +1,16 @@
 <?php
-include("nav.php");
-require_once("validate-session.php");
+   use DAO\NavDAO as NavDAO;
+
+   NavDAO::getNav();
+
+   require_once("validate-session.php");
+
+   if (isset($_SERVER["HTTP_REFERER"])) {
+        $back = $_SERVER["HTTP_REFERER"];
+    } else {
+        $back = NULL;
+    }
+    
 ?>
 
 <main class="py-5">

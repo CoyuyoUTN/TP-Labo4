@@ -31,6 +31,8 @@ require_once("validate-session.php");
                     <div class="col-lg-12">
                         <label for="description">Descripcion</label>
                         <textarea id="description" name="description" rows="4" cols="50" class="form-control"></textarea>
+                        <label for="date">Vencimiento</label>
+                        <input type="date" id="date" name="date" rows="4" cols="50" class="form-control"></input>
                     </div>
                 </div>
                 <button type="submit" class="btn" name="companyId" value="<?php echo $id ?>" style="background-color:#DC8E47;color:white;" >Enviar</button>

@@ -42,12 +42,12 @@ class OffersController
         require_once(VIEWS_PATH . "offersNew.php");
     }
 
-    public function AddOffer($position, $description, $companyId)
+    public function AddOffer($position, $description, $companyId, $vencimiento)
     {
         if ($companyId == "" || $companyId == NULL) {
             $this->AddForm();
         } else {
-            $this->jobOffersDAO->Add($description, $companyId, $position);
+            $this->jobOffersDAO->Add($description, $companyId, $position, $vencimiento);
             $this->ShowAll();
         }
     }
@@ -266,9 +266,6 @@ class OffersController
             require_once(VIEWS_PATH . "offersList.php");
     }
     
-
-
-
 
 
 

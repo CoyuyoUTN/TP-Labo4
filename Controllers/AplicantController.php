@@ -4,17 +4,21 @@
     use DAO\AplicantDAO as AplicantDAO;
     
     use Models\Aplicant as Aplicant;
-    
+    use DAO\AdminDAO as AdminDAO;
+    use Models\Admin as Admin;
+
    
 
     class AplicantController
     {
         private $aplicantDAO;
+        private $adminDAO;
         
         
         public function __construct()
         {
             $this->aplicantDAO = new AplicantDAO();
+            $this->adminDAO = new AdminDAO();
         }
 
          /**
@@ -31,20 +35,19 @@
             require_once(VIEWS_PATH . "aplicantList.php");
             }
             else{
-
+               
+             
                 ?> <script language="javascript">
                 alert("No hay postulaciones");
                 
             </script>
         <?php
+         $adminList = $this->adminDAO->readAll();
          require_once(VIEWS_PATH."adminList.php");
 
             }
 
         }
-
-
-
 
 
 

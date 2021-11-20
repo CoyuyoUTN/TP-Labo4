@@ -16,6 +16,7 @@ class JobOffer
     private $active;
     private $company;
     private $date;
+    private $vencimiento;
 
     public function __construct($id=NULL, $description=NULL, $companyId=NULL, $jobPositionId=NULL)
     {   
@@ -221,6 +222,26 @@ class JobOffer
     public function setCompany($company)
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of vencimiento
+     */ 
+    public function getVencimiento()
+    {
+        return $this->vencimiento;
+    }
+
+    /**
+     * Set the value of vencimiento
+     *
+     * @return  self
+     */ 
+    public function setVencimiento($vencimiento)
+    {
+        $this->vencimiento = $vencimiento;
 
         return $this;
     }

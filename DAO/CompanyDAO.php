@@ -622,7 +622,7 @@ class CompanyDAO implements Crud{
             
             $query = "SELECT * FROM " .$this->table. " WHERE Email = '".$email."'  && Password = '".$password."' and active = 1 ";
     
-           
+           $company= null;
           
             $this->connection = Connection::GetInstance();
           

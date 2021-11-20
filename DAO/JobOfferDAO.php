@@ -8,7 +8,7 @@ use Models\JobOffer as JobOffer;
 
 use DAO\JobPositionDAO as JobPositionDAO;
 use Models\JobPosition as JobPosition;
-
+use \DateTime as DateTime;
 class JobOfferDAO
 {
     private $db;
@@ -21,7 +21,7 @@ class JobOfferDAO
         $this->jobPositionDao = JobPositionDAO::getInstance();
     }
 
-    function GetAll($id = null, $description = null, $company = null, $position = null)
+    function GetAll($id = null, $description = null, $company = null, $position = null, $vencimiento = null )
     {
         /**
          * Retorna una lista con todos los datos de una tabla en particular.
@@ -34,7 +34,7 @@ class JobOfferDAO
             $positionId = $this->jobPositionDao->searchByDescription($position);
         }
 
-        $result = $this->db->Execute($this->selectBuilder($id, $description, $company, $positionId));
+        $result = $this->db->Execute($this->selectBuilder($id, $description, $company, $positionId, $vencimiento));
 
         foreach ($result as $value) {
             array_push($list, JobOffer::fromArray($value));
@@ -43,7 +43,7 @@ class JobOfferDAO
         return $list;
     }
 
-    private function selectBuilder($id = null, $description = null, $company = null, $position = null)
+    private function selectBuilder($id = null, $description = null, $company = null, $position = null, $vencimiento = null)
     {   
         /**
          * Funcion utilizada para armar la query e igualar los parametros a las variables de la query
@@ -98,10 +98,23 @@ class JobOfferDAO
                 $query = $query . " && JobPositionId=" . $position->getCareerId();
             }
         }
+
+        if (isset($vencimiento) && $vencimiento != "") {
+            if(is_array($vencimiento)){
+                $query = $query . " && ";
+                foreach ($vencimiento as $option){
+                    $query = $query . "vencimiento=" . $option ." OR ";
+                }
+                $query = substr($query, 0, -4);
+            }
+            else{
+                $query = $query . " && vencimiento=" . $id;
+            }
         return $query;
     }
+}
 
-    private function insertBuilder($description, $company, $position)
+    private function insertBuilder($description, $company, $position, $vencimiento)
     {
         /**
          * Funcion utilizada para armar la query e igualar los parametros a las variables de la query
@@ -110,8 +123,8 @@ class JobOfferDAO
         $values = ") VALUES (";
 
 
-        $query = $query . "Description,CompanyId,JobPositionId";
-        $values = $values . '"' . $description . '",' . strval($company) . ',' . strval($position) . ')';
+        $query = $query . "Description,CompanyId,JobPositionId, vencimiento";
+        $values = $values . '"' . $description . '",' . strval($company) . ',' . strval($position) . '",' . $vencimiento . ')';
 
         return $query.$values;
     }
@@ -185,9 +198,9 @@ class JobOfferDAO
          * Funcion utilizada para agregar Students a la base de datos
          */
 
-    function Add(string $description, int $company, int $position)
+    function Add(string $description, int $company, int $position, DateTime $vencimiento)
     {
-        $result = $this->db->Execute($this->insertBuilder($description, $company, $position));
+        $result = $this->db->Execute($this->insertBuilder($description, $company, $position, $vencimiento));
     }
 
         
@@ -502,6 +515,66 @@ class JobOfferDAO
     }
 
 
+
+//**************************************************************************************************************************************************** 
+
+/*public function remove($jobOffer){
+
+    try
+    {
+ 
+        $query = "UPDATE ".$this->table." SET active = 0  WHERE ( id = :id ) ";
+
+        
+        $parameters["id"] = $jobOffer->getId();
+     
+     
+        
+        $this->connection = Connection::GetInstance();
+
+        $this->connection->ExecuteNonQuery($query, $parameters);
+    }
+    catch(Exception $ex)
+    {
+        throw $ex;
+    }
+
+
+
+
+}
+
+//Convierte la hora en decimal
+     private function hourToDecimal($time)
+      {
+          $hms = explode(":", $time);
+          return (($hms[0] * 60) + $hms[1]);
+      }
+   
+      
+      private function validateHourAndDayShow($offerList)
+      {
+          date_default_timezone_set("America/Argentina/Buenos_Aires"); //setea a la zona horaria correspondiente (por defecto viene en GMT)
+          $date = getdate();
+          $time = time() + (7 * 24 * 60 * 60);
+          $hourLocale = (($date['hours'] * 60) + ($date['minutes']));
+   
+          foreach ($offerList as $jobOffer) {
+              
+              if ($jobOffer['day'] == date('Y-m-d')) {
+                  $hourjobOffer = $this->hourToDecimal($jobOffer['hour']);
+                  if ($hourjobOffer < $hourLocale) {
+                      if ($jobOffer['active']) {
+                          $this->Remove($jobOffer['id']);
+                      }
+                  }
+              }if(($jobOffer['day'] < date('Y-m-d')) && ($jobOffer['active'])){
+                  $this->Remove($jobOffer['id']);
+              }
+          }
+      }
+  
+*/
 
 
 

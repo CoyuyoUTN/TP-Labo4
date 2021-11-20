@@ -13,6 +13,10 @@
                 case ' Models\Admin':
                     $ret = "nav.php";
                     break;
+
+                case 'Models\Company';
+                    $ret="navCompany.php";
+                    break;
                 default:
                     $ret = "nav.php";
                     break;

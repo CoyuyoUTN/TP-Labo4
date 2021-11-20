@@ -66,7 +66,7 @@ class HomeController
                 $userCompany= $this->companyDAO->getCompanyByEmail($email, $password);
 
                 if($userCompany !=null && $userCompany->getEmail() == $email  && $userCompany->getPassword() == $password){
-                    
+                      
                     $_SESSION["loggedUser"] = $userCompany;
                     $this->ShowFullData($userCompany->getId());
         
