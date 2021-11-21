@@ -68,7 +68,7 @@ class HomeController
                 if($userCompany !=null && $userCompany->getEmail() == $email  && $userCompany->getPassword() == $password){
                       
                     $_SESSION["loggedUser"] = $userCompany;
-                    $this->ShowFullData($userCompany->getId());
+                    $this->ShowFullData();
         
                 } else {
                 ?> <script language="javascript">
@@ -223,8 +223,9 @@ class HomeController
     }
 
 
-    public function ShowFullData($companyID)
-    {
+    public function ShowFullData()
+    {   
+       $companyID= $_SESSION["loggedUser"]->getId(); 
         $company = $this->companyDAO->read($companyID);
         require_once(VIEWS_PATH . "companyFullData.php");
 

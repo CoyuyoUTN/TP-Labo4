@@ -4,13 +4,16 @@ namespace Controllers;
 
 use DAO\CompanyDAO as CompanyDAO;
 use Models\Company as Company;
+use DAO\JobOfferDAO as JobOfferDAO;
 
 class CompanyController
 {
     private $companyDAO;
+    private $jobOffersDAO;
     public function __construct()
     {
         $this->companyDAO = new CompanyDAO();
+        $this->jobOffersDAO = new JobOfferDAO();
     }
 
 
@@ -202,5 +205,14 @@ alert("Empresa ya existente");
 
         require_once(VIEWS_PATH . "validate-session.php");
         require_once(VIEWS_PATH . "companyModify.php");
+    }
+
+
+
+    public function ShowAllOfersForCompany($id = null, $description = null, $company = null, $position = null)
+    {
+        $offersList = $this->jobOffersDAO->GetAll($id, $description, $company, $position);
+
+        require_once(VIEWS_PATH . "offerListCompany.php");
     }
 }
